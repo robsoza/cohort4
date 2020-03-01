@@ -124,37 +124,39 @@
         <div>
             <form class="calculate">
                 <h1>My calculator</h1>
-                <span>Number 1:</span> <input type="text" id="usernum1" placeholder="enter number...">
+                Number 1:<input type="text" id="num1" placeholder="enter number...">
                 <br>
-                Number 2: <input type="text" id="usernum2" placeholder="enter number...">
+                Number 1:<input type="text" id="num2" placeholder="enter number...">
                 <br>
                 <div>
-                    Operation:
-                    <label class="container">+
-                        <input name="checkmark" type="radio" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="container">-
-                        <input name="checkmark" type="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="container">*
-                        <input name="checkmark" type="radio">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="container">/
-                        <input name="checkmark" type="radio">
-                        <span class="checkmark"></span>
-                      </label>
+                  Operation:
+                  <label class="container">+
+                    <input id="+" name="checkmark" type="radio" checked>
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">-
+                    <input id="-" name="checkmark" type="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">*
+                    <input id="*" name="checkmark" type="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">/
+                    <input id="/" name="checkmark" type="radio">
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
-                </br>
-                <!-- <button class="calculate-button">Calculate</button> -->
+                <br>
+                <button id="calculate" class="calculate-button">Clear</button>
                 <div><strong>
-                    <label id="result">Result:</strong></label>
-                    <input id="answer" type="text" id="result" placeholder="answer...">
-                </strong>
+                    <label id="result"><strong>Result =</strong></label>
+                    <input id="answer" type="text" placeholder="answer...">
+                  </strong>
                 </div>
-            </form>
+                <ul id="ul">
+                </ul>
+              </form>
         </div>
     </div>
 
@@ -177,7 +179,6 @@
 
 
     <script type="module" src="./scripts/main.js"></script>
-    <script type="module" src="./scripts/calculator.js"></script>
 
     <script>
         // Change style of navbar on scroll
@@ -204,7 +205,7 @@
             }
         }
     </script>
-
+<script type="module" src="./scripts/calculator.js"></script>
 </body>
 
 </html>

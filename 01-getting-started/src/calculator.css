@@ -1,14 +1,17 @@
 .calculate {
   font-family: roboto, sans-serif;
 }
-#usernum1, #usernum2{
-  text-align:center;
+
+#num1,
+#num2 {
+  text-align: center;
   padding: 12px 45px;
   margin: 8px 5px;
   display: inline-block;
   border: 1px solid rgb(76, 113, 224);
   border-radius: 5px;
-  box-sizing: border-box; text-rendering: auto;
+  box-sizing: border-box;
+  text-rendering: auto;
   margin: 0px 5px 5px 10px;
 }
 
@@ -44,12 +47,12 @@
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.container:hover input~.checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.container input:checked~.checkmark {
   background-color: #2196F3;
 }
 
@@ -61,7 +64,7 @@
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.container input:checked~.checkmark:after {
   display: block;
 }
 
@@ -78,31 +81,45 @@
   transform: rotate(45deg);
 }
 
- .calculate-button {
-    background-color: #FF7F00;
-    border: none;
-    color: white;
-    padding: 10px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-  textarea {
-    resize: none;
-  }
-  #result {
-    font-size: large;
-  }
-  #answer {
-    text-align:center;
-    padding: 12px 45px;
-    margin: 8px 5px;
-    display: inline-block;
-    border: none;
-    border-radius: 5px;
-    box-sizing: border-box; text-rendering: auto;
-    margin: 0px 5px 5px 10px;
-  }
+.calculate-button {
+  background-color: #FF7F00;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+textarea {
+  resize: none;
+}
+
+#result {
+  font-size: large;
+}
+
+#answer {
+  color: green;
+  font-size: 1.5em;
+  text-align: center;
+  padding: 12px 0px;
+  margin: 5px 5px;
+  display: inline-block;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  text-rendering: auto;
+  margin: 0px 5px 5px 10px;
+}
+
+#ul li:nth-of-type(1n+5) {
+  display: none;
+}
+
+li {
+  list-style-type: none;
+}
