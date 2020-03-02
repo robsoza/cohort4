@@ -32,6 +32,7 @@
             <a href="#home" class="w3-bar-item w3-button">HOME</a>
             <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
             <a href="#idSize" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> SIZE</a>
+            <a href="#calculator" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> CALCULATOR</a>
             <a href="https://www.evolveu.ca" class="w3-bar-item w3-button w3-hide-small" target="_blank"><i
                     class="fa fa-envelope"></i> CONTACT</a>
             <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
@@ -122,7 +123,7 @@
 
     <div class="w3-content w3-container w3-padding-64 w3-center" id="calculator">
         <div>
-            <form class="calculate">
+            <form id="calculator" class="calculate">
                 <h1>My calculator</h1>
                 Number 1:<input type="text" id="num1" placeholder="enter number...">
                 <br>
@@ -131,19 +132,19 @@
                 <div>
                   Operation:
                   <label class="container">+
-                    <input id="+" name="checkmark" type="radio" checked>
+                    <input id="add-checkbox" name="checkmark" type="radio">
                     <span class="checkmark"></span>
                   </label>
                   <label class="container">-
-                    <input id="-" name="checkmark" type="radio">
+                    <input id="substract-checkbox" name="checkmark" type="radio">
                     <span class="checkmark"></span>
                   </label>
                   <label class="container">*
-                    <input id="*" name="checkmark" type="radio">
+                    <input id="multiply-checkbox" name="checkmark" type="radio">
                     <span class="checkmark"></span>
                   </label>
                   <label class="container">/
-                    <input id="/" name="checkmark" type="radio">
+                    <input id="divide-checkbox" name="checkmark" type="radio">
                     <span class="checkmark"></span>
                   </label>
                 </div>
