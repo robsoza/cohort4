@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./index.css">
     <link rel="stylesheet" type="text/css" href="./calculator.css">
+    <link rel="stylesheet" type="text/css" href="./taxcalculator.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -130,39 +131,51 @@
                 Number 1:<input type="text" id="num2" placeholder="enter number...">
                 <br>
                 <div>
-                  Operation:
-                  <label class="container">+
-                    <input id="add-checkbox" name="checkmark" type="radio">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="container">-
-                    <input id="substract-checkbox" name="checkmark" type="radio">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="container">*
-                    <input id="multiply-checkbox" name="checkmark" type="radio">
-                    <span class="checkmark"></span>
-                  </label>
-                  <label class="container">/
-                    <input id="divide-checkbox" name="checkmark" type="radio">
-                    <span class="checkmark"></span>
-                  </label>
+                    Operation:
+                    <label class="container">+
+                        <input id="add-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="+">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">-
+                        <input id="substract-checkbox" name="checkmark" class="operation-checkmark" type="radio"
+                            value="-">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">*
+                        <input id="multiply-checkbox" name="checkmark" class="operation-checkmark" type="radio"
+                            value="*">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">/
+                        <input id="divide-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="/">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
                 <br>
                 </a><button id="calculate" class="calculate-button">Clear</button>
                 <div><strong>
-                    <label id="result"><strong>Result =</strong></label>
-                    <input id="answer" type="text" placeholder="answer...">
-                  </strong>
+                        <label id="result"><strong>Result =</strong></label>
+                        <input id="answer" type="text" placeholder="answer...">
+                    </strong>
                 </div>
-                <ul id="ul-numbers">
-                    <li id="logs">logs:</li>
-                </ul>
-              </form>
+            </form>
         </div>
     </div>
 
+    <!-- ---------- my tax-calculator------------------ -->
 
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white w3-wide">CANADIAN TAXES</span>
+        </div>
+    </div>
+    <h1>My calculator</h1>
+    Taxable Income:<input type="text" id="taxnum1" placeholder="enter income...">
+    <br>
+    <label class="tax-container">15% on the first $48,535 of taxable income
+        <input id="tax-multiply-checkbox" name="checkmark" type="text">
+        <span class="checkmark"></span>
+    </label>
 
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
@@ -207,7 +220,8 @@
             }
         }
     </script>
-<script type="module" src="./scripts/calculator.js"></script>
+    <script type="module" src="./scripts/calculator.js"></script>
+    <script type="module" src="./scripts/taxcalculator.js"></script>
 </body>
 
 </html>
