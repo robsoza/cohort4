@@ -181,7 +181,7 @@ html {
     font-size: large;
   }
   
-  #answer {
+  #answer, #federal-tax-answer, #provincial-tax-answer {
     color: green;
     font-size: 1.5em;
     text-align: center;

@@ -12,8 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./index.css">
-    <link rel="stylesheet" type="text/css" href="./calculator.css">
-    <link rel="stylesheet" type="text/css" href="./taxcalculator.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -178,7 +176,7 @@
     <input type="text" id="income" placeholder="enter income...">
     </div><br>
     <div class="dropdown">
-        <h5 for="Provinces"Select Your Province:>Select Your Provinces:</h5><br>
+        <h5 for="Provinces" class="provinces-list" Select Your Province: >Select Your Province:</h5><br>
         <select id="provinces" class="provinces-list">
             <option value="AB">Alberta</option>
             <option value="BC">British Columbia</option>
@@ -195,7 +193,14 @@
             <option value="YT">Yukon</option>
         </select><br>
     </div><br>
-
+    <div><strong>
+        <label id="federal-tax"><strong>Your Federal Tax =</strong></label>
+        <input id="federal-tax-answer" type="text" placeholder="answer...">
+    </strong>
+    <div><strong>
+        <label id="provincial-tax"><strong>Your Provincial Tax =</strong></label>
+        <input id="provincial-tax-answer" type="text" placeholder="answer...">
+    </strong>
 
  
     <!-- Footer -->

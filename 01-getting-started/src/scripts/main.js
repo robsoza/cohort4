@@ -1,10 +1,14 @@
 import functions from './functions.js';
 import calculator from './Calculator.js';
+import taxCalcFunctions from './taxcalc.js';
 
 let num1Input = document.getElementById('num1');
 let num2Input = document.getElementById('num2');
 let button = document.getElementById('calculate');
 let checkmark = document.getElementsByClassName('operation-checkmark');
+let incomeInput = document.getElementById('income');
+let provincesList = document.getElementsByClassName('provinces-list');
+let netIncome = 0;
 let num1 = 0;
 let num2 = 0;
 // **********
@@ -60,4 +64,34 @@ if (button) {
         document.getElementById('answer').value = '';
         window.location.href = '#calculator';
     });
+}
+
+if (incomeInput) {
+    incomeInput.addEventListener('input', updateIncome);
+    function updateIncome(event) {
+        netIncome = Number(event.target.value);
+    }
+}
+
+const performTaxCalc = (clickobj) => {
+    let operator = clickobj.target.value;
+    switch (operator) {
+        case 'AB':
+            document.getElementById("federal-tax-answer").value = taxCalcFunctions.fedTaxRates(netIncome);
+            break;
+        case '-':
+            document.getElementById("federal-tax-answer").value = calculator.subtract(num1, num2);;
+            break;
+        case '*':
+            document.getElementById("federal-tax-answer").value = calculator.multiply(num1, num2);
+            break;
+        case '/':
+            document.getElementById("federal-tax-answer").value = calculator.divide(num1, num2);
+            break;
+        default:
+            return 'error';
+    };
+}
+for (let i = 0; i < provincesList.length; i++) {
+    provincesList[i].addEventListener('click', performTaxCalc, false);
 }

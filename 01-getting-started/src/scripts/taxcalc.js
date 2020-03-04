@@ -2,7 +2,7 @@
  * @description taxcalc pure-functions and testing
  * @name taxcalc
  */
-const functions = {
+const taxCalcFunctions = {
 
     fedTaxRates: (netIncome) => {
         //Base Amounts
@@ -51,4 +51,4 @@ const functions = {
     }
 };
 
-export default functions;
+export default taxCalcFunctions;
