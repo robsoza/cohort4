@@ -47,7 +47,6 @@ const performOperation = (clickobj) => {
             break;
         default:
             return 'error';
-            break;
     };
 }
 for (let i = 0; i < checkmark.length; i++) {

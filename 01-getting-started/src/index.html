@@ -125,7 +125,7 @@
     <div class="w3-content w3-container w3-padding-64 w3-center" id="calculator">
         <div>
             <form id="calculator" class="calculate">
-                <h1>My calculator</h1>
+                <h2>My calculator</h2>
                 Number 1:<input type="text" id="num1" placeholder="enter number...">
                 <br>
                 Number 1:<input type="text" id="num2" placeholder="enter number...">
@@ -170,14 +170,34 @@
             <span class="w3-xxlarge w3-text-white w3-wide">CANADIAN TAXES</span>
         </div>
     </div>
-    <h1>Canadian Taxes</h1>
-    Taxable Income:<input type="text" id="taxnum1" placeholder="enter income...">
-    <br>
-    <label class="tax-container">15% on the first $48,535 of taxable income
-        <input id="tax-multiply-checkbox" name="checkmark" type="text">
-        <span class="checkmark"></span>
-    </label>
+    <div class="w3-content w3-container w3-padding-64 w3-center" id="taxcalc">
+    <h2>Canadian Taxes calculator</h2><br>
+    <div>
+    <h5>Enter your taxable income from line 26000 of your return:
+    </h5><br>
+    <input type="text" id="income" placeholder="enter income...">
+    </div><br>
+    <div class="dropdown">
+        <h5 for="Provinces"Select Your Province:>Select Your Provinces:</h5><br>
+        <select id="provinces" class="provinces-list">
+            <option value="AB">Alberta</option>
+            <option value="BC">British Columbia</option>
+            <option value="MB">Manitoba</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland and Labrador</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+            <option value="QC">Quebec</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="NT">Northwest Territories</option>
+            <option value="NU">Nunavut</option>
+            <option value="YT">Yukon</option>
+        </select><br>
+    </div><br>
 
+
+ 
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
         <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>

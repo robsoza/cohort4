@@ -1,10 +1,10 @@
 /**
- * @description calculatorFunctions pure-functions and testing
+ * @description taxcalc pure-functions and testing
  * @name taxcalc
  */
 const functions = {
 
-    taxRates: (netIncome) => {
+    fedTaxRates: (netIncome) => {
         //Base Amounts
         let amt1 = 48535;
         let amt2 = 97069;
@@ -40,12 +40,12 @@ const functions = {
         }
         //29%
         else if (netIncome > amt3 && netIncome <= amt4) {
-            tax = ((netIncom - amt3) * rt4) + b1 + b2 + b3;
+            tax = ((netIncome - amt3) * rt4) + b1 + b2 + b3;
             return (netIncome - tax);
         }
         //33%
         else if (netIncome > amt4) {
-            tax = ((netIncom - amt4) * rt5) + b1 + b2 + b3 + b4;
+            tax = ((netIncome - amt4) * rt5) + b1 + b2 + b3 + b4;
             return (netIncome - tax);
         }
     }

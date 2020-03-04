@@ -76,12 +76,13 @@ html {
     }
 }
 
+/* My Calculator */
+
 .calculate {
     font-family: roboto, sans-serif;
   }
   
-  #num1,
-  #num2 {
+  #num1, #num2, #income, #provinces {
     text-align: center;
     padding: 12px 45px;
     margin: 8px 5px;
@@ -193,3 +194,5 @@ html {
     text-rendering: auto;
     margin: 0px 5px 5px 10px;
   }
+
+  
