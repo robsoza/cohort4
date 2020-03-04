@@ -38,16 +38,16 @@ const performOperation = (clickobj) => {
     let operator = clickobj.target.value;
     switch (operator) {
         case '+':
-            document.getElementById("answer").value = calculator.add(num1, num2);
+            document.getElementById("answer").value = calculator.add(num1, num2).toFixed(2);
             break;
         case '-':
-            document.getElementById("answer").value = calculator.subtract(num1, num2);;
+            document.getElementById("answer").value = calculator.subtract(num1, num2).toFixed(2);
             break;
         case '*':
-            document.getElementById("answer").value = calculator.multiply(num1, num2);
+            document.getElementById("answer").value = calculator.multiply(num1, num2).toFixed(2);
             break;
         case '/':
-            document.getElementById("answer").value = calculator.divide(num1, num2);
+            document.getElementById("answer").value = calculator.divide(num1, num2).toFixed(2);
             break;
         default:
             return 'error';
@@ -70,28 +70,7 @@ if (incomeInput) {
     incomeInput.addEventListener('input', updateIncome);
     function updateIncome(event) {
         netIncome = Number(event.target.value);
+        document.getElementById("federal-tax-answer").value = '$ ' + taxCalcFunctions.fedTaxRates(netIncome).toFixed(2);
     }
 }
 
-const performTaxCalc = (clickobj) => {
-    let operator = clickobj.target.value;
-    switch (operator) {
-        case 'AB':
-            document.getElementById("federal-tax-answer").value = taxCalcFunctions.fedTaxRates(netIncome);
-            break;
-        case '-':
-            document.getElementById("federal-tax-answer").value = calculator.subtract(num1, num2);;
-            break;
-        case '*':
-            document.getElementById("federal-tax-answer").value = calculator.multiply(num1, num2);
-            break;
-        case '/':
-            document.getElementById("federal-tax-answer").value = calculator.divide(num1, num2);
-            break;
-        default:
-            return 'error';
-    };
-}
-for (let i = 0; i < provincesList.length; i++) {
-    provincesList[i].addEventListener('click', performTaxCalc, false);
-}
