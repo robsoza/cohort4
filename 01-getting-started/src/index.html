@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:500&display=swap" rel="stylesheet">
     <title>FSD</title>
 </head>
 
@@ -112,6 +111,7 @@
         <input id="idNumber" type="number"> is a <span id="idNumberSize">unknown</span> number?
         <p id="idNumberSizexx"></p>
     </div>
+
     <!-- ---------- my calculator------------------ -->
 
     <div class="bgimg-2 w3-display-container w3-opacity-min">
@@ -131,7 +131,8 @@
                 <div>
                     Operation:
                     <label class="container">+
-                        <input id="add-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="+">
+                        <input id="add-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="+"
+                            checked>
                         <span class="checkmark"></span>
                     </label>
                     <label class="container">-
@@ -150,11 +151,11 @@
                     </label>
                 </div>
                 <br>
-                </a>
                 <button id="calculate" class="calculate-button">Clear</button>
-                <div><strong>
-                        <label id="result"><strong>Result =</strong></label>
-                        <input id="answer" type="text" placeholder="answer...">
+                <div>
+                    <strong>
+                        <label id="result">Result =</label>
+                        <input id="answer" type="text" placeholder="answer..." disabled>
                     </strong>
                 </div>
             </form>
@@ -169,64 +170,97 @@
         </div>
     </div>
     <div class="w3-content w3-container w3-padding-64 w3-center" id="taxcalc">
-        <h2>Canadian Federal Tax calculator</h2><br>
+        <h2>Canadian Federal Tax calculator</h2>
+        <br>
         <div>
-            <h4>Enter your taxable income from line 26000 of your return:
-            </h4><br>
+            <h4>
+                Enter your taxable income from line 26000 of your return:
+            </h4>
+            <br>
             <input type="text" id="income" placeholder="enter income...">
-            <div><strong>
-                    <h4 id="federal-tax"><strong>Your Federal Tax =</strong></h4>
-                    <input id="federal-tax-answer" type="text" placeholder="answer...">
-                </strong></div>
+            <div>
+                <strong>
+                    <h4 id="federal-tax"><strong>Your Total Federal Tax =</h4>
+                    <input id="federal-tax-answer" type="text" placeholder="answer..." disabled>
+                </strong>
+            </div>
+        </div>
+    </div>
 
+    <!-- ---------- Working With Arrays------------------ -->
 
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white w3-wide">WORKING WITH ARRAYS</span>
+        </div>
+    </div>
+    <div class="w3-content w3-container w3-padding-64 w3-center" id="taxcalc">
+        <h2>Working With Arrays</h2>
+        <br>
+        <div>
+            <br>
+            <input type="text" id="array-input" placeholder="enter number...">
+            <br>
+            <div>
+                <button class="array-buttons" id="add" value="add">Add</button>
+                <button class="array-buttons" id="show" value="show">Show</button>
+                <button class="array-buttons" id="total" value="total">Total</button>
+                <button class="array-buttons" id="clear" value="clear">Clear</button>
+                <div>
+                </div><br>
+                <div>
+                    <textarea rows="2" cols="20" id="array-answer" type="text" placeholder="answer..." disabled></textarea>
 
-            <!-- Footer -->
-            <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
-                <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the
-                    top</a>
-                <div class="w3-xlarge w3-section">
-                    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-                    <i class="fa fa-instagram w3-hover-opacity"></i>
-                    <i class="fa fa-snapchat w3-hover-opacity"></i>
-                    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-                    <i class="fa fa-twitter w3-hover-opacity"></i>
-                    <i class="fa fa-linkedin w3-hover-opacity"></i>
                 </div>
-                <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
-                        class="w3-hover-text-green">w3.css</a></p>
-            </footer>
+            </div>
+        </div>
+    </div> <br>
 
 
-            <script type="module" src="./scripts/main.js"></script>
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
+        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the
+            top</a>
+        <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
+                class="w3-hover-text-green">w3.css</a></p>
+    </footer>
 
-            <script>
-                // Change style of navbar on scroll
-                window.onscroll = function () {
-                    myFunction()
-                };
 
-                function myFunction() {
-                    var navbar = document.getElementById("myNavbar");
-                    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
-                    } else {
-                        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
-                    }
-                }
+    <script type="module" src="./scripts/main.js"></script>
 
-                // Used to toggle the menu on small screens when clicking on the menu button
-                function toggleFunction() {
-                    var x = document.getElementById("navDemo");
-                    if (x.className.indexOf("w3-show") == -1) {
-                        x.className += " w3-show";
-                    } else {
-                        x.className = x.className.replace(" w3-show", "");
-                    }
-                }
-            </script>
-            <script type="module" src="./scripts/calculator.js"></script>
-            <script type="module" src="./scripts/taxcalc.js"></script>
+    <script>
+        // Change style of navbar on scroll
+        window.onscroll = function () {
+            myFunction()
+        };
+
+        function myFunction() {
+            var navbar = document.getElementById("myNavbar");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+            } else {
+                navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+            }
+        }
+
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function toggleFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+    </script>
 </body>
 
 </html>

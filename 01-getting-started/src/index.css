@@ -79,14 +79,11 @@ html {
 
 /* My Calculator */
 
-.calculate {
-  font-family: roboto, sans-serif;
-}
-
 #num1,
 #num2,
 #income,
-#provinces {
+#array-input,
+array-input {
   text-align: center;
   padding: 12px 45px;
   margin: 8px 5px;
@@ -164,7 +161,7 @@ html {
   transform: rotate(45deg);
 }
 
-.calculate-button {
+.calculate-button, .array-buttons {
   background-color: #FF7F00;
   border: none;
   color: white;
@@ -177,16 +174,13 @@ html {
   cursor: pointer;
 }
 
-textarea {
-  resize: none;
-}
-
 #result {
   font-size: large;
 }
 
 #answer,
-#federal-tax-answer {
+#federal-tax-answer,
+#array-answer {
   color: green;
   font-size: 1.5em;
   text-align: center;
@@ -198,4 +192,13 @@ textarea {
   box-sizing: border-box;
   text-rendering: auto;
   margin: 0px 5px 5px 10px;
+}
+
+#add {
+  background-color: rgb(51, 145, 182);
+}
+
+#show,
+#total {
+  background-color: rgb(133, 133, 133);
 }
