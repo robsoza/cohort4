@@ -152,3 +152,18 @@ const arrayOperation = (clickobj) => {
 for (let i = 0; i < arrayButtons.length; i++) {
     arrayButtons[i].addEventListener('click', arrayOperation, false);
 }
+
+// Working with dictionaries
+let lookupProvinceInput = document.getElementById('lookup-province-input');
+let lookupProvinceButton = document.getElementById('lookup-province-button');
+let lookupProvinceAnswer = document.getElementById('lookup-province-answer');
+
+
+if (lookupProvinceButton) {
+    lookupProvinceButton.addEventListener('click', function () {
+        console.log('clickedddd');
+        
+        lookupProvinceAnswer.innerHTML = arraysFunctions.provinceLookup(lookupProvinceInput.value);
+        console.log(arraysFunctions.provinceLookup(lookupProvinceInput.value));
+    });
+}

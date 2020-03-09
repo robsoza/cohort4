@@ -121,45 +121,41 @@
     </div>
 
     <div class="w3-content w3-container w3-padding-64 w3-center" id="calculator">
-        <div>
-            <form id="calculator" class="calculate">
-                <h2>My calculator</h2>
-                Number 1:<input type="text" id="num1" placeholder="enter number...">
-                <br>
-                Number 1:<input type="text" id="num2" placeholder="enter number...">
-                <br>
-                <div>
-                    Operation:
-                    <label class="container">+
-                        <input id="add-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="+"
-                            checked>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">-
-                        <input id="substract-checkbox" name="checkmark" class="operation-checkmark" type="radio"
-                            value="-">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">*
-                        <input id="multiply-checkbox" name="checkmark" class="operation-checkmark" type="radio"
-                            value="*">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">/
-                        <input id="divide-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="/">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <br>
-                <button id="calculate" class="calculate-button">Clear</button>
-                <div>
-                    <strong>
-                        <label id="result">Result =</label>
-                        <input id="answer" type="text" placeholder="answer..." disabled>
-                    </strong>
-                </div>
-            </form>
-        </div>
+        <form id="calculator" class="calculate">
+            <h2>My calculator</h2>
+            Number 1:<input type="text" id="num1" placeholder="enter a number...">
+            <br>
+            Number 2:<input type="text" id="num2" placeholder="enter a number...">
+            <br>
+            <div>
+                Operation:
+                <label class="container">+
+                    <input id="add-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="+"
+                        checked>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">-
+                    <input id="substract-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="-">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">*
+                    <input id="multiply-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="*">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">/
+                    <input id="divide-checkbox" name="checkmark" class="operation-checkmark" type="radio" value="/">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <br>
+            <button id="calculate" class="calculate-button">Clear</button>
+            <div>
+                <strong>
+                    <label id="result">Result =</label>
+                    <input id="answer" type="text" placeholder="answer..." disabled>
+                </strong>
+            </div>
+        </form>
     </div>
 
     <!-- ---------- Canadian Taxes------------------ -->
@@ -170,14 +166,14 @@
         </div>
     </div>
     <div class="w3-content w3-container w3-padding-64 w3-center" id="taxcalc">
-        <h2>Canadian Federal Tax calculator</h2>
+        <h2>My Canadian Federal Tax calculator</h2>
         <br>
         <div>
             <h4>
                 Enter your taxable income from line 26000 of your return:
             </h4>
             <br>
-            <input type="text" id="income" placeholder="enter income...">
+            <input type="text" id="income" placeholder="enter your income...">
             <div>
                 <strong>
                     <h4 id="federal-tax"><strong>Your Total Federal Tax =</h4>
@@ -194,26 +190,51 @@
             <span class="w3-xxlarge w3-text-white w3-wide">WORKING WITH ARRAYS</span>
         </div>
     </div>
-    <div class="w3-content w3-container w3-padding-64 w3-center" id="taxcalc">
-        <h2>Working With Arrays</h2>
+
+    <div class="w3-content w3-container w3-padding-64 w3-center" id="Arrays">
+        <h2>My Numbers Array</h2>
         <br>
         <div>
-            <br>
-            <input type="text" id="array-input" placeholder="enter number...">
+            <input type="text" id="array-input" placeholder="enter a number...">
             <br>
             <div>
                 <button class="array-buttons" id="push" value="push">Add</button>
                 <button class="array-buttons" id="show" value="show">Show</button>
                 <button class="array-buttons" id="total" value="total">Total</button>
                 <button class="array-buttons" id="clear" value="clear">Clear</button>
-                <div>
-                </div><br>
-                <div>
-                    <textarea rows="2" cols="20" id="array-answer" type="text" placeholder="answer..." disabled></textarea>
-
-                </div>
+            </div><br>
+            <div>
+                <textarea rows="2" cols="20" id="array-answer" type="text" placeholder="answer..." disabled></textarea>
             </div>
         </div>
+    </div> <br>
+
+
+    <!-- ---------- Working With Dictionaries------------------ -->
+
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white w3-wide">WORKING WITH DICTIONARIES</span>
+        </div>
+    </div>
+
+    <div class="w3-content w3-container w3-padding-64 w3-center">
+        <h2>My Canadian Provinces Dictionary</h2>
+        <br>
+        <div>
+            <input type="text" id="lookup-province-input" placeholder="enter a province code...">
+            <br>
+            <div>
+                <button class="lookup-province-button" id="lookup-province-button"
+                    value="lookup-province-button">Lookup</button>
+            </div><br>
+            <div>
+                <textarea rows="2" cols="20" id="lookup-province-answer" type="text" placeholder="answer..."
+                    disabled></textarea>
+
+            </div>
+        </div>
+    </div>
     </div> <br>
 
 

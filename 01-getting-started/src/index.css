@@ -83,7 +83,7 @@ html {
 #num2,
 #income,
 #array-input,
-array-input {
+#lookup-province-input {
   text-align: center;
   padding: 12px 45px;
   margin: 8px 5px;
@@ -161,7 +161,7 @@ array-input {
   transform: rotate(45deg);
 }
 
-.calculate-button, .array-buttons {
+.calculate-button, .array-buttons, .lookup-province-button {
   background-color: #FF7F00;
   border: none;
   color: white;
@@ -180,7 +180,8 @@ array-input {
 
 #answer,
 #federal-tax-answer,
-#array-answer {
+#array-answer,
+#lookup-province-answer {
   color: green;
   font-size: 1.5em;
   text-align: center;
@@ -194,7 +195,7 @@ array-input {
   margin: 0px 5px 5px 10px;
 }
 
-#push {
+#push, #lookup-province-button {
   background-color: rgb(51, 145, 182);
 }
 

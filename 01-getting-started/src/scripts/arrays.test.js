@@ -23,3 +23,10 @@ test("does that clearArr function work?", () => {
     expect(arraysFunctions.clearArr([4, 5, 6])).toBe(0);
     expect(arraysFunctions.clearArr([2, 53, 3])).toBe(0);
 });
+
+test("does that provinceLookup function work?", () => {
+    expect(arraysFunctions.provinceLookup('AB')).toBe('Alberta');
+    expect(arraysFunctions.provinceLookup('BC')).toBe('British Columbia');
+    expect(arraysFunctions.provinceLookup('ns')).toBe('Nova Scotia');
+    expect(arraysFunctions.provinceLookup('ABZ')).toBe('error');
+});
