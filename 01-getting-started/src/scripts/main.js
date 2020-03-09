@@ -7,14 +7,9 @@ let num1Input = document.getElementById('num1');
 let num2Input = document.getElementById('num2');
 let button = document.getElementById('calculate');
 let checkmark = document.getElementsByClassName('operation-checkmark');
-let incomeInput = document.getElementById('income');
-let arrayButtons = document.getElementsByClassName('array-buttons');
-let arrayInput = document.getElementById('array-input');
-let netIncome = 0;
 let num1 = 0;
 let num2 = 0;
-let element = 0;
-let arr = [];
+let result;
 // **********
 //
 // Add the event listeners
@@ -92,43 +87,67 @@ if (button) {
 }
 
 // netincome input eventlistener
+let incomeInput = document.getElementById('income');
 if (incomeInput) {
     incomeInput.addEventListener('input', updateIncome);
     function updateIncome(event) {
-        netIncome = Number(event.target.value);
+        let netIncome = Number(event.target.value);
         document.getElementById('federal-tax-answer').value = '$ ' + taxCalcFunctions.fedTaxRates(netIncome).toFixed(2);
     }
 }
 
 // Array input eventlisteners
+let arrayButtons = document.getElementsByClassName('array-buttons');
+let arrayInput = document.getElementById('array-input');
 if (arrayInput) {
     arrayInput.addEventListener('input', updateArray);
     function updateArray(event) {
         element = Number(event.target.value);
     }
 }
+
+if (arrayInput) {
+    arrayInput.addEventListener('change', updateArrayAnswer);
+    function updateArrayAnswer(event) {
+        let newNum = Number(event.target.value);
+        if (typeof newNum == 'number')
+        document.getElementById('array-answer').value = newNum;
+    }
+}
+
 // Array Operations
+let element;
+let numArray = [];
 const arrayOperation = (clickobj) => {
     let operator = clickobj.target.value;
     switch (operator) {
-        case 'add':
-            document.getElementById('array-answer').value = arraysFunctions.addEleToArr(element);
+        case 'push':
+            result = arraysFunctions.pushArray(element, numArray)
+            numArray = result[0];
+            document.getElementById('array-answer').value = result[1];
             break;
+
         case 'show':
-            document.getElementById('array-answer').value = arraysFunctions.showArray(element.value);
+            document.getElementById('array-answer').value = arraysFunctions.showArray(numArray);
             break;
+
         case 'total':
-            // document.getElementById('array-answer').value = arraysFunctions.addEles(arr);
+            document.getElementById('array-answer').value = arraysFunctions.sumArray(numArray);
             break;
+
         case 'clear':
-            console.log('abc');
+            document.getElementById('array-answer').value = arraysFunctions.clearArr();
             document.getElementById('array-answer').value = '';
             arrayInput.value = '';
+            numArray.length = 0;
+            element = '';
             break;
+
         default:
             return 'error';
     };
 }
+//console.log(arrs);
 //loop through buttons for array operations
 for (let i = 0; i < arrayButtons.length; i++) {
     arrayButtons[i].addEventListener('click', arrayOperation, false);

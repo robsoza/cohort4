@@ -2,30 +2,34 @@
  * @description arrays, pure-functions and testing
  * @name arraysFunctions
  */
-const arr = [];
+
 const arraysFunctions = {
     
-    addEleToArr: (element) => {
+    pushArray: (element, numArray) => {
+        let msg;
         if (isNaN(element)) {
-            return "The input is not a valid number"
-        } arr.push(element);
-        return "The number has been added to the array";
+            msg = "The input is not a valid number";
+        } else if (typeof element == 'number')  {
+            numArray.push(element);
+            msg = "The number has been added to the array";
+        };
+        return [numArray, msg];
     },
 
-    showArray: () => {
-        let show = arr.join(', ');
-        return show;
+    showArray: (numArray) => {
+        return numArray.toString();
     },
 
-    addEles: (arr) => {
-        let arrResult = 0;
-        for (let i = 0; i < arr.length; i++) {
-            return (arrResult + arr[i]);
-        }
+    sumArray: (numArray) => {
+        let numArrayResult = 0;
+            for (let i = 0; i < numArray.length; i++) {
+                numArrayResult = numArray[i] + numArrayResult;
+            } return numArrayResult;
     },
 
-    clearArr: (arr) => {
-        return (arr.length = 0);
+    clearArr: (numArray) => {
+        numArray = [];
+        return (numArray.length = 0);
     }
 };
 
