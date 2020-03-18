@@ -1,29 +1,52 @@
+let i = 0;
 
 const functions = {
-
-    addDiv: (string) => {
-        return string
-    },
-
-    setBg: (randomColur) => {
+    buildLi: (text) => {
         const randomColour = Math.floor(Math.random() * 16777215).toString(16);
         const li = document.createElement("li");
+        li.className = "myOlitems";
         li.style.backgroundColor = "#" + randomColour;
-        let t = document.createTextNode("#" + randomColour);
+        const t = document.createTextNode(text + " #" + randomColour);
         li.appendChild(t);
-        document.getElementById("myUL").appendChild(li);
-        let span = document.createElement("SPAN");
-        let txt = document.createTextNode("\u00D7");
-        span.className = "close";
-        span.appendChild(txt);
-        li.appendChild(span);
+        return li;
+    },
 
-        for (let i = 0; i < close.length; i++) {
-            close[i].onclick = function () {
-                let div = this.parentElement;
-                div.style.display = "none";
-            }
-        }
+    buildCard: (text) => {
+        const myCard = document.createElement("div");
+        myCard.setAttribute("class", "cards");
+        const cardTitle = document.createElement("cardTitle");
+        cardTitle.setAttribute("id", "cardTitle");
+        cardTitle.textContent = text + i;
+        myCard.appendChild(cardTitle);
+        myCard.appendChild(document.createElement("br"));
+        // add buttons
+        myCard.appendChild(functions.buildBtn("Add Before", "addCardBeforeBtn", "cardBtn"));
+        myCard.appendChild(functions.buildBtn("Add After", "addCardAfterBtn", "cardBtn"));
+        myCard.appendChild(functions.buildBtn("Delete", "deleteCardBtn", "cardBtn"));
+
+        return myCard;
+    },
+
+    buildBtn: (textContent, id, className) => {
+        let btn = document.createElement("button");
+        btn.textContent = textContent;
+        btn.id = id;
+        btn.className = className;
+        return btn;
+    },
+
+    addCardBefore: (node, text) => {
+        i++;
+        const myCard = functions.buildCard(text);
+        node.parentElement.insertBefore(myCard, node);
+    },
+    addCardAfter: (node, text) => {
+        i++;
+        const myCard = functions.buildCard(text);
+        node.parentNode.insertBefore(myCard, node.nextSibling);
+    },
+    deleteCard: (node) => {
+        node.remove();
     }
 };
 

@@ -1,38 +1,62 @@
 import functions from './domfuncs.js'
 
-// Create a "close" button and append it to each list item
-const myNodelist = document.getElementsByTagName("LI");
-for (let i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+// addLi Btn Eventlistener
+const addLiBtn = document.getElementById('addLi');
+addLiBtn.addEventListener('click', function (e) {
+  const myOl = document.getElementById("myOl");
+  const li = document.createElement("li");
+  myOl.appendChild(functions.buildLi("Your new div's colour is"));
+});
 
-// Click on a close button to hide the current list item
-const close = document.getElementsByClassName("close");
-for (let i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    var div = this.parentElement;
-    div.style.display = "none";
+// Show Btn Eventlistener
+const list = document.getElementsByClassName("myOlitems");
+const showLiBtn = document.getElementById('showLi');
+showLiBtn.addEventListener('click', function (e) {
+  for (let i = list.length - 1; i >= 0; --i) {
+    if (list[i].style.display === "none") {
+      list[i].style.display = "block";
+      console.log(list[i]);
+    } else {
+      list[i].style.display = "none";
+      console.log(list[i]);
+    }
   }
-}
 
-// Add a "checked" symbol when clicking on a list item
-const list = document.querySelector('ul');
-list.addEventListener('click', function (ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-    console.log(ev.target.innerText);
+});
+
+// delete Btn Eventlistener
+const deleteBtn = document.getElementById('deleteLi');
+deleteBtn.addEventListener('click', function (e) {
+  for (let i = list.length - 1; i >= 0; --i) {
+    list[i].remove();
   }
-}, false);
+});
 
-// delete lastChild
-const delBtn = document.getElementById('del-last');
-delBtn.addEventListener('click', function (ev) {
-  list.removeChild(list.lastChild); 
-  });
+// click window Eventlistener
+addEventListener('click', function (ev) {
+  console.log(ev);
+  console.log(ev.target.textContent);
+});
 
-genNew.addEventListener("click", functions.setBg);
-
+// buildCar Btn Eventlistener
+const lPanel = document.getElementById('leftPanel');
+const onCardClick = (e) => {
+  switch (e.target.id) {
+    case 'addCard':
+      const newCard = functions.buildCard("Card # ");
+      lPanel.appendChild(newCard);
+      break;
+    case 'addCardBeforeBtn':
+      functions.addCardBefore(e.target.parentElement, "Card # ");
+      break;
+    case 'addCardAfterBtn':
+      functions.addCardAfter(e.target.parentElement, "Card # ");
+      break;
+    case 'deleteCardBtn':
+      functions.deleteCard(e.target.parentElement);
+      break;
+  }
+};
+leftPanel.addEventListener('click', ((e) => {
+  onCardClick(e);
+}));
