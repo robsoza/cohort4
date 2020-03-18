@@ -5,23 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./dom.css">
-    <title>DOM</title>
+    <title>Events and DOM</title>
 </head>
 
 <body>
     <div id="basic-dom">
-        <div <div id="myDIV" class="header">
-            <h2 style="margin:5px">BASIC DOM</h2>
-            <button id="genNew" class="addBtn">Add</button>
-            <button id="del-last" class="delBtn">Delete </button>
-        </div>
-        <div>
-            <ul id="myUL">
-                <li>#f9f9f9</li>
-                <li>#eeeeee</li>
-            </ul>
+        <!-- BASIC DOME -->
+        <h1 style="margin:5px">BASIC DOM</h1>
+        <p>This is a list of random colours</p>
+        <button id="addLi" class="addBtn">Add</button>
+        <button id="showLi" class="showBtn">Show</button>
+        <button id="deleteLi" class="delBtn">Delete </button>
+        <ol id="myOl">
+            <li class="myOlitems" style="background-color: white;">#ffffff</li>
+            <li class="myOlitems" style="background-color: lightgray;">#d3d3d3</li>
+            <li class="myOlitems" style="background-color: gray;">#808080</li>
+        </ol>
+    </div>
+    <br>
+
+    <div id="working-with-cards">
+        <!-- WORKING WITH CARDS -->
+        <h1>WORKING WITH CARDS</h1>
+
+        <div id="cardsContainer">
+
+            <div id="leftPanel" class="panels">
+                <h2>Left panel</h2>
+                <button id="addCard" class="addBtn">Add Card</button>
+            </div>
+
+            <div id="rightPanel" class="panels">
+                <h2>Right panel</h2>
+            </div>
         </div>
     </div>
+    <footer class="footer">© robsoza 2020</footer>
     <script type="module" src="./scripts/dom.js"></script>
 </body>
 
