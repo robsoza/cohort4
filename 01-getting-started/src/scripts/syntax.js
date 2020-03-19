@@ -46,7 +46,7 @@ const myfunctions = {
         return false;
     },
 
-    addNumsInArr: (arr) => {
+    sumArray: (arr) => {
         let result = 0;
         for (let i = 0; i < arr.length; i++) {
             result = result + arr[i];
@@ -69,31 +69,23 @@ const myfunctions = {
     countToTen: (num) => {
         let result = 0;
         while (num <= 10) {
-            result = num;
-            num++;
+            result = num++;
         }
         return result;
     },
 
-    countToZ: (num) => {
-        let result = 0;
+    doWhileLoop: (x) => {
         do {
-            return result;
-            num--;
-            result = num;
-        } while (num > 0)
+            x--;
+            return x;
+        } while (x > 0);
     },
 
-    containsWordTest: (word) => {
-        let result;
-        const students = [
-            "john",
-        ];
+    checkValueInList: (word) => {
+        const students = ["john",];
         if (students[0] == word) {
-            result = true;
-        } else if (students[0] !== word) {
-            result = false;
-        } return result;
+            return true;
+        } return false;
     }
 };
 export default myfunctions;

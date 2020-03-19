@@ -22,9 +22,9 @@ test("Does the isEven function return true or false boolean?", () => {
     expect(myfunctions.isEven(3)).toBe(false);
 });
 
-test("does the addNumsInArr function add numbers inside an array?", () => {
-    expect(myfunctions.addNumsInArr([1, 2, 3])).toBe(6);
-    expect(myfunctions.addNumsInArr([4, 5, 6])).toBe(15);
+test("does the sumArray function add numbers inside an array?", () => {
+    expect(myfunctions.sumArray([1, 2, 3])).toBe(6);
+    expect(myfunctions.sumArray([4, 5, 6])).toBe(15);
 });
 
 test("does the isClassicCar function work?", () => {
@@ -39,14 +39,14 @@ test("Does the countToTen function work", () => {
     expect(myfunctions.countToTen(3)).toBe(10);
 });
 
-test("Does the countToZ function work", () => {
-    expect(myfunctions.countToZ(10)).toBe(0);
-    expect(myfunctions.countToZ(9)).toBe(0);
-    expect(myfunctions.countToZ(8)).toBe(0);
+test("Does the doWhileLoop function work", () => {
+    expect(myfunctions.doWhileLoop(5)).toBe(4);
+    expect(myfunctions.doWhileLoop(8)).toBe(7);
+    expect(myfunctions.doWhileLoop(9)).toBe(8);
 });
 
-test("does the containsWordTest function work?", () => {
-    expect(myfunctions.containsWordTest("john")).toBe(true);
-    expect(myfunctions.containsWordTest("mike")).toBe(false);
-    expect(myfunctions.containsWordTest("steve")).toBe(false);
+test("does the checkValueInList function work?", () => {
+    expect(myfunctions.checkValueInList("john")).toBe(true);
+    expect(myfunctions.checkValueInList("mike")).toBe(false);
+    expect(myfunctions.checkValueInList("steve")).toBe(false);
 });

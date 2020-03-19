@@ -1,6 +1,6 @@
 
 const functions = {
-    
+
     size: (num) => {
         if (num < 10) return "small";
         if (num < 20) return "medium";
@@ -12,7 +12,7 @@ const functions = {
         return num1 + num2;
     },
 
-    subtract: (num1, num2) => {
+    substract: (num1, num2) => {
         return num1 - num2;
     },
 
@@ -20,9 +20,8 @@ const functions = {
         if (num % 2 == 0) {
             return true;
         };
-    return false;
-  },
-    
+        return false;
+    },
 };
 
 export default functions;

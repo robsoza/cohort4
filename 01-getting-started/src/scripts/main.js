@@ -3,10 +3,10 @@ import calculator from './Calculator.js';
 import taxCalcFunctions from './taxcalc.js';
 import arraysFunctions from './arrays.js';
 
-let num1Input = document.getElementById('num1');
-let num2Input = document.getElementById('num2');
-let button = document.getElementById('calculate');
-let checkmark = document.getElementsByClassName('operation-checkmark');
+const num1Input = document.getElementById('num1');
+const num2Input = document.getElementById('num2');
+const button = document.getElementById('calculate');
+const checkmark = document.getElementsByClassName('operation-checkmark');
 let num1 = 0;
 let num2 = 0;
 let result;
@@ -24,7 +24,6 @@ if (num1Input) {
     num1Input.addEventListener('input', updateN1);
     function updateN1(event) {
         num1 = Number(event.target.value);
-
     }
 }
 
@@ -69,6 +68,7 @@ const performOperation = (clickobj) => {
             return 'error';
     };
 }
+
 // loop through operatoions checkmark eventListener
 for (let i = 0; i < checkmark.length; i++) {
     checkmark[i].addEventListener('input', performOperation, false);
@@ -87,7 +87,7 @@ if (button) {
 }
 
 // netincome input eventlistener
-let incomeInput = document.getElementById('income');
+const incomeInput = document.getElementById('income');
 if (incomeInput) {
     incomeInput.addEventListener('input', updateIncome);
     function updateIncome(event) {
@@ -97,8 +97,8 @@ if (incomeInput) {
 }
 
 // Array input eventlisteners
-let arrayButtons = document.getElementsByClassName('array-buttons');
-let arrayInput = document.getElementById('array-input');
+const arrayButtons = document.getElementsByClassName('array-buttons');
+const arrayInput = document.getElementById('array-input');
 if (arrayInput) {
     arrayInput.addEventListener('input', updateArray);
     function updateArray(event) {
@@ -153,17 +153,32 @@ for (let i = 0; i < arrayButtons.length; i++) {
     arrayButtons[i].addEventListener('click', arrayOperation, false);
 }
 
-// Working with dictionaries
-let lookupProvinceInput = document.getElementById('lookup-province-input');
-let lookupProvinceButton = document.getElementById('lookup-province-button');
-let lookupProvinceAnswer = document.getElementById('lookup-province-answer');
+const provinceDictionary = {
+    AB: 'Alberta',
+    BC: 'British Columbia',
+    MB: 'Manitoba',
+    SK: 'Saskatchewan',
+    NS: 'Nova Scotia',
+    NB: 'New Brunswick',
+    NL: 'Newfoundland and Labrador',
+    PE: 'Prince Edward Island',
+    ON: 'Ontario',
+    QC: 'Quebec',
+    NT: 'Northwest Territories',
+    YT: 'Yukon',
+    NU: 'Nunavut'
+};
 
+// Working with dictionaries
+const lookupProvinceInput = document.getElementById('lookup-province-input');
+const lookupProvinceButton = document.getElementById('lookup-province-button');
+const lookupProvinceAnswer = document.getElementById('lookup-province-answer');
 
 if (lookupProvinceButton) {
     lookupProvinceButton.addEventListener('click', function () {
         console.log('clickedddd');
         
-        lookupProvinceAnswer.innerHTML = arraysFunctions.provinceLookup(lookupProvinceInput.value);
+        lookupProvinceAnswer.value = arraysFunctions.provinceLookup(lookupProvinceInput.value, provinceDictionary);
         console.log(arraysFunctions.provinceLookup(lookupProvinceInput.value));
     });
 }

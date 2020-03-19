@@ -25,8 +25,8 @@ test("does that clearArr function work?", () => {
 });
 
 test("does that provinceLookup function work?", () => {
-    expect(arraysFunctions.provinceLookup('AB')).toBe('Alberta');
-    expect(arraysFunctions.provinceLookup('BC')).toBe('British Columbia');
-    expect(arraysFunctions.provinceLookup('ns')).toBe('Nova Scotia');
-    expect(arraysFunctions.provinceLookup('ABZ')).toBe('error');
+    expect(arraysFunctions.provinceLookup('AB', {AB: 'Alberta'})).toBe('Alberta');
+    expect(arraysFunctions.provinceLookup('BC', {BC: 'British Columbia'})).toBe('British Columbia');
+    expect(arraysFunctions.provinceLookup('ns', {NS: 'Nova Scotia'})).toBe('Nova Scotia');
+    expect(arraysFunctions.provinceLookup('ABZ', {AB: 'Alberta'})).toBe("Enter a valid Canadian province code");
 });

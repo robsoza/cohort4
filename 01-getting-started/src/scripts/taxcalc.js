@@ -26,28 +26,23 @@ const taxCalcFunctions = {
         //15%
         if (netIncome <= amt1 && netIncome >= 0) {
             tax = netIncome * rt1;
-            return Number((tax).toFixed(2));
         }
         //20.5%
-        else if (netIncome > amt1 && netIncome <= amt2 && netIncome >= 0) {
+        if (netIncome > amt1 && netIncome <= amt2 && netIncome >= 0) {
             tax = ((netIncome - amt1) * rt2) + b1;
-            return Number((tax).toFixed(2));
         }
         //26%
-        else if (netIncome > amt2 && netIncome <= amt3 && netIncome >= 0) {
+        if (netIncome > amt2 && netIncome <= amt3 && netIncome >= 0) {
             tax = ((netIncome - amt2) * rt3) + b1 + b2;
-            return Number((tax).toFixed(2));
         }
         //29%
-        else if (netIncome > amt3 && netIncome <= amt4 && netIncome >= 0) {
+        if (netIncome > amt3 && netIncome <= amt4 && netIncome >= 0) {
             tax = ((netIncome - amt3) * rt4) + b1 + b2 + b3;
-            return Number((tax).toFixed(2));
         }
         //33%
         else if (netIncome > amt4 && netIncome >= 0) {
             tax = ((netIncome - amt4) * rt5) + b1 + b2 + b3 + b4;
-            return Number((tax).toFixed(2));
-        }
+        } return Number((tax).toFixed(2));
     }
 };
 
