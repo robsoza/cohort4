@@ -1,8 +1,8 @@
 {
-    "name": "jest-p2",
+    "name": "02-dom",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "dom.js",
     "scripts": {
         "test": "jest",
         "testcov": "jest --coverage",
@@ -14,9 +14,9 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@babel/cli": "^7.0.0",
-        "@babel/preset-env": "^7.0.0",
-        "jest": "^24.9.0",
+        "@babel/cli": "^7.8.4",
+        "@babel/preset-env": "^7.8.7",
+        "jest": "^25.1.0",
         "node-fetch": "^2.6.0",
         "whatwg-fetch": "^3.0.0"
     },

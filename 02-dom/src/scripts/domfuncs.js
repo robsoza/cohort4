@@ -1,6 +1,12 @@
+/**
+ * @description javascript Events / DOM
+ * @name buildCard
+ */
+
 let i = 0;
 
 const functions = {
+    
     buildLi: (text) => {
         const randomColour = Math.floor(Math.random() * 16777215).toString(16);
         const li = document.createElement("li");

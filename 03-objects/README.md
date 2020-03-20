@@ -1,5 +1,5 @@
 
-This file should be viewed from [github](https://github.com/robsoza/cohort4/tree/master/02-dom). Do not view from an editor.
+This file should be viewed from [github](https://github.com/robsoza/cohort4/tree/master/03-objects). Do not view from an editor.
 
 This project is the "Getting Started" project for the EvovleU Full Stack Development program. It is a baseline to demonstrate:
 
@@ -17,7 +17,7 @@ Once all the base tools are installed this is the instructions to run the first 
 1. Install the dependencies required for the project. This command looks at the 'package.json' file and installs all of the dependencies. You must be in the correct directory to run this.  
 ```sh
 cd reference
-cd 02-dom
+cd 03-objects
 # Check to see if package.json is here
 # by using ls or dir
 npm i

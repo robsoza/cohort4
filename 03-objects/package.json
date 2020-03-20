@@ -1,0 +1,26 @@
+{
+  "name": "jest-p2",
+  "version": "1.0.0",
+  "description": "This file should be viewed from [github](https://github.com/robsoza/cohort4/tree/master/03-objects). Do not view from an editor.",
+  "main": "account.js",
+  "scripts": {
+    "test": "jest",
+    "testcov": "jest --coverage",
+    "test1": "jest src/01-getting-started",
+    "test1cov": "jest src/01-getting-started --coverage",
+    "testfile": "jest src/01-getting-started/scripts/lfsplay.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/preset-env": "^7.8.7",
+    "jest": "^25.1.0",
+    "node-fetch": "^2.6.0",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}
