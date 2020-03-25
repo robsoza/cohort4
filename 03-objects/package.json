@@ -1,8 +1,8 @@
 {
   "name": "jest-p2",
   "version": "1.0.0",
-  "description": "This file should be viewed from [github](https://github.com/robsoza/cohort4/tree/master/03-objects). Do not view from an editor.",
-  "main": "account.js",
+  "description": "03-Objects",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "testcov": "jest --coverage",

@@ -1,121 +1,172 @@
 body {
+  /* background-image: url('./scripts/images/background.jpg'); */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
   background-color: #f1f1f1;
   margin: 2rem;
   min-width: 250px;
+  /* text-align: center; */
+}
+
+h1 {
+  outline: 1px solid greenyellow;
   text-align: center;
+  background: green;
+  color: white; 
 }
 
-/* border style */
-#basic-dom,
-#working-with-cards {
-  border: 2px solid black;
-  padding: 10px 10px 10px 10px;
+legend {
+  outline: 1px solid greenyellow;
+  padding: 3px;
+  text-align: left;
+  color: whitesmoke;
+  background: green
 }
 
-/* Include the padding and border in an element's total width and height */
-* {
+.class-acc-el, .class-txn-el, #class-txn-hide {
+  display: none;
+}
+
+#grid {
+  display: grid;  
+  grid-template-columns: 1fr;
+}
+
+#acc-info, #txn-info {
+text-align: center;
+border-radius: 10px;
+transition: all 0.3s linear;
+background: none;
+}
+
+input[type=text], select, input{
+  width: 100%;
+  padding: 10px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
+  text-align: left;
 }
 
-/* Remove margins and padding from the list */
-ol {
-  margin: 0;
-  padding: 0;
+fieldset {
+cursor: pointer;
+opacity: 0.9;
+background: white;
 }
+
+.label {
+  text-align: left;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #D5F3FE;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/*  */
+button {
+  outline: 1px solid yellow;
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 4px;}
+.button3 {border-radius: 8px;}
+#button4, #button5 {
+  outline: 1px solid greenyellow;
+}
+.button5 {border-radius: 50%;}
+
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
 
 /* Style the list items */
-ol li {
+.myP {
+  opacity: none;
   cursor: pointer;
   position: relative;
   padding: 12px 8px 12px 40px;
-  list-style-position: inside;
-  background: #eee;
+  list-style: none;
+  background: green;
   font-size: 18px;
   transition: 0.2s;
-}
-
-/* Darker background-color on hover */
-ol li:hover {
-  background: #ddd;
-}
-
-/* Style the "Add" button */
-.addBtn,
-.delBtn,
-.showBtn {
-  align-items: center;
-  padding: 10px;
-  margin: 5px;
-  width: 25%;
-  background: #d9d9d9;
-  color: #555;
-
   text-align: center;
-  font-size: 16px;
+  color: white;
+  outline: 1px solid greenyellow;
+}
+
+#dropdown {
   cursor: pointer;
-  transition: 0.3s;
-  border-radius: 0;
+  position: relative;
+  top: 50%;
+  right: 0%;
+  padding: 6px 10px;
+  transform: translate(0%, -50%);
+  border-radius: 50%;
+  color: gold;
+
 }
 
-/* Style the buttons hover */
-.addBtn:hover,
-.showBtn:hover,
-.delBtn:hover,
-.cardBtn:hover {
-  background-color: #bbb;
+.close:hover {background:#f1f1f1;}
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-/* card containers */
-#cardsContainer {
-  display: grid;
-  grid-template-columns: 50% 50%;
-}
 
-/* card containers panels */
-.panels {
-  background-color: white;
-  margin: auto;
-  width: 40vw;
-}
-
-#leftPanel {
-  grid-area: 1 / 1 / 2 / 2;
-  display: inline-flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-#rightPanel {
-  grid-area: 1 / 2 / span 1 / span 1;
-  height: 100%;
-  padding: 10px;
-}
-
-/* cards style */
-#addCard {
-  margin: auto;
-}
-
-.cards {
-  text-align: center;
-  margin: 1em auto;
-  background: -webkit-linear-gradient(lightgray, rgba(80, 80, 80, 0.8));
-  width: 50;
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-  padding: 5px;
-}
-
-.cardBtn {
-  background-color: lightgray;
-  width: 8em;
-  height: 2em;
-  margin: 5px;
-  border: none;
-  padding: 5px;
-}
-
-#cardTitle {
-  margin: auto;
-  font-size: 1.25em;
-  font-weight: bold;
+footer {
+  color: lightblue;
+  position: fixed;
+  bottom: 0;
+  margin: 10px;
 }
