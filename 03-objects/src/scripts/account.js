@@ -19,7 +19,7 @@ class Account {
     }
 
     show() {
-        return this.name, this.valance;
+        return [this.name, this.balance];
     }
 }
 
@@ -30,20 +30,12 @@ class AccountController {
     }
 
     addAcc(acc) {
-        let accs = this.accs;
-        let msg = "";
-        acc.name = acc.name.toLowerCase();
-        acc.name = acc.name.charAt(0).toUpperCase() + acc.name.slice(1);
-        if (isNaN(element) || element == "") {
-            msg = "The input is not a valid number";
-        } if (accs.find((element) => {
-            return element.name === name;
-        }) === undefined) {
-            accs.push(acc.name, acc.balance);
-            msg = "This account was created";
-        } else {
-            msg = "The account alreaty exists"
-        } return [accs, msg];
+        this.accs.push(acc);
+    }
+ 
+    deleteAcc(name) {
+        let i = this.accs.findIndex(x => x.name===name);
+        this.accs.splice(i,1);   
     }
 }
 
