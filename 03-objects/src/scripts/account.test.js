@@ -60,3 +60,44 @@ test('does that deleteAcc function work?', () => {
     control1.deleteAcc('Savings');
     expect(control1.accs).toEqual([]);
 });
+
+test('does that accsTotal function work?', () => {
+    const control2 = new AccountController;
+    let myAcc8 = new Account('Checkings', 20);
+    let myAcc9 = new Account('Bonds', 30);
+
+    control2.addAcc(myAcc8);
+    control2.addAcc(myAcc9);
+    expect(control2.accsTotal()).toBe(50);
+
+    control2.deleteAcc('Checkings');
+    expect(control2.accsTotal()).toBe(30);
+});
+
+test('does that biggestAcc function work?', () => {
+    const control3 = new AccountController;
+    let myAcc10 = new Account('Checkings', 20);
+    let myAcc11 = new Account('Bonds', 30);
+
+    control3.addAcc(myAcc10);
+    control3.addAcc(myAcc11);
+    expect(control3.biggestAcc()).toBe(30);
+
+    let myAcc12 = new Account('Savings', 100);
+    control3.addAcc(myAcc12);
+    expect(control3.biggestAcc()).toBe(100);
+});
+
+test('does that smallestAcc function work?', () => {
+    const control4 = new AccountController;
+    let myAcc14 = new Account('Checkings', 20);
+    let myAcc15 = new Account('Bonds', 30);
+
+    control4.addAcc(myAcc14);
+    control4.addAcc(myAcc15);
+    expect(control4.smallestAcc()).toBe(20);
+
+    let myAcc16 = new Account('Savings', 10);
+    control4.addAcc(myAcc16);
+    expect(control4.smallestAcc()).toBe(10);
+});
