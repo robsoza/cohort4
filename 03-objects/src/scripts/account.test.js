@@ -12,7 +12,7 @@ test('does the deposit function work?', () => {
     myAcc1.deposit(25);
     expect(myAcc1.balance).toBe(50);
     myAcc1.deposit(50);
-    expect(myAcc1.balance).toBe(100);
+    expect(myAcc1.balance).toBe(100.00);
 });
 
 test('does the withdraw function work?', () => {
@@ -26,8 +26,8 @@ test('does the withdraw function work?', () => {
 test('does the show function work?', () => {
     let myAcc3 = new Account('Checking', 100);
     let myAcc4 = new Account('Savings', 200);
-    expect(myAcc3.show()).toStrictEqual(['Checking', 100]);
-    expect(myAcc4.show()).toStrictEqual(['Savings', 200]);
+    expect(myAcc3.show()).toStrictEqual('Checking : $100.00');
+    expect(myAcc4.show()).toStrictEqual('Savings : $200.00');
 });
 
 test('Does that addAcc function work?', () => {
@@ -48,8 +48,8 @@ test('Does that addAcc function work?', () => {
 
 test('does that deleteAcc function work?', () => {
     const control1 = new AccountController;
-    let myAcc6 = new Account('Savings', 50);
-    let myAcc7 = new Account('Bonds', 60);
+    let myAcc6 = new Account('Savings', '50.00');
+    let myAcc7 = new Account('Bonds', '60.00');
 
     control1.addAcc(myAcc6);
     control1.addAcc(myAcc7);
@@ -68,10 +68,10 @@ test('does that accsTotal function work?', () => {
 
     control2.addAcc(myAcc8);
     control2.addAcc(myAcc9);
-    expect(control2.accsTotal()).toBe(50);
+    expect(control2.accsTotal()).toBe('50.00');
 
     control2.deleteAcc('Checkings');
-    expect(control2.accsTotal()).toBe(30);
+    expect(control2.accsTotal()).toBe('30.00');
 });
 
 test('does that biggestAcc function work?', () => {
@@ -81,11 +81,11 @@ test('does that biggestAcc function work?', () => {
 
     control3.addAcc(myAcc10);
     control3.addAcc(myAcc11);
-    expect(control3.biggestAcc()).toBe(30);
+    expect(control3.biggestAcc()).toBe('Bonds : $30.00');
 
     let myAcc12 = new Account('Savings', 100);
     control3.addAcc(myAcc12);
-    expect(control3.biggestAcc()).toBe(100);
+    expect(control3.biggestAcc()).toBe('Savings : $100.00');
 });
 
 test('does that smallestAcc function work?', () => {
@@ -95,9 +95,22 @@ test('does that smallestAcc function work?', () => {
 
     control4.addAcc(myAcc14);
     control4.addAcc(myAcc15);
-    expect(control4.smallestAcc()).toBe(20);
+    expect(control4.smallestAcc()).toBe('Checkings : $20.00');
 
     let myAcc16 = new Account('Savings', 10);
     control4.addAcc(myAcc16);
-    expect(control4.smallestAcc()).toBe(10);
+    expect(control4.smallestAcc()).toBe('Savings : $10.00');
+});
+
+test('does that isNewAcc function work?', () => {
+    let acc16 = new Account('Checkings', 50);
+    let acc17 = new Account('Savings', 50);
+    const control5 = new AccountController;
+    control5.addAcc(acc16);
+    control5.addAcc(acc17);
+
+    expect(control5.isNewAcc('Checkings')).toEqual('error');
+    expect(control5.isNewAcc('Savings')).toEqual('error');
+    expect(control5.isNewAcc('Bonds')).toEqual('Bonds');
+    expect(control5.isNewAcc('Travel')).toEqual('Travel');
 });

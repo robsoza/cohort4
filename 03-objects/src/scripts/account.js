@@ -5,21 +5,23 @@
 
 class Account {
 
-    constructor(name, initBalance) {
+    constructor(name, v) {
         this.name = name;
-        this.balance = initBalance;
+        this.balance = Number(v);
     }
 
-    deposit(amount) {
-        this.balance += amount;
+    deposit(v) {
+        this.balance += Number(v);
     }
 
-    withdraw(amount) {
-        this.balance -= amount;
+    withdraw(v) {
+        this.balance -= Number(v);
     }
 
     show() {
-        return [this.name, this.balance];
+
+        let acc = [this.name, ' : $' + this.balance.toFixed(2)];
+        return acc.join('');
     }
 }
 
@@ -39,20 +41,36 @@ class AccountController {
     }
 
     accsTotal() {
-        const value = this.accs.map((x) => x.balance);
-        return value.reduce((a, b) => a + b);
+        if (this.accs.length != []) {
+            let value = this.accs.map((x) => x.balance);
+            value = value.reduce((a, b) => (Number(a) + Number(b)));
+            return Number.parseFloat(value).toFixed(2);
+        }
     }
 
     biggestAcc() {
-        const value = this.accs.map((x) => x.balance);
-        return value.reduce((a, b) => b > a ? b : a);
+        if (this.accs.length != []) {
+            this.accs.sort((a, b) => { return b.balance - a.balance });
+            let value = [this.accs[0].name, ' : $' + (this.accs[0].balance.toFixed(2))];
+            return value.join('');
+        }
     }
 
     smallestAcc() {
-        const value = this.accs.map((x) => x.balance);
-        return value.reduce((a, b) => b < a ? b : a);
+        if (this.accs.length != []) {
+            this.accs.sort((a, b) => { return a.balance - b.balance });
+            let value = [this.accs[0].name, ' : $' + (this.accs[0].balance.toFixed(2))];
+            return value.join('');
+        }
     }
 
+    isNewAcc(name) {
+        for (let v in this.accs) {
+            if (this.accs[v].name === name) {
+                return 'error';
+            }
+        } return name;
+    }
 }
 
 export { Account, AccountController };

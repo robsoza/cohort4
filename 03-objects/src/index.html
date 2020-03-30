@@ -8,84 +8,61 @@
     <title>Objects</title>
 </head>
 
-<body class="bgimg">
-    <h1 id="h1title">RS BANK</h1>
-    <div id="grid">
-        
-        <!-- CREATE NEW ACCOUNT -->
-        
-
-            <fieldset>
-                <legend>Account Info</legend>
-                <div id="create-new-acc">
-                    <strong>
-                        <p class="myP" id="acc-p">Create an Account<span id="dropdown">&#8693;</span></p>
-                    </strong>
-                    <p id="id-accname" class="class-acc-el">Enter your new account's name:</p>
-                    <input id="id-acc-name-input" class="class-acc-el" name="name-acc-input" placeholder="name...">
-                    <p id="id-amount-label" class="class-acc-el">Enter initial amount:</p>
-                    <input id="id-init-amount-input" class="class-acc-el" name="name-init-amount"
-                        placeholder="amount...">
-                    <div>
-                        <button id="button4" class="class-acc-el">Create new account</button>
-                    </div>
+<body>
+    <h1 id="h1title">MY ACCOUNTS</h1>
+    <!-- CREATE NEW ACCOUNT -->
+    <div id="container">
+        <fieldset id="accs">
+            <legend>Create an Account</legend>
+            <div id="create-new-acc">
+                <p id="id-amount-label" class="class-acc-el">Enter initial amount:</p>
+                <input id="id-init-amount-input" class="class-acc-el" name="name-init-amount" placeholder="amount...">
+                <p id="id-accname" class="class-acc-el">Enter your new account's name:</p>
+                <input id="id-acc-name-input" class="class-acc-el" name="name-acc-input" placeholder="name...">
+                <div>
+                    <button id="button4" class="class-acc-el">Create new account</button>
                 </div>
-            </fieldset>
-        
+            </div>
+        </fieldset>
         <br>
         <!-- MAKE A TRANSACTIONS -->
-        
-            <fieldset id="class-txn-hide">
-                <legend>Transactions</legend>
-                <div id="create-new-txn">
-                    <strong>
-                        <p class="myP" id="txn-p">Make a transaction<span id="dropdown">&#8693;</span></p>
-                    </strong>
-
-                    <p for="fname" id="client-name" class="class-txn-el">Enter transaction amount :</p>
-
-                    <input id="txn-amount-input" name="txn-amount-input" placeholder="amount..." class="class-txn-el">
-
-                    <p for="txn-acc" id="txn-acc" class="class-txn-el">Select yor account :</p>
-                    <select id="txn-acc" class="class-txn-el"></select>
-
-                    <p for="myTransactions" id="transaction-name" class="class-txn-el">Select a transaction type :</p>
-                    <select id="Transactions" class="class-txn-el">
-                        <option value="Deposit" class="class-txn-el">Deposit</option>
-                        <option value="Withdraw" class="class-txn-el">Withdraw</option>
-                    </select>
-                    <div>
-                        <button id="button5" class="class-txn-el">Submmit your transaction</button>
-                    </div>
+        <fieldset id="txns">
+            <legend>Make a Transaction</legend>
+            <div id="create-new-txn">
+                <p for="fname" id="client-name" class="class-txn-el">Enter transaction amount :</p>
+                <input id="txn-amount-input" name="txn-amount-input" placeholder="amount..." class="class-txn-el">
+                <p for="txn-acc" id="p-txn-acc" class="class-txn-el">Select yor account :</p>
+                <select id="txn-acc" class="class-txn-el">
+                    <option value="" selected disabled hidden>Choose account</option>
+                </select>
+                <p for="myTransactions" id="transaction-name" class="class-txn-el">Select a transaction type :</p>
+                <select id="Transactions" class="class-txn-el">
+                    <option value="Deposit" class="class-txn-el">Deposit</option>
+                    <option value="Withdraw" class="class-txn-el">Withdraw</option>
+                </select>
+                <div>
+                    <button id="button5" class="class-txn-el">Submmit your transaction</button>
                 </div>
-            </fieldset>
-    <br>
-    <!-- HISTORY -->
-    <!-- <div> -->
-    <!-- <fieldset>
-            <legend>Hystory</legend>
-            <p>Name:</p>
+            </div>
+        </fieldset>
+        <fieldset id="his">
+            <legend>History</legend>
             <table id="customers">
                 <tr>
-                    <th>Description</th>
-                    <th>Ammount</th>
-                    <th>Valance</th>
+                  <th>Total:</th>
+                  <th>Biggest Account:</th>
+                  <th>Smallest Account:</th>
                 </tr>
                 <tr>
-                    <td>Deposits</td>
-                    <td>10</td>
-                    <td>50</td>
+                  <td id="current-balance"></td>
+                  <td id="biggest-acc" ></td>
+                  <td id="smallest-acc"></td>
                 </tr>
-                <tr>
-                    <td>Withdraws</td>
-                    <td>10</td>
-                    <td>50</td>
-                </tr>
-
-            </table>
-        </fieldset> -->
-    <!-- </div> -->
-</div>
+              </table>
+                        <ol id="acc-history"></ol>
+        </fieldset>
+    </div>
+    </div>
     <footer class="footer">© robsoza 2020</footer>
     <script type="module" src="./scripts/index.js"></script>
 </body>

@@ -1,122 +1,151 @@
-import { Account } from './account.js'
+import { Account, AccountController } from './account.js'
+import domFunc from './domFunc.js'
 
-// DISPLAY ELEMENTS
-function displayEl(list) {
-  for (let i = list.length - 1; i >= 0; --i) {
-    if (list[i].style.display === 'block') {
-      list[i].style.display = 'none';
-    } else {
-      list[i].style.display = 'block';
+const control = new AccountController;
+const NewAccField = document.getElementById('accs');
+const accHistory = document.getElementById('acc-history');
+const txnAcc = document.getElementById('txn-acc');
+let initAmount = 0;
+let newAccName = '';
+let strMsg = '';
+let numMsg = '';
+
+// input initial amount eventListenner
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-init-amount-input') {
+    if (numMsg) { numMsg.style.display = 'none'; }
+    initAmount = e.target.value;
+    initAmount = domFunc.isAnum(initAmount);
+    if (initAmount == 'error') {
+      if (numMsg) { numMsg.style.display = 'none'; }
+      numError();
+    }
+  } else {
+    if (initAmount != 'error') {
+      if (numMsg) { numMsg.style.display = 'none'; }
+      return initAmount;
     }
   }
-}
-
-
-// CREATE NEW ACCOUNT DROPDOWN
-const accList = document.getElementsByClassName('class-acc-el');
-const accDropDownbtn = document.getElementById('acc-p');
-accDropDownbtn.addEventListener('click', function (e) {
-    displayEl(accList);
 });
 
-// ACCOUNT NAME EVENT LISTENER
-let newAccName;
-window.addEventListener('change', newAccUpdate);
-function newAccUpdate(e) {
-  if (e.target.id === "id-acc-name-input") {
+// account name eventListenner
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-acc-name-input') {
+    if (strMsg) { strMsg.style.display = 'none'; }
     newAccName = e.target.value;
-  }
-};
-
-// AMOUNT EVENT LISTERN
-let initAmount;
-window.addEventListener('change', initAmountUpdate);
-function initAmountUpdate(e) {
-  if (e.target.id === "id-init-amount-input") {
-    initAmount = e.target.value;
-  }
-};
-
-let msg = "";
-let accs = [{ "SAVINGS": 5555 }];
-let hTitle = document.getElementById('h1title');
-let txnHide = document.getElementById('txnHide');
-console.log(hTitle);
-
-// ACC BUTTON
-const txnList = document.getElementsByClassName('class-txn-el');
-window.addEventListener('click', function (e) {
-  if (e.target.textContent == 'Create new account') {
-    pushEl(accs, newAccName, initAmount);
-  }
-});
-
-// PUSH ELELEMENT FUNCTION
-let txnField = document.getElementById('class-txn-hide');
-function pushEl(el, accName, amount) {
-  if (isNaN(amount) || amount == "") {
-    msg = "The input is not a valid number";
-    hTitle.textContent = msg;
+    newAccName = newAccName.toUpperCase();
+    newAccName = control.isNewAcc(newAccName);
+    if (newAccName === 'error') {
+      if (strMsg) { strMsg.style.display = 'none'; }
+      strError();
+    }
   } else {
-    accName = accName.toUpperCase();
-    el = el.push([{ accName, amount }]);
-    msg = "The number has been added to the array";
-    displayEl(accList);
-    hTitle.textContent = accName + " $" + amount;
-    txnField.style.display = 'block';
-  };
-  return [el, msg];
-}
-console.log(accs);
-console.log(msg);
-
-function accLookup(key, obj) {
-  key = key.toUpperCase()
-  return (key in obj) ? obj[key] : 'Enter a valid Canadian province code';
-}
-
-let myvalue = "savings";
-let eacc = accLookup(myvalue, accs);
-console.log(eacc);
-
-// MAKE TRANSACTION DROPDOWN
-  function buildSelect(id, className) {
-    let select = document.createElement('select');
-    select.id = id;
-    select.className = className;
-    return select;
+    if (newAccName != 'error') {
+      if (strMsg) { strMsg.style.display = 'none'; }
+      return newAccName;
+    }
   }
-
-  function buildOpts(value,textContent) {
-    let option = document.createElement('option');
-    option.value = value;
-    option.textContent = textContent;
-    return option;
-  }
-
-// MAKE TRANSACTION DROPDOWN
-const txnDropDownbtn = document.getElementById('txn-p');
-txnDropDownbtn.addEventListener('click', function (e) {
-    displayEl(txnList);
 });
 
-let ar1 = [];
-function add (accountName, bal) {
-  accountName = accountName.toUpperCase();
-  if ( ar1.find((element) => {
-    console.log(element.name === accountName);
-      return element.name === accountName;
-    }) === undefined
-  )
-   {
-   const account = new Account(accountName, Number(bal));
-   ar1.push(account);
-  } else  
-  console.log("nonono");
+// create new acc button eventListener
+window.addEventListener('click', (e) => {
+  if (e.target.id === 'button4') {
+
+    //if inputs are empty
+
+    newAccName = newAccName.toUpperCase();
+    newAccName = control.isNewAcc(newAccName);
+    if (newAccName === 'error' || newAccName === '') {
+      if (strMsg) { strMsg.style.display = 'none'; }
+      strError();
+    }
+
+    initAmount = domFunc.isAnum(initAmount);
+    if (initAmount == 'error') {
+      if (numMsg) { numMsg.style.display = 'none'; }
+      numError();
+    }
+
+    // if inputs are valid create new account
+    else if (newAccName != 'ERROR' && initAmount != 'ERROR' && newAccName != '' && initAmount != '') {
+      if (strMsg) { strMsg.style.display = 'none'; }
+      let newAcc = new Account(newAccName, initAmount);
+      control.addAcc(newAcc);
+
+      // append new acc to history list
+      let accItem = document.createElement('li');
+      accItem.className = newAccName + 'myAppend';
+      accItem.innerText = newAcc.show();
+
+
+      let span = document.createElement('span');
+      let txt = document.createTextNode('\u00D7');
+      span.className = 'close';
+      span.appendChild(txt);
+      accItem.appendChild(span);
+      accHistory.appendChild(accItem);
+
+      // append option to pulldown list
+      let selectAcc = document.createElement('option');
+      selectAcc.value = newAccName;
+      selectAcc.textContent = newAccName;
+      selectAcc.className = newAccName + 'myAppend';
+      txnAcc.appendChild(selectAcc);
+
+      // Add summary
+      showSummary();
+
+      // reset inputs
+      document.getElementById('id-init-amount-input').value = '';
+      document.getElementById('id-acc-name-input').value = '';
+      initAmount = '';
+      newAccName = '';
+    }
+  }
+});
+
+// Click on a close button to hide the current list item
+window.addEventListener('click', (e) => {
+  if (e.target.className === 'close') {
+    let deleteEl = document.getElementsByClassName(e.target.parentElement.className);
+    for (let i = 0; i < deleteEl.length; i++) {
+      control.deleteAcc(e.target.parentElement.className);
+      deleteEl[i].style.display = "none";
+      showSummary();
+    }
+  }
+});
+
+//summary function
+function showSummary() {
+    let accTotal = document.getElementById('current-balance');
+    accTotal.textContent = '$' + control.accsTotal();
+    let biggest = document.getElementById('biggest-acc');
+    biggest.textContent = control.biggestAcc();
+    let smallest = document.getElementById('smallest-acc');
+    smallest.textContent = control.smallestAcc();
 }
-add("sav",0);
-add("chk",3)
-add("sa",0)
-add("s",0)
-add("sav",0)
-console.log(ar1);
+
+// add errors functions
+function numError() {
+  if (numMsg) { numMsg.style.display = 'none'; }
+  numMsg = document.createElement('P');
+  numMsg.innerText = 'Not a valid number';
+  numMsg.style.color = 'red';
+  NewAccField.appendChild(numMsg);
+}
+
+function strError() {
+  if (strMsg) { strMsg.style.display = 'none'; }
+  strMsg = document.createElement('P');
+  strMsg.innerText = 'Not a valid name';
+  strMsg.style.color = 'red';
+  NewAccField.appendChild(strMsg);
+}
+
+// transaction btn event listener
+window.addEventListener('click', (e) => {
+  if (e.target.id === 'button5') {
+    console.log('5');
+  }
+});
