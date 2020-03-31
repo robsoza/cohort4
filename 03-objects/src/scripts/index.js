@@ -2,74 +2,71 @@ import { Account, AccountController } from './account.js'
 import domFunc from './domFunc.js'
 
 const control = new AccountController;
-const NewAccField = document.getElementById('accs');
 const accHistory = document.getElementById('acc-history');
 const txnAcc = document.getElementById('txn-acc');
 let initAmount = 0;
 let newAccName = '';
-let strMsg = '';
-let numMsg = '';
+let accTotal;
+let biggest;
+let smallest;
+let newAcc;
 
 // input initial amount eventListenner
 window.addEventListener('change', (e) => {
   if (e.target.id === 'id-init-amount-input') {
-    if (numMsg) { numMsg.style.display = 'none'; }
+    domFunc.deleteNumErrorMsg();
+    // assign the input to initAmount
     initAmount = e.target.value;
+    // check if it's a number
     initAmount = domFunc.isAnum(initAmount);
-    if (initAmount == 'error') {
-      if (numMsg) { numMsg.style.display = 'none'; }
-      numError();
+    if (initAmount === 'error') {
+      domFunc.showNumErrorMsg();
     }
   } else {
-    if (initAmount != 'error') {
-      if (numMsg) { numMsg.style.display = 'none'; }
-      return initAmount;
-    }
+    domFunc.deleteNumErrorMsg();
+    return initAmount;
   }
 });
 
-// account name eventListenner
+// Input account name eventListenner
 window.addEventListener('change', (e) => {
   if (e.target.id === 'id-acc-name-input') {
-    if (strMsg) { strMsg.style.display = 'none'; }
+    domFunc.deleteNumErrorMsg();
+    // assign the input to initAmount
     newAccName = e.target.value;
+    // check if acc exists
     newAccName = newAccName.toUpperCase();
     newAccName = control.isNewAcc(newAccName);
-    if (newAccName === 'error') {
-      if (strMsg) { strMsg.style.display = 'none'; }
-      strError();
+    if (newAccName === 'ERROR' || newAccName === '') {
+      domFunc.showStrErrorMsg();
     }
   } else {
-    if (newAccName != 'error') {
-      if (strMsg) { strMsg.style.display = 'none'; }
-      return newAccName;
-    }
+    domFunc.deleteStrErrorMsg();
+    return newAccName;
   }
 });
 
-// create new acc button eventListener
+// button new acc eventListener
 window.addEventListener('click', (e) => {
   if (e.target.id === 'button4') {
-
-    //if inputs are empty
-
-    newAccName = newAccName.toUpperCase();
-    newAccName = control.isNewAcc(newAccName);
-    if (newAccName === 'error' || newAccName === '') {
-      if (strMsg) { strMsg.style.display = 'none'; }
-      strError();
+    domFunc.deleteStrErrorMsg();
+    // check if it's a number
+    initAmount = domFunc.isAnum(initAmount);
+    if (initAmount === 'error') {
+      domFunc.showNumErrorMsg();
     }
 
-    initAmount = domFunc.isAnum(initAmount);
-    if (initAmount == 'error') {
-      if (numMsg) { numMsg.style.display = 'none'; }
-      numError();
+    // check if the account exists
+    newAccName = newAccName.toUpperCase();
+    newAccName = control.isNewAcc(newAccName);
+    if (newAccName === 'ERROR' || newAccName === '') {
+      domFunc.showStrErrorMsg();
     }
 
     // if inputs are valid create new account
-    else if (newAccName != 'ERROR' && initAmount != 'ERROR' && newAccName != '' && initAmount != '') {
-      if (strMsg) { strMsg.style.display = 'none'; }
-      let newAcc = new Account(newAccName, initAmount);
+    else if (newAccName != 'ERROR' && newAccName != '' && initAmount != 'error' && initAmount != '') {
+
+      newAcc = new Account(newAccName, initAmount);
       control.addAcc(newAcc);
 
       // append new acc to history list
@@ -103,49 +100,67 @@ window.addEventListener('click', (e) => {
     }
   }
 });
-
+console.log(control.accs);
 // Click on a close button to hide the current list item
 window.addEventListener('click', (e) => {
   if (e.target.className === 'close') {
-    let deleteEl = document.getElementsByClassName(e.target.parentElement.className);
-    for (let i = 0; i < deleteEl.length; i++) {
-      control.deleteAcc(e.target.parentElement.className);
-      deleteEl[i].style.display = "none";
+    let removeItems = document.getElementsByClassName(e.target.parentElement.className);
+    for (let i = 0; i < removeItems.length; i++) {
+      removeItems[i].style.display = "none";
+      let deleteAccName = e.target.parentElement.className.slice(0, -8);
+      control.deleteAcc(deleteAccName);
       showSummary();
     }
   }
 });
 
-//summary function
 function showSummary() {
-    let accTotal = document.getElementById('current-balance');
-    accTotal.textContent = '$' + control.accsTotal();
-    let biggest = document.getElementById('biggest-acc');
-    biggest.textContent = control.biggestAcc();
-    let smallest = document.getElementById('smallest-acc');
-    smallest.textContent = control.smallestAcc();
+  accTotal = document.getElementById('current-balance');
+  accTotal.textContent = '$' + control.accsTotal();
+  biggest = document.getElementById('biggest-acc');
+  biggest.textContent = control.biggestAcc();
+  smallest = document.getElementById('smallest-acc');
+  smallest.textContent = control.smallestAcc();
 }
-
-// add errors functions
-function numError() {
-  if (numMsg) { numMsg.style.display = 'none'; }
-  numMsg = document.createElement('P');
-  numMsg.innerText = 'Not a valid number';
-  numMsg.style.color = 'red';
-  NewAccField.appendChild(numMsg);
-}
-
-function strError() {
-  if (strMsg) { strMsg.style.display = 'none'; }
-  strMsg = document.createElement('P');
-  strMsg.innerText = 'Not a valid name';
-  strMsg.style.color = 'red';
-  NewAccField.appendChild(strMsg);
-}
-
+// console.log(control.accsTotal());
 // transaction btn event listener
+
+
+let txnSelectedAcc;
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'txn-acc') {
+    txnSelectedAcc = document.getElementById(e.target.id);
+    console.log(txnSelectedAcc.value);
+  }
+});
+
+let txnSelectedType;
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'transactions') {
+    txnSelectedType = document.getElementById(e.target.id);
+    console.log(txnSelectedType.value);
+  }
+});
+
+let changeAcc = control.accs.find((el) => {return el.name === txnSelectedAcc});
+console.log(changeAcc);
+console.log(control.accs);
+
 window.addEventListener('click', (e) => {
   if (e.target.id === 'button5') {
-    console.log('5');
+    let txnAmountInput = document.getElementById('txn-amount-input');
+    txnAmountInput = txnAmountInput.value;
+    txnAmountInput = domFunc.isAnum(txnAmountInput);
+
+    if (txnAmountInput === 'error') {
+      domFunc.showNumErrorMsg();
+    }
+    if (txnSelectedType = 'Deposit' && txnAmountInput != 'error' && txnAmountInput != '') {
+      changeAcc.depsit(txnAmountInput);
+    } else {
+      if (txnSelectedType = 'Withdraw' && txnAmountInput != 'error' && txnAmountInput != '') {
+        changeAcc.withdraw(txnAmountInput);
+      }
+    }
   }
 });
