@@ -12,11 +12,8 @@ let txnNumMsg = '';
 const newAccField = document.getElementById('accs');
 const accHistory = document.getElementById('acc-history');
 const txnAcc = document.getElementById('txn-acc');
-let accTotal;
-let biggest;
-let smallest;
-let newAcc;
 
+console.log(control.accs);
 const txnField = document.getElementById('txns');
 
 const domFunc = {
@@ -132,23 +129,39 @@ const domFunc = {
   },
 
   checkTxnUserInput: (num) => {
-      num = control.isNewAmount(num);
-      if (num === 'ERROR') {
-        domFunc.showTxnNumErrMsg();
-        return 'ERROR';
-      } else {
-        domFunc.deleteTxnNumErrMsg();
-        return num;
-      }
+    num = control.isNewAmount(num);
+    if (num === 'ERROR') {
+      domFunc.showTxnNumErrMsg();
+      return 'ERROR';
+    } else {
+      domFunc.deleteTxnNumErrMsg();
+      return num;
+    }
   },
 
   makeAtransaction: (num, name, type) => {
-    if (type === 'Checking') {
-      changeAcc.depsit(txnAmountInput);
+    const myAcc = control.accs.find((el) => { return el.name === name });
+    if (type === 'Deposit') {
+      myAcc.deposit(num);
+      console.log(myAcc.balance);
+      domFunc.showSummary();
     } else if (type === 'Withdraw') {
-      changeAcc.withdraw(txnAmountInput);
+      myAcc.withdraw(num);
+      domFunc.showSummary();
+      console.log(myAcc.balance);
     }
+  },
 
+  isNewAcc(name) {
+    if (name === '') {
+      return 'ERROR'
+    } else {
+      for (let v in this.accs) {
+        if (this.accs[v].name === name) {
+          return 'ERROR';
+        }
+      } return name;
+    }
   },
 
   showTxnNumErrMsg: () => {

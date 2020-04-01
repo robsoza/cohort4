@@ -42,7 +42,6 @@ window.addEventListener('click', (e) => {
       initAmount = ''; newAccName = '';
     }
   }
-
 });
 
 // make a transaction
@@ -85,7 +84,6 @@ window.addEventListener('click', (e) => {
     if (txnAmountInput === '' || txnAmountInput === 'ERROR' || txnSelectedAcc === '' || txnSelectedType === '') {
       domFunc.showTxnNumErrMsg();
     } else {
-      domFunc.deleteTxnNumErrMsg();
       domFunc.deleteTxnNumErrMsg();
       domFunc.makeAtransaction(txnAmountInput, txnSelectedAcc, txnSelectedType);
     }
