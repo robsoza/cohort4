@@ -9,6 +9,7 @@ const control = new AccountController;
 let strMsg = '';
 let numMsg = '';
 let txnNumMsg = '';
+let ii = 0;
 const newAccField = document.getElementById('accs');
 const accHistory = document.getElementById('acc-history');
 const txnAcc = document.getElementById('txn-acc');
@@ -54,14 +55,16 @@ const domFunc = {
   },
 
   addAccToDom: (name, num) => {
+    ii = ii + 1;
     //create account and add it
     let newAcc = new Account(name, num);
     control.addAcc(newAcc);
 
     // append new acc to history list
     let accItem = document.createElement('li');
+    accItem.id = name + 'id';
     accItem.className = name + 'myAppend';
-    accItem.innerText = newAcc.show();
+    accItem.innerText = newAcc.show() + '   (initial Balance)';
 
     // append close button to each item
     let span = document.createElement('span');
@@ -69,7 +72,7 @@ const domFunc = {
     span.className = 'close';
     span.appendChild(txt);
     accItem.appendChild(span);
-    accHistory.appendChild(accItem);
+    accHistory.insertBefore(accItem, accHistory.firstChild);
 
     // append option to pulldown list
     let selectAcc = document.createElement('option');
@@ -85,14 +88,15 @@ const domFunc = {
   },
 
   showSummary: () => {
-    if (control.accs.length === 0) {
-      document.getElementById('current-balance').textContent = '';
-      document.getElementById('biggest-acc').textContent = '';
-      document.getElementById('smallest-acc').textContent = '';
-    } else {
+    if (ii >= 1) {
+      console.log(ii);
       document.getElementById('current-balance').textContent = '$' + control.accsTotal();
       document.getElementById('biggest-acc').textContent = control.biggestAcc();
       document.getElementById('smallest-acc').textContent = control.smallestAcc();
+    } else {
+      document.getElementById('current-balance').textContent = '';
+      document.getElementById('biggest-acc').textContent = '';
+      document.getElementById('smallest-acc').textContent = '';
     }
   },
 
@@ -140,16 +144,32 @@ const domFunc = {
   },
 
   makeAtransaction: (num, name, type) => {
-    const myAcc = control.accs.find((el) => { return el.name === name });
-    if (type === 'Deposit') {
+    let myAcc = control.accs.find((el) => { return el.name === name });
+    if (type === 'Deposit' && control.accs.length > 0) {
       myAcc.deposit(num);
-      console.log(myAcc.balance);
       domFunc.showSummary();
-    } else if (type === 'Withdraw') {
+      domFunc.addTxnToDom(name, type, num);
+    } else if (type === 'Withdraw' && control.accs.length > 0) {
       myAcc.withdraw(num);
       domFunc.showSummary();
-      console.log(myAcc.balance);
+      domFunc.addTxnToDom(name, type, num);
     }
+  },
+
+  addTxnToDom: (myAcc, type, num) => {
+    myAcc = control.accs.find((el) => { return el.name === myAcc });
+    // append new txn acc to history list
+    let accItem = document.createElement('li');
+    accItem.style.backgroundColor = 'white';
+    accItem.style.borderTop = 'none';
+    accItem.style.borderBottom = 'none';
+    accItem.className = myAcc.name + 'myAppend';
+    accItem.innerText = myAcc.show() + '      (' + type + ' ' + num + ')';
+    const existingItem = document.getElementById(myAcc.name + 'id');
+    existingItem.style.borderTop = 'none';
+    existingItem.insertBefore(accItem, existingItem.lastChild);
+    // existingItem.after(accItem.lastChild);
+    // accHistory.insertBefore(accItem, existingItem);
   },
 
   isNewAcc(name) {
@@ -176,16 +196,7 @@ const domFunc = {
     if (txnNumMsg) {
       txnNumMsg.style.display = 'none';
     }
-  },
-
-  // DISPLAY HIDE A LIST OF ELEMENTS
-  displayEl: (list) => {
-    for (let i = list.length - 1; i >= 0; --i) {
-      if (list[i].style.display === 'block') {
-        list[i].style.display = 'none';
-      } list[i].style.display = 'block';
-    }
-  },
+  }
 };
 
 export default domFunc;
@@ -193,12 +204,16 @@ export default domFunc;
 // Click on a close button to hide the current list item
 window.addEventListener('click', (e) => {
   if (e.target.className === 'close') {
+    ii--;
     let removeItems = document.getElementsByClassName(e.target.parentElement.className);
     for (let i = 0; i < removeItems.length; i++) {
       removeItems[i].style.display = "none";
+      // removeItems[i].remove();
       let deleteAccName = e.target.parentElement.className.slice(0, -8);
       domFunc.deleteAccElement(deleteAccName);
       domFunc.showSummary();
+      console.log(deleteAccName);
+      console.log(ii);
     }
   }
-});
+}); 

@@ -19,7 +19,6 @@ class Account {
     }
 
     show() {
-
         let acc = [this.name, ' : $' + this.balance.toFixed(2)];
         return acc.join('');
     }
@@ -36,12 +35,14 @@ class AccountController {
     }
 
     deleteAcc(name) {
-        let i = this.accs.findIndex(x => x.name === name);
-        this.accs.splice(i, 1);
+        if (this.accs.length > 0) {
+            let i = this.accs.findIndex(x => x.name === name);
+            this.accs.splice(i, 1);
+        }
     }
 
     accsTotal() {
-        if (this.accs.length != []) {
+        if (this.accs.length > 0) {
             let value = this.accs.map((x) => x.balance);
             value = value.reduce((a, b) => (Number(a) + Number(b)));
             return Number.parseFloat(value).toFixed(2);
@@ -49,15 +50,15 @@ class AccountController {
     }
 
     biggestAcc() {
-        if (this.accs.length != []) {
+        if (this.accs.length > 0) {
             this.accs.sort((a, b) => { return b.balance - a.balance });
-            let value = [this.accs[0].name, ' : $' + (this.accs[0].balance.toFixed(2))];
+            let value = [this.accs[0].name, ' : $' + this.accs[0].balance.toFixed(2)];
             return value.join('');
         }
     }
 
     smallestAcc() {
-        if (this.accs.length != []) {
+        if (this.accs.length > 0) {
             this.accs.sort((a, b) => { return a.balance - b.balance });
             let value = [this.accs[0].name, ' : $' + (this.accs[0].balance.toFixed(2))];
             return value.join('');
