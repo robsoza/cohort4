@@ -65,11 +65,21 @@ class AccountController {
     }
 
     isNewAcc(name) {
-        for (let v in this.accs) {
-            if (this.accs[v].name === name) {
-                return 'error';
-            }
-        } return name;
+        if (name === '') {
+            return 'ERROR'
+        } else {
+            for (let v in this.accs) {
+                if (this.accs[v].name === name) {
+                    return 'ERROR';
+                }
+            } return name;
+        }
+    }
+
+    isNewAmount(num) {
+        if (isNaN(num) || num === '') {
+            return 'ERROR';
+        } return num;
     }
 }
 

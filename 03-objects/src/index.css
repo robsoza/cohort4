@@ -1,9 +1,4 @@
 body {
-  /* background-image: url('./images/background.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover; */
   background-color: #f1f1f1;
   margin: 2rem;
   min-width: 250px;
@@ -163,11 +158,11 @@ ol li:hover {
 }
 
 .close:hover {
-  background: rgb(160, 42, 42);
-  color:white;
+  background: red;
+  color: white;
 }
 
- /* Summary table */
+/* Summary table */
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 

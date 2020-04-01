@@ -33,15 +33,16 @@
                 <input id="txn-amount-input" name="txn-amount-input" placeholder="amount..." class="class-txn-el">
                 <p for="txn-acc" id="p-txn-acc" class="class-txn-el">Select yor account :</p>
                 <select id="txn-acc" class="class-txn-el">
-                    <option value="" selected disabled hidden>Choose account</option>
+                    <option value="">account...</option>
                 </select>
                 <p for="myTransactions" id="transaction-name" class="class-txn-el">Select a transaction type :</p>
-                <select id="Transactions" class="class-txn-el">
+                <select id="transactions" class="class-txn-el">
+                    <option value="">transaction...</option>
                     <option value="Deposit" class="class-txn-el">Deposit</option>
                     <option value="Withdraw" class="class-txn-el">Withdraw</option>
                 </select>
                 <div>
-                    <button id="button5" class="class-txn-el">Submmit your transaction</button>
+                    <button id="button5" class="class-txn-el">Make a transaction</button>
                 </div>
             </div>
         </fieldset>
@@ -61,7 +62,6 @@
               </table>
                         <ol id="acc-history"></ol>
         </fieldset>
-    </div>
     </div>
     <footer class="footer">© robsoza 2020</footer>
     <script type="module" src="./scripts/index.js"></script>
