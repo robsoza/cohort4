@@ -19,8 +19,8 @@ class Account {
     }
 
     show() {
-        let acc = [this.name, ' : $' + this.balance.toFixed(2)];
-        return acc.join('');
+        let myacc = [this.name, ' : $' + this.balance.toFixed(2)];
+        return myacc.join('');
     }
 }
 
@@ -30,55 +30,52 @@ class AccountController {
         this.accs = [];
     }
 
-    addAcc(acc) {
-        this.accs.push(acc);
+    addAcc(name, num) {
+        let pushAcc = new Account(name, num);
+        this.accs.push(pushAcc);
+    }
+
+    showAddedAcc(name, num) {
+        let myAddedAcc = [name, ' : $' + Number(num).toFixed(2)];
+        return myAddedAcc.join('');
     }
 
     deleteAcc(name) {
-        if (this.accs.length > 0) {
-            let i = this.accs.findIndex(x => x.name === name);
-            this.accs.splice(i, 1);
-        }
+        let myAcc = this.accs.find(x => x.name === name);
+        let i = this.accs.indexOf(myAcc);
+       this.accs.splice(i,1);
     }
 
     accsTotal() {
-        if (this.accs.length > 0) {
-            let value = this.accs.map((x) => x.balance);
+        let value = this.accs.map((x) => x.balance);
+        if (value.length > 0) {
             value = value.reduce((a, b) => (Number(a) + Number(b)));
-            return Number.parseFloat(value).toFixed(2);
+            return '$' + Number.parseFloat(value).toFixed(2);
         }
     }
 
     biggestAcc() {
-        if (this.accs.length > 0) {
-            this.accs.sort((a, b) => { return b.balance - a.balance });
-            let value = [this.accs[0].name, ' : $' + this.accs[0].balance.toFixed(2)];
-            return value.join('');
-        }
+        this.accs.sort((a, b) => { return b.balance - a.balance });
+        let value = [this.accs[0].name, ' : $' + this.accs[0].balance.toFixed(2)];
+        return value.join('');
     }
 
     smallestAcc() {
-        if (this.accs.length > 0) {
-            this.accs.sort((a, b) => { return a.balance - b.balance });
-            let value = [this.accs[0].name, ' : $' + (this.accs[0].balance.toFixed(2))];
-            return value.join('');
-        }
+        this.accs.sort((a, b) => { return a.balance - b.balance });
+        let value = [this.accs[0].name, ' : $' + (this.accs[0].balance.toFixed(2))];
+        return value.join('');
     }
 
     isNewAcc(name) {
-        if (name === '') {
-            return 'ERROR'
-        } else {
             for (let v in this.accs) {
                 if (this.accs[v].name === name) {
                     return 'ERROR';
                 }
             } return name;
         }
-    }
 
     isNewAmount(num) {
-        if (isNaN(num) || num === '') {
+        if (isNaN(num)) {
             return 'ERROR';
         } return num;
     }

@@ -1,4 +1,4 @@
-import { Account, AccountController } from './account.js'
+import { AccountController } from './account.js'
 const control = new AccountController;
 
 /**
@@ -10,11 +10,10 @@ let strMsg = '';
 let numMsg = '';
 let txnNumMsg = '';
 let ii = 0;
-const newAccField = document.getElementById('accs');
+const newAccField = document.getElementById('id-accs');
 const accHistory = document.getElementById('acc-history');
 const txnAcc = document.getElementById('txn-acc');
 
-console.log(control.accs);
 const txnField = document.getElementById('txns');
 
 const domFunc = {
@@ -55,25 +54,31 @@ const domFunc = {
   },
 
   addAccToDom: (name, num) => {
-    ii = ii + 1;
     //create account and add it
-    let newAcc = new Account(name, num);
-    control.addAcc(newAcc);
-
+    control.addAcc(name, num);
+    ii++;
     // append new acc to history list
-    let accItem = document.createElement('li');
-    accItem.id = name + 'id';
-    accItem.className = name + 'myAppend';
-    accItem.innerText = newAcc.show() + '   (initial Balance)';
-
+    let accCardName = document.createElement('p');
+    accCardName.id = 'id-p';
+    accCardName.style.backgroundColor = 'lightgray';
+    accCardName.innerText = 'Account #' + ii;
+    accCardName.className = name + 'myAppend';
     // append close button to each item
     let span = document.createElement('span');
     let txt = document.createTextNode('\u00D7');
     span.className = 'close';
     span.appendChild(txt);
-    accItem.appendChild(span);
-    accHistory.insertBefore(accItem, accHistory.firstChild);
+    accCardName.appendChild(span);
+    // accHistory.appendChild(accCardName);
+    accHistory.insertBefore(accCardName, accHistory.firstChild);
 
+    let accList = document.createElement('ol');
+    let accItem = document.createElement('li');
+    accItem.id = name + 'id';
+    accItem.innerText = control.showAddedAcc(name, num) + '   (initial Balance)';
+    accCardName.appendChild(accList);
+    accList.insertBefore(accItem, accList.lastChild);
+ 
     // append option to pulldown list
     let selectAcc = document.createElement('option');
     selectAcc.value = name;
@@ -85,23 +90,21 @@ const domFunc = {
   resetUserInputs: () => {
     document.getElementById('id-init-amount-input').value = '';
     document.getElementById('id-acc-name-input').value = '';
+    document.getElementById('txn-amount-input').value = '';
+    document.getElementById('txn-acc').value = '';
+    document.getElementById('transactions').value = '';
   },
 
   showSummary: () => {
     if (ii >= 1) {
-      console.log(ii);
-      document.getElementById('current-balance').textContent = '$' + control.accsTotal();
+      document.getElementById('current-balance').textContent = control.accsTotal();
       document.getElementById('biggest-acc').textContent = control.biggestAcc();
       document.getElementById('smallest-acc').textContent = control.smallestAcc();
-    } else {
+    } else { 
       document.getElementById('current-balance').textContent = '';
       document.getElementById('biggest-acc').textContent = '';
       document.getElementById('smallest-acc').textContent = '';
     }
-  },
-
-  deleteAccElement: (name) => {
-    control.deleteAcc(name);
   },
 
   showNumErrorMsg: () => {
@@ -144,32 +147,31 @@ const domFunc = {
   },
 
   makeAtransaction: (num, name, type) => {
-    let myAcc = control.accs.find((el) => { return el.name === name });
-    if (type === 'Deposit' && control.accs.length > 0) {
-      myAcc.deposit(num);
-      domFunc.showSummary();
-      domFunc.addTxnToDom(name, type, num);
-    } else if (type === 'Withdraw' && control.accs.length > 0) {
-      myAcc.withdraw(num);
-      domFunc.showSummary();
-      domFunc.addTxnToDom(name, type, num);
+    if (ii>0) {
+      let myAcc = control.accs.find((el) => { return el.name === name });
+      if (type === 'Deposit' && control.accs.length > -1) {
+        myAcc.deposit(num);
+        domFunc.showSummary();
+        domFunc.addTxnToDom(name, type, num);
+      } else if (type === 'Withdraw' && control.accs.length > -1) {
+        myAcc.withdraw(num);
+        domFunc.showSummary();
+        domFunc.addTxnToDom(name, type, num);
+      }
     }
   },
 
-  addTxnToDom: (myAcc, type, num) => {
+  addTxnToDom: (myAcc, type, num) => { 
     myAcc = control.accs.find((el) => { return el.name === myAcc });
-    // append new txn acc to history list
-    let accItem = document.createElement('li');
-    accItem.style.backgroundColor = 'white';
-    accItem.style.borderTop = 'none';
-    accItem.style.borderBottom = 'none';
-    accItem.className = myAcc.name + 'myAppend';
-    accItem.innerText = myAcc.show() + '      (' + type + ' ' + num + ')';
+
+    // append txn txn acc to history list
+    let txnItem = document.createElement('li');
+    txnItem.style.backgroundColor = 'white';
+    txnItem.className = myAcc.name + 'myAppend';
+    txnItem.innerText = myAcc.show() + '      (' + type + ' ' + num + ')';
+   
     const existingItem = document.getElementById(myAcc.name + 'id');
-    existingItem.style.borderTop = 'none';
-    existingItem.insertBefore(accItem, existingItem.lastChild);
-    // existingItem.after(accItem.lastChild);
-    // accHistory.insertBefore(accItem, existingItem);
+    existingItem.insertBefore(txnItem, existingItem.firstChild);
   },
 
   isNewAcc(name) {
@@ -201,19 +203,16 @@ const domFunc = {
 
 export default domFunc;
 
-// Click on a close button to hide the current list item
+// Click on a close button
 window.addEventListener('click', (e) => {
   if (e.target.className === 'close') {
-    ii--;
+    if (ii>0){ii--;}
     let removeItems = document.getElementsByClassName(e.target.parentElement.className);
-    for (let i = 0; i < removeItems.length; i++) {
+    for (let i = removeItems.length - 1; i >= 0; i--) {
       removeItems[i].style.display = "none";
-      // removeItems[i].remove();
-      let deleteAccName = e.target.parentElement.className.slice(0, -8);
-      domFunc.deleteAccElement(deleteAccName);
-      domFunc.showSummary();
-      console.log(deleteAccName);
-      console.log(ii);
     }
+    let deleteAccName = e.target.parentElement.className.slice(0, -8);
+    control.deleteAcc(deleteAccName);
+    domFunc.showSummary();
   }
 }); 

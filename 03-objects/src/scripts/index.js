@@ -1,4 +1,3 @@
-import { Account, AccountController } from './account.js'
 import domFunc from './domFunc.js'
 
 let initAmount = '';
@@ -36,6 +35,7 @@ window.addEventListener('click', (e) => {
     if (newAccName === '' || newAccName === 'ERROR') {
       newAccName = domFunc.checkAccNameUserInput(newAccName);
     } else {
+      if (initAmount != '' && newAccName != '' && initAmount != 'ERROR' && newAccName != 'ERROR')
       domFunc.addAccToDom(newAccName, initAmount);
       domFunc.showSummary();
       domFunc.resetUserInputs();
@@ -55,10 +55,8 @@ window.addEventListener('change', (e) => {
     txnAmountInput = e.target.value;
     domFunc.deleteTxnNumErrMsg();
     txnAmountInput = domFunc.checkTxnUserInput(txnAmountInput);
-    console.log(txnAmountInput);
   }
 });
-
 
 //select txn account
 window.addEventListener('change', (e) => {
@@ -84,8 +82,13 @@ window.addEventListener('click', (e) => {
     if (txnAmountInput === '' || txnAmountInput === 'ERROR' || txnSelectedAcc === '' || txnSelectedType === '') {
       domFunc.showTxnNumErrMsg();
     } else {
+      if (txnAmountInput === '' && txnAmountInput === 'ERROR' && txnSelectedAcc === '' && txnSelectedType === '')
       domFunc.deleteTxnNumErrMsg();
       domFunc.makeAtransaction(txnAmountInput, txnSelectedAcc, txnSelectedType);
+      domFunc.resetUserInputs();
+      txnSelectedAcc = '';
+      txnSelectedType = '';
+      txnAmountInput = '';
     }
   }
 });
