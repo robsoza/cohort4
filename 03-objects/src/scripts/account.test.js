@@ -9,10 +9,10 @@ test('does the Account function work?', () => {
 
 test('does the deposit function work?', () => {
     let myAcc1 = new Account('Checking', 25);
-    myAcc1.deposit(25);
-    expect(myAcc1.balance).toBe(50);
+    myAcc1.deposit(10);
+    expect(myAcc1.balance).toBe(35);
     myAcc1.deposit(50);
-    expect(myAcc1.balance).toBe(100.00);
+    expect(myAcc1.balance).toBe(85.00);
 });
 
 test('does the withdraw function work?', () => {

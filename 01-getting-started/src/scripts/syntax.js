@@ -58,6 +58,7 @@ const myfunctions = {
         let result;
         for (let car in cars) {
             if (cars[car]["year"] < year) {
+                console.log(cars[car]);
                 result = true;
             } else {
                 result = false;

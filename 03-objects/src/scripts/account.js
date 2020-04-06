@@ -35,9 +35,11 @@ class AccountController {
         this.accs.push(pushAcc);
     }
 
-    showAddedAcc(name, num) {
-        let myAddedAcc = [name, ' : $' + Number(num).toFixed(2)];
-        return myAddedAcc.join('');
+    showAddedAcc(name) {
+            let myAcc = this.accs.find(x => x.name === name);
+            myAcc = [myAcc.name, ' : $' + myAcc.balance.toFixed(2)];
+            console.log(myAcc);
+            return myAcc.join('');
     }
 
     deleteAcc(name) {
@@ -64,6 +66,13 @@ class AccountController {
         this.accs.sort((a, b) => { return a.balance - b.balance });
         let value = [this.accs[0].name, ' : $' + (this.accs[0].balance.toFixed(2))];
         return value.join('');
+    }
+
+    reNameAcc(name, newName) {
+        newName = newName.toUpperCase();
+        let myAcc = this.accs.find(x => x.name === name);
+        let i = this.accs.indexOf(myAcc);
+        this.accs[i].name = newName;
     }
 
     isNewAcc(name) {

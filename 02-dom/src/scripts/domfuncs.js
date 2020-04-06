@@ -8,10 +8,13 @@ let i = 0;
 const functions = {
     
     buildLi: (text) => {
+        // random colour math
         const randomColour = Math.floor(Math.random() * 16777215).toString(16);
+        // create li element and add attributes
         const li = document.createElement("li");
         li.className = "myOlitems";
         li.style.backgroundColor = "#" + randomColour;
+        // create a textnode and append it to li
         const t = document.createTextNode(text + " #" + randomColour);
         li.appendChild(t);
         return li;

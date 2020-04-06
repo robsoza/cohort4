@@ -94,6 +94,7 @@ ol li:hover {
 /* cards style */
 #addCard {
   margin: auto;
+  width: fit-content;
 }
 
 .cards {

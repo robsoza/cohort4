@@ -6,8 +6,8 @@ let newAccName = '';
 // input initial amount eventListenner
 window.addEventListener('change', (e) => {
   if (e.target.id === 'id-init-amount-input') {
-    initAmount = e.target.value;
     domFunc.deleteNumErrorMsg();
+    initAmount = e.target.value;
     initAmount = domFunc.checkAmountUserInput(initAmount);
   }
 });
@@ -36,7 +36,7 @@ window.addEventListener('click', (e) => {
       newAccName = domFunc.checkAccNameUserInput(newAccName);
     } else {
       if (initAmount != '' && newAccName != '' && initAmount != 'ERROR' && newAccName != 'ERROR')
-      domFunc.addAccToDom(newAccName, initAmount);
+        domFunc.addAccToDom(newAccName, initAmount);
       domFunc.showSummary();
       domFunc.resetUserInputs();
       initAmount = ''; newAccName = '';
@@ -62,14 +62,13 @@ window.addEventListener('change', (e) => {
 window.addEventListener('change', (e) => {
   if (e.target.id === 'txn-acc') {
     domFunc.deleteTxnNumErrMsg();
-    txnSelectedAcc = document.getElementById(e.target.id);
-    txnSelectedAcc = txnSelectedAcc.value;
+    txnSelectedAcc = e.target.value;
   }
 });
 
 //select txn type
 window.addEventListener('change', (e) => {
-  if (e.target.id === 'transactions') {
+  if (e.target.id === "transactions") {
     domFunc.deleteTxnNumErrMsg();
     txnSelectedType = document.getElementById(e.target.id);
     txnSelectedType = txnSelectedType.value;
@@ -82,8 +81,9 @@ window.addEventListener('click', (e) => {
     if (txnAmountInput === '' || txnAmountInput === 'ERROR' || txnSelectedAcc === '' || txnSelectedType === '') {
       domFunc.showTxnNumErrMsg();
     } else {
-      if (txnAmountInput === '' && txnAmountInput === 'ERROR' && txnSelectedAcc === '' && txnSelectedType === '')
-      domFunc.deleteTxnNumErrMsg();
+      if (txnAmountInput != '' && txnAmountInput != 'ERROR' && txnSelectedAcc != '' && txnSelectedType != '')
+        //make transaction and reset inputs
+        domFunc.deleteTxnNumErrMsg();
       domFunc.makeAtransaction(txnAmountInput, txnSelectedAcc, txnSelectedType);
       domFunc.resetUserInputs();
       txnSelectedAcc = '';
