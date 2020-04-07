@@ -60,9 +60,9 @@ const domFunc = {
     // append new acc to history list
     let accCardName = document.createElement('p');
     accCardName.id = 'id-p';
+    accCardName.className = name + 'myAppend';
     accCardName.style.backgroundColor = 'lightgray';
     accCardName.innerText = 'Account #' + ii;
-    accCardName.className = name + 'myAppend';
 
     // accHistory.appendChild(accCardName);
     accHistory.insertBefore(accCardName, accHistory.firstChild);
@@ -72,6 +72,7 @@ const domFunc = {
     accItem.id = name + 'id';
     accItem.textContent = ' (Initial Balance) ';
 
+    // append spand to li with CLASS + ADDED
     let addedAcc = document.createElement('span');
     addedAcc.className = name + 'added';
     addedAcc.textContent = name + ' : $' + Number(num).toFixed(2);
@@ -86,7 +87,8 @@ const domFunc = {
     span.className = 'close';
     span.appendChild(txt);
     accCardName.appendChild(span);
-    // append option to pulldown list
+
+    // append option to pulldown list WITH CLASS + APPEND
     let selectAcc = document.createElement('option');
     selectAcc.value = name;
     selectAcc.textContent = name;
@@ -94,6 +96,7 @@ const domFunc = {
     txnAcc.insertBefore(selectAcc, txnAcc.lastChild);
   },
 
+  // reset inputs
   resetUserInputs: () => {
     document.getElementById('id-init-amount-input').value = '';
     document.getElementById('id-acc-name-input').value = '';
@@ -102,6 +105,7 @@ const domFunc = {
     document.getElementById('transactions').value = '';
   },
 
+  // update acc summary
   showSummary: () => {
     if (ii >= 1) {
       document.getElementById('current-balance').textContent = control.accsTotal();
@@ -114,6 +118,7 @@ const domFunc = {
     }
   },
 
+  // add error messages to the dom
   showNumErrorMsg: () => {
     domFunc.deleteNumErrorMsg();
     numMsg = document.createElement('P');
@@ -130,6 +135,7 @@ const domFunc = {
     newAccField.appendChild(strMsg);
   },
 
+  //remove error messages from the dom
   deleteNumErrorMsg: () => {
     if (numMsg) {
       numMsg.style.display = 'none';
@@ -142,6 +148,7 @@ const domFunc = {
     }
   },
 
+  // check for transaction error
   checkTxnUserInput: (num) => {
     num = control.isNewAmount(num);
     if (num === 'ERROR') {
@@ -153,10 +160,10 @@ const domFunc = {
     }
   },
 
+  // make a transaction
   makeAtransaction: (num, name, type) => {
     if (ii > 0) {
       let myAcc = control.accs.find((a) => { return a.name === name });
-      console.log(myAcc);
       if (type === 'Deposit' && control.accs.length > -1) {
         myAcc.deposit(num);
         domFunc.showSummary();
@@ -169,6 +176,7 @@ const domFunc = {
     }
   },
 
+  // add transaction to the dom
   addTxnToDom: (myAcc, type, num) => {
     myAcc = control.accs.find((el) => { return el.name === myAcc });
 
@@ -179,16 +187,16 @@ const domFunc = {
     txnItem.textContent = '      (' + type + ' ' + num + ')';
 
     let addedAcc = document.createElement('span');
-    addedAcc.className = name + 'added';
+    addedAcc.className = myAcc.name + 'added';
     addedAcc.textContent = myAcc.show();
     txnItem.insertBefore(addedAcc, txnItem.lastChild);
 
+    // insert the transaction before existing acc
     const existingItem = document.getElementById(myAcc.name + 'id');
-    console.log(existingItem.id);
     existingItem.insertBefore(txnItem, existingItem.firstChild);
   },
 
-
+  // add transaction error to the dom
   showTxnNumErrMsg: () => {
     domFunc.deleteTxnNumErrMsg();
     txnNumMsg = document.createElement('P');
@@ -197,6 +205,7 @@ const domFunc = {
     txnField.appendChild(txnNumMsg);
   },
 
+  // remove error from the dom
   deleteTxnNumErrMsg: () => {
     if (txnNumMsg) {
       txnNumMsg.style.display = 'none';
@@ -219,69 +228,3 @@ window.addEventListener('click', (e) => {
     domFunc.showSummary();
   }
 });
-
-// change Acc name
-let oldName;
-const modal = document.getElementById("myModal");
-window.addEventListener('dblclick', (e) => {
-  if (e.target.nodeName === 'SPAN') {
-    modal.style.display = "block";
-    oldName = e.target.parentElement.id.slice(0, -2);
-  }
-});
-
-// new name eventlistener
-let myNewName;
-window.addEventListener('change', (e) => {
-  if (e.target.id === 'newNameInput') {
-    domFunc.deleteStrErrorMsg();
-    myNewName = e.target.value;
-    myNewName = domFunc.checkAccNameUserInput(myNewName);
-  }
-});
-
-// change new name button
-window.addEventListener('click', (e) => {
-  // check for errors
-  if (e.target.id == 'myBtn') {
-    if (myNewName != 'ERROR') {
-      // change the name
-      control.reNameAcc(oldName, myNewName);
-      // update the inputs and dom
-      modal.style.display = "none";
-      domFunc.showSummary();
-      updateElements();
-    }
-  }
-});
-
-function updateElements() {
-  // get the oldName to update the history
-  let updateNewName = document.getElementsByClassName(oldName + 'added');
-  updateNewName.textContent = myNewName.toUpperCase();
-  for (let i = updateNewName.length - 1; i >= 0; i--) {
-    updateNewName[i].textContent = control.showAddedAcc(myNewName);
-    updateNewName[i].id = myNewName + 'id';
-  }
-  console.log(updateNewName);
-   // update the pulldown menu
-  let updateNewAcc = document.getElementsByClassName(oldName + 'myAppend')[0];
-  console.log(updateNewAcc);
-  updateNewAcc.id = myNewName + 'id';
-  updateNewAcc.className = myNewName + 'myAppend';
-  updateNewAcc.value = myNewName;
-  updateNewAcc.textContent = myNewName.toUpperCase();
-}
-
-// close the modal
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-
-// close the modal button
-var span = document.getElementsByClassName("closeModal")[0];
-span.onclick = function () {
-  modal.style.display = "none";
-}

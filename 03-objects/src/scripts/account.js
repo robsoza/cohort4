@@ -5,17 +5,17 @@
 
 class Account {
 
-    constructor(name, v) {
+    constructor(name, num) {
         this.name = name;
-        this.balance = Number(v);
+        this.balance = Number(num);
     }
 
-    deposit(v) {
-        this.balance += Number(v);
+    deposit(num) {
+        this.balance += Number(num);
     }
 
-    withdraw(v) {
-        this.balance -= Number(v);
+    withdraw(num) {
+        this.balance -= Number(num);
     }
 
     show() {
@@ -36,24 +36,22 @@ class AccountController {
     }
 
     showAddedAcc(name) {
-            let myAcc = this.accs.find(x => x.name === name);
-            myAcc = [myAcc.name, ' : $' + myAcc.balance.toFixed(2)];
-            console.log(myAcc);
-            return myAcc.join('');
+        let myAcc = this.accs.find(x => x.name === name);
+        myAcc = [myAcc.name, ' : $' + myAcc.balance.toFixed(2)];
+        return myAcc.join('');
     }
 
     deleteAcc(name) {
         let myAcc = this.accs.find(x => x.name === name);
         let i = this.accs.indexOf(myAcc);
-       this.accs.splice(i,1);
+        this.accs.splice(i, 1);
     }
 
     accsTotal() {
         let value = this.accs.map((x) => x.balance);
-        if (value.length > 0) {
+ 
             value = value.reduce((a, b) => (Number(a) + Number(b)));
             return '$' + Number.parseFloat(value).toFixed(2);
-        }
     }
 
     biggestAcc() {
@@ -68,20 +66,13 @@ class AccountController {
         return value.join('');
     }
 
-    reNameAcc(name, newName) {
-        newName = newName.toUpperCase();
-        let myAcc = this.accs.find(x => x.name === name);
-        let i = this.accs.indexOf(myAcc);
-        this.accs[i].name = newName;
-    }
-
     isNewAcc(name) {
-            for (let v in this.accs) {
-                if (this.accs[v].name === name) {
-                    return 'ERROR';
-                }
-            } return name;
-        }
+        for (let v in this.accs) {
+            if (this.accs[v].name === name) {
+                return 'ERROR';
+            }
+        } return name;
+    }
 
     isNewAmount(num) {
         if (isNaN(num)) {

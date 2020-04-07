@@ -46,8 +46,11 @@ test('Does the addAcc function work?', () => {
 
 test('does the showAddedAcc function work?', () => {
     const control = new AccountController;
-    expect(control.showAddedAcc('Savings', 50)).toStrictEqual('Savings : $50.00');
-    expect(control.showAddedAcc('Bonds', 60)).toStrictEqual('Bonds : $60.00');
+    control.addAcc('Savings', 50);
+    control.addAcc('Bonds', 60);
+
+    expect(control.showAddedAcc('Savings')).toStrictEqual('Savings : $50.00');
+    expect(control.showAddedAcc('Bonds')).toStrictEqual('Bonds : $60.00');
 });
 
 test('does the deleteAcc function work?', () => {
