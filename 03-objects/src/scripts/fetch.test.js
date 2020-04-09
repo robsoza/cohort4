@@ -47,3 +47,7 @@ test('does the getFirstName function work?', () => {
     expect(fetchFunc.getFirstName(data)).toBe('Maricica');
 });
 
+test('does the getAllFirstNames function work?', () => {
+    expect(fetchFunc.getAllFirstNames(data)).toStrictEqual(["Maricica", "Nishant", "Nicuță", "Barbara", "Stanca", "Bella", "Fabian", "Славчо", "Upendra", "Dumitra"]);
+});
+
