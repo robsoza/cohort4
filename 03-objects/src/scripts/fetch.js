@@ -15,7 +15,7 @@ const fetchFunc = {
 
     getAllFirstNames(data) {
         try {
-            return data.map(d => d.name);
+            return data.map((d, i, x) => d.name);
         } catch (err) {
             throw err;
         }
