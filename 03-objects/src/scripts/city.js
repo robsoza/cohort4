@@ -7,9 +7,9 @@ class City {
 
     constructor(name, lat, long, population) {
         this.name = name;
-        this.latitude = lat;
-        this.longitude = long;
-        this.population = population;
+        this.latitude = Number(lat);
+        this.longitude = Number(long);
+        this.population = Number(population);
     }
 
     show() {
