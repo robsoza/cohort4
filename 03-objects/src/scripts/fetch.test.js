@@ -52,3 +52,59 @@ test('does the getAllFirstNames function work?', () => {
     expect(functions.getAllFirstNames(data)).toStrictEqual(["Maricica", "Nishant", "Nicuță", "Barbara", "Stanca", "Bella", "Fabian", "Славчо", "Upendra", "Dumitra"]);
 });
 
+const url = 'http://localhost:5000/';
+
+test('test that the fetch works?', async () => {
+
+    const cities = [
+        { key: 1, name: "Saskatoon" },
+        { key: 2, name: "Amsterdam" },
+    ]
+
+    // Check that the server is running and clear any data
+    let data = await functions.postData(url + 'clear');
+
+    data = await functions.postData(url + 'all');
+    expect(data.status).toEqual(200);
+    expect(data.length).toBe(0);
+
+    data = await functions.postData(url + 'add', cities[0]);
+    expect(data.status).toEqual(200);
+
+    data = await functions.postData(url + 'all');
+    expect(data.status).toEqual(200);
+    expect(data.length).toBe(1);
+    expect(data[0].name).toBe("Saskatoon");
+
+    // add a second with the same key which should be an error
+    data = await functions.postData(url + 'add', cities[0]);
+    expect(data.status).toEqual(400);
+
+    // add a second which should be ok
+    data = await functions.postData(url + 'add', cities[1]);
+    expect(data.status).toEqual(200);
+
+    data = await functions.postData(url + 'all');
+    expect(data.status).toEqual(200);
+    expect(data.length).toBe(2);
+    expect(data[1].name).toBe("Amsterdam");
+
+    data = await functions.postData(url + 'read', { key: 1 });
+    expect(data.status).toEqual(200);
+    expect(data.length).toBe(1);
+    expect(data[0].name).toBe("Saskatoon");
+
+    data = await functions.postData(url + 'update', { key: 1, name: "Fort Mc" });
+    expect(data.status).toEqual(200);
+
+    data = await functions.postData(url + 'read', { key: 1 });
+    expect(data.status).toEqual(200);
+    expect(data.length).toBe(1);
+    expect(data[0].name).toBe("Fort Mc");
+
+    data = await functions.postData(url + 'delete', { key: 1 });
+    expect(data.status).toEqual(200);
+
+    data = await functions.postData(url + 'read', { key: 1 });
+    expect(data.status).toEqual(400);
+});
