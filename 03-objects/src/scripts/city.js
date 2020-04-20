@@ -4,21 +4,23 @@
  */
 
 import functions from './fetch.js'
+global.fetch = require('node-fetch');
 
 class City {
 
-    constructor(name, lat, long, population) {
+    constructor(name, lat, long, population, key) {
         this.name = name;
         this.latitude = Number(lat);
         this.longitude = Number(long);
         this.population = Number(population);
+        this.key = key;
     }
 
     show() {
         try {
-            return `City: ${this.name}, Lat: ${this.latitude}, Long: ${this.longitude}, Poulation: ${this.population}`
+            return `City: ${this.name}, Lat: ${this.latitude}, Long: ${this.longitude}, Poulation: ${this.population}`;
         } catch (error) {
-            throw ('ERROR')
+            throw (error);
         }
     }
 
@@ -26,7 +28,7 @@ class City {
         try {
             this.population += Number(num);
         } catch (error) {
-            throw ('ERROR')
+            throw (error);
         }
     }
 
@@ -34,7 +36,7 @@ class City {
         try {
             this.population -= Number(num);
         } catch (error) {
-            throw ('ERROR')
+            throw (error);
         }
     }
 
@@ -52,7 +54,7 @@ class City {
                 return "Hamlet";
             }
         } catch (error) {
-            throw ('ERROR')
+            throw (error);
         }
     }
 }
@@ -60,19 +62,110 @@ class City {
 class Community {
 
     constructor() {
-        this.url = 'http://localhost:5000/all';
+        this.url = 'http://localhost:5000/';
     }
 
-    whichSphere(city, community) {
-        let myCity = community.find(c => c.name === name);
-        if (myCity.latitude > 0) {
-            return "Northern Hemisphere";
-        } if (myCity.latitude < 0) {
-            return 'Southern Hemisphere';
-        } if (myCity.latitude === 0) {
-            return 'The equator';
-        } else return 'Error';
+    async createCity(city, lat, long, population) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            let myCity = new City(city, lat, long, population, data.length + 1);
+            data = await functions.postData(this.url + 'add', myCity);
+            data = await functions.postData(this.url + 'all');
+            return data;
+        } catch (error) {
+            throw (error);
+        }
     }
+
+    async deleteCity(city) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                let myCity = data.find(c => c.name === city);
+                let k = 'key: ' + myCity.key;
+                data = await functions.postData(this.url + 'delete', { k });
+                data = await functions.postData(this.url + 'all');
+                return data;
+            } return 'ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    async whichSphere(city) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                let myCity = data.find(c => c.name === city);
+                if (myCity.latitude > 0) {
+                    return "Northern Hemisphere";
+                } if (myCity.latitude < 0) {
+                    return 'Southern Hemisphere';
+                } if (myCity.latitude === 0) {
+                    return 'The Equator';
+                }
+            } return 'ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    async getMostNorthern() {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                data = data.sort((a, b) => { return b.latitude - a.latitude });
+                return data[0].name;
+            } return 'ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    async getMostSouther() {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                data = data.sort((a, b) => { return a.latitude - b.latitude });
+                return data[0].name;
+            } return 'ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    async getPopulation() {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                let pop = data.map(c => c.population);
+                pop = pop.reduce((a, b) => (Number(a) + Number(b)));
+                return Number(pop).toLocaleString();
+            } return 'ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    async isNewCity(city) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            for (let c in data) {
+                if (data[c].name === city) {
+                    return 'ERROR';
+                }
+            } return city;
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    isAcoordinate(num) {
+        if (isNaN(num)) {
+            return 'ERROR';
+        } return num;
+    }
+
 }
 
 export { City, Community };
