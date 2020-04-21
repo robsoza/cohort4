@@ -1,11 +1,22 @@
+.topnav {
+  top: 0;
+  position: relative;
+  overflow: hidden;
+}
+
 body {
+  padding-top: 20px;
   background-color: #f1f1f1;
-  margin: 2rem;
+  margin: 1rem;
   min-width: 250px;
   /* text-align: center; */
 }
+a {
+  padding: 5px 5px 5px 20px;
+}
 
 h1 {
+  margin-top: 160;
   outline: 1px solid greenyellow;
   text-align: center;
   background: green;
@@ -29,6 +40,11 @@ legend {
   background: green
 }
 
+fieldset {
+  opacity: 0.8;
+  background: white;
+}
+
 input[type=text],
 select,
 input {
@@ -39,11 +55,6 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
   text-align: left;
-}
-
-fieldset {
-  opacity: 0.8;
-  background: white;
 }
 
 input[type=submit] {
@@ -110,11 +121,15 @@ button {
   height: auto;
 }
 
-footer {
-  color: lightblue;
-  position: relative;
-  bottom: 0;
-  margin: 10px;
+#id-add-city {
+  text-align: center;
+  display: grid;
+  grid-template-rows: ;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#h1City,#id-city, #id-comm {
+  background-color: blue;
 }
 
 * {
@@ -131,7 +146,6 @@ ol {
   margin: 0;
 }
 
-
 ol li {
 
   border: 1px solid #ddd;
@@ -147,6 +161,10 @@ ol li {
 
 ol li:hover {
   background-color: #eee;
+}
+
+ol tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 .close,
@@ -167,34 +185,29 @@ ol li:hover {
 }
 
 /* Summary table */
-#customers {
+#customers, #customers2 {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 
   border-collapse: collapse;
   width: 100%;
 }
 
-#customers td,
-#customers th {
+#customers td, #customers th, 
+#customers2 td,#customers2 th {
   text-align: center;
   border: 1px solid white;
   padding: 3px;
-  color: green;
 }
 
-ol tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-#customers td {
+#customers td, #customers2 td {
   border: 1px solid #eee;
 }
 
-#customers tr:hover {
+#customers tr:hover, #customers2 tr:hover {
   background-color: white;
 }
 
-#customers th {
+#customers th, #customers2 th {
   padding-top: 3px;
   padding-bottom: 1px;
   text-align: left;
@@ -204,4 +217,11 @@ ol tr:nth-child(even) {
 
 #id-p {
   text-align: center;
+}
+
+footer {
+  color: lightblue;
+  position: relative;
+  bottom: 0;
+  margin: 10px;
 }

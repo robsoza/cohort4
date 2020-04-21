@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head id="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./index.css">
@@ -9,6 +9,11 @@
 </head>
 
 <body>
+
+    <div class="topnav">
+        <a href="#h1title">My Accounts</a>
+        <a href="#h1City">City & Community</a>
+    </div>
     <h1 id="h1title">MY ACCOUNTS</h1>
     <!-- CREATE NEW ACCOUNT -->
     <div id="container">
@@ -47,10 +52,10 @@
             </div>
         </fieldset>
         <fieldset id="his">
-            <legend>History</legend>
+            <legend>Account's History</legend>
             <table id="customers">
                 <tr>
-                    <th>Total:</th>
+                    <th>Accounts Total:</th>
                     <th>Biggest Account:</th>
                     <th>Smallest Account:</th>
                 </tr>
@@ -63,9 +68,44 @@
             <div id="acc-history"> </div>
         </fieldset>
     </div>
-
-
+    <!-- CITY AND COMMUNITY -->
+    <h1 id="h1City">CITY & COMMUNITY</h1>
+    <div>
+        <fieldset>
+            <legend id="id-city">Add a City</legend>
+            <div id="id-add-city">
+                <p id="id-city-name">City's Name:</p>
+                <input id="id-city-name-input" placeholder="city...">
+                <p id="id-lat">Latitude:</p>
+                <input id="id-lat-input" placeholder="lat...">
+                <p id="id-pop">Population:</p>
+                <input id="id-pop-input" placeholder="population...">
+                <p id="id-long">Longitude:</p>
+                <input id="id-long-input" placeholder="long...">
+                <div>
+                    <button id="button5" class="class-txn-el">Add Now</button>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend id="id-comm" >Community</legend>
+            <table id="customers2">
+                <tr>
+                    <th>Population Total:</th>
+                    <th>Northern City:</th>
+                    <th>Southern City:</th>
+                </tr>
+                <tr>
+                    <td id="current-balance"></td>
+                    <td id="biggest-acc"></td>
+                    <td id="smallest-acc"></td>
+                </tr>
+            </table>
+            <div id="id-community"> </div>
+        </fieldset>
     </div>
+
+    
     <footer class="footer">© robsoza 2020</footer>
     <script type="module" src="./scripts/index.js"></script>
 </body>

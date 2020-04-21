@@ -43,8 +43,8 @@ test('does the howBig function work?', () => {
 });
 
 test('does the createCity function work?', async () => {
-    const control = new Community;
     let data = await functions.postData(url + 'clear');
+    const control = new Community;
     data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
     expect(data.status).toBe(200);
     let data2 = await control.createCity('Banff', 51.17578, -115.57274, 8142);
