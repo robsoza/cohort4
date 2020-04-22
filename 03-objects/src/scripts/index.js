@@ -28,15 +28,15 @@ window.addEventListener('click', (e) => {
     domFunc.deleteNumErrorMsg();
     domFunc.deleteStrErrorMsg();
 
-    if (initAmount === '' || initAmount === 'ERROR') {
+    if (domFunc.inputIsError(initAmount) === 'ERROR') {
       initAmount = domFunc.checkAmountUserInput(initAmount);
     }
 
-    if (newAccName === '' || newAccName === 'ERROR') {
+    if (domFunc.inputIsError(newAccName) === 'ERROR') {
       newAccName = domFunc.checkAccNameUserInput(newAccName);
-    } else {
-      if (initAmount != '' && newAccName != '' && initAmount != 'ERROR' && newAccName != 'ERROR')
-        domFunc.addAccToDom(newAccName, initAmount);
+    } else if (domFunc.inputNotAnError(initAmount) != 'ERROR' &&
+      domFunc.inputNotAnError(newAccName) != 'ERROR') {
+      domFunc.addAccToDom(newAccName, initAmount);
       domFunc.showSummary();
       domFunc.resetUserInputs();
       initAmount = ''; newAccName = '';
@@ -78,10 +78,10 @@ window.addEventListener('change', (e) => {
 //submit transaction button event listener
 window.addEventListener('click', (e) => {
   if (e.target.id === 'button5') {
-    if (txnAmountInput === '' || txnAmountInput === 'ERROR' || txnSelectedAcc === '' || txnSelectedType === '') {
+    if (domFunc.inputIsError(txnAmountInput) === 'ERROR' || domFunc.inputIsError(txnSelectedAcc) === 'ERROR' || domFunc.inputIsError(txnSelectedType) === 'ERROR') {
       domFunc.showTxnNumErrMsg();
     } else {
-      if (txnAmountInput != '' && txnAmountInput != 'ERROR' && txnSelectedAcc != '' && txnSelectedType != '')
+      if (domFunc.inputIsError(txnAmountInput) != 'ERROR' || domFunc.inputIsError(txnSelectedAcc) != 'ERROR' || domFunc.inputIsError(txnSelectedType) != 'ERROR')
         //make transaction and reset inputs
         domFunc.deleteTxnNumErrMsg();
       domFunc.makeAtransaction(txnAmountInput, txnSelectedAcc, txnSelectedType);
@@ -90,5 +90,38 @@ window.addEventListener('click', (e) => {
       txnSelectedType = '';
       txnAmountInput = '';
     }
+  }
+});
+
+// city & community
+let cityName = '';
+let pop = '';
+let lat = '';
+let long = '';
+
+// input cityName eventListenner
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-city-name-input') {
+    domFunc.deleteNumErrorMsg();
+    cityName = e.target.value;
+    cityName = domFunc.checkAmountUserInput(cityName);
+  }
+});
+
+// input lat eventListenner
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-lat-input') {
+    domFunc.deleteNumErrorMsg();
+    lat = e.target.value;
+    lat = domFunc.checkAmountUserInput(lat);
+  }
+});
+
+// input long eventListenner
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-long-input') {
+    domFunc.deleteNumErrorMsg();
+    long = e.target.value;
+    long = domFunc.checkAmountUserInput(long);
   }
 });

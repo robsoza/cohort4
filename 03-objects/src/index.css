@@ -11,6 +11,7 @@ body {
   min-width: 250px;
   /* text-align: center; */
 }
+
 a {
   padding: 5px 5px 5px 20px;
 }
@@ -128,7 +129,10 @@ button {
   grid-template-columns: repeat(4, 1fr);
 }
 
-#h1City,#id-city, #id-comm {
+#h1City,
+#id-city,
+#id-comm {
+  outline: 1px solid greenyellow;
   background-color: blue;
 }
 
@@ -147,7 +151,6 @@ ol {
 }
 
 ol li {
-
   border: 1px solid #ddd;
   margin-top: -1px;
   /* Prevent double borders */
@@ -185,29 +188,35 @@ ol tr:nth-child(even) {
 }
 
 /* Summary table */
-#customers, #customers2 {
+#customers,
+#customers2 {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 
   border-collapse: collapse;
   width: 100%;
 }
 
-#customers td, #customers th, 
-#customers2 td,#customers2 th {
+#customers td,
+#customers th,
+#customers2 td,
+#customers2 th {
   text-align: center;
-  border: 1px solid white;
+  border: 1px solid #eee;
   padding: 3px;
 }
 
-#customers td, #customers2 td {
-  border: 1px solid #eee;
+#customers td,
+#customers2 td {
+  border: 1px solid lightgray;
 }
 
-#customers tr:hover, #customers2 tr:hover {
+#customers tr:hover,
+#customers2 tr:hover {
   background-color: white;
 }
 
-#customers th, #customers2 th {
+#customers th,
+#customers2 th {
   padding-top: 3px;
   padding-bottom: 1px;
   text-align: left;
@@ -215,7 +224,7 @@ ol tr:nth-child(even) {
   text-align: center;
 }
 
-#id-p {
+.id-p {
   text-align: center;
 }
 

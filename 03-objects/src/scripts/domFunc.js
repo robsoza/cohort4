@@ -13,7 +13,6 @@ let ii = 0;
 const newAccField = document.getElementById('id-accs');
 const accHistory = document.getElementById('acc-history');
 const txnAcc = document.getElementById('txn-acc');
-
 const txnField = document.getElementById('txns');
 
 const domFunc = {
@@ -53,16 +52,18 @@ const domFunc = {
     }
   },
 
+  //create account and add it
   addAccToDom: (name, num) => {
-    //create account and add it
     control.addAcc(name, num);
     ii++;
     // append new acc to history list
     let accCardName = document.createElement('p');
-    accCardName.id = 'id-p';
-    accCardName.className = name + 'myAppend';
+    accCardName.className = name + 'myAppend id-p';
     accCardName.style.backgroundColor = 'lightgray';
-    accCardName.innerText = 'Account #' + ii;
+    accCardName.textContent = 'Account #';
+    let numSpan = document.createElement('span');
+    numSpan.className = 'numSpan';
+    accCardName.appendChild(numSpan);
 
     // accHistory.appendChild(accCardName);
     accHistory.insertBefore(accCardName, accHistory.firstChild);
@@ -92,8 +93,16 @@ const domFunc = {
     let selectAcc = document.createElement('option');
     selectAcc.value = name;
     selectAcc.textContent = name;
-    selectAcc.className = name + 'myAppend';
+    selectAcc.className = name + 'myAppend id-p';
     txnAcc.insertBefore(selectAcc, txnAcc.lastChild);
+    domFunc.setAccTitleNums();
+  },
+
+  setAccTitleNums: () => {
+    let accTitleNum = document.getElementsByClassName('numSpan');
+    for (let i = accTitleNum.length - 1; i >= 0; i--) {
+      accTitleNum[i].textContent = i + 1;
+    }
   },
 
   // reset inputs
@@ -116,6 +125,19 @@ const domFunc = {
       document.getElementById('biggest-acc').textContent = '';
       document.getElementById('smallest-acc').textContent = '';
     }
+  },
+
+  // check for errors
+  inputIsError(userInput) {
+    if (userInput === '' || userInput === 'ERROR') {
+      return 'ERROR'
+    } return userInput;
+  },
+
+  inputNotAnError(userInput) {
+    if (userInput != '' || userInput != 'ERROR') {
+      return userInput
+    } return 'ERROR';
   },
 
   // add error messages to the dom
@@ -221,10 +243,11 @@ window.addEventListener('click', (e) => {
     if (ii > 0) { ii--; }
     let removeItems = document.getElementsByClassName(e.target.parentElement.className);
     for (let i = removeItems.length - 1; i >= 0; i--) {
-      removeItems[i].style.display = "none";
+      removeItems[i].remove();
     }
-    let deleteAccName = e.target.parentElement.className.slice(0, -8);
+    let deleteAccName = e.target.parentElement.className.slice(0, -13);
     control.deleteAcc(deleteAccName);
     domFunc.showSummary();
+    domFunc.setAccTitleNums();
   }
 });
