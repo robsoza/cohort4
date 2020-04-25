@@ -84,7 +84,8 @@ button {
 }
 
 #button4,
-#button5 {
+#button5,
+#button6 {
   background-color: #bbb;
 }
 
@@ -171,7 +172,7 @@ ol tr:nth-child(even) {
 }
 
 .close,
-.closeModal {
+.id-close {
   color: white;
   border: 1px solid gray;
   cursor: pointer;
@@ -182,7 +183,7 @@ ol tr:nth-child(even) {
 }
 
 .close:hover,
-.closeModal:hover {
+.id-close:hover {
   background: red;
   color: white;
 }
@@ -203,11 +204,13 @@ ol tr:nth-child(even) {
   text-align: center;
   border: 1px solid #eee;
   padding: 3px;
+  border-bottom: none;
 }
 
 #customers td,
 #customers2 td {
   border: 1px solid lightgray;
+  border-top: none;
 }
 
 #customers tr:hover,
@@ -224,7 +227,8 @@ ol tr:nth-child(even) {
   text-align: center;
 }
 
-.id-p {
+.id-p,
+.id-cp {
   text-align: center;
 }
 

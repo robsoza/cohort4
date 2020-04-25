@@ -1,4 +1,5 @@
 import { Account, AccountController } from './account.js'
+import cityDomFunc from './cityDomFunc.js'
 const control = new AccountController;
 
 /**
@@ -52,7 +53,7 @@ const domFunc = {
     }
   },
 
-  //create account and add it
+  //create account and add it to the dom
   addAccToDom: (name, num) => {
     control.addAcc(name, num);
     ii++;
@@ -61,9 +62,9 @@ const domFunc = {
     accCardName.className = name + 'myAppend id-p';
     accCardName.style.backgroundColor = 'lightgray';
     accCardName.textContent = 'Account #';
-    let numSpan = document.createElement('span');
-    numSpan.className = 'numSpan';
-    accCardName.appendChild(numSpan);
+    let accNumSpan = document.createElement('span');
+    accNumSpan.className = 'accNumSpan';
+    accCardName.appendChild(accNumSpan);
 
     // accHistory.appendChild(accCardName);
     accHistory.insertBefore(accCardName, accHistory.firstChild);
@@ -99,7 +100,7 @@ const domFunc = {
   },
 
   setAccTitleNums: () => {
-    let accTitleNum = document.getElementsByClassName('numSpan');
+    let accTitleNum = document.getElementsByClassName('accNumSpan');
     for (let i = accTitleNum.length - 1; i >= 0; i--) {
       accTitleNum[i].textContent = i + 1;
     }
@@ -160,13 +161,13 @@ const domFunc = {
   //remove error messages from the dom
   deleteNumErrorMsg: () => {
     if (numMsg) {
-      numMsg.style.display = 'none';
+      numMsg.remove();
     }
   },
 
   deleteStrErrorMsg: () => {
     if (strMsg) {
-      strMsg.style.display = 'none';
+      strMsg.remove();
     }
   },
 
@@ -230,7 +231,7 @@ const domFunc = {
   // remove error from the dom
   deleteTxnNumErrMsg: () => {
     if (txnNumMsg) {
-      txnNumMsg.style.display = 'none';
+      txnNumMsg.remove();
     }
   }
 };

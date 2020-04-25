@@ -1,10 +1,9 @@
+import functions from './fetch.js'
+
 /**
  * @description working with objects
  * @name City
  */
-
-import functions from './fetch.js'
-global.fetch = require('node-fetch');
 
 class City {
 
@@ -77,14 +76,10 @@ class Community {
         }
     }
 
-    async deleteCity(city) {
+    async getCommunity() {
         try {
             let data = await functions.postData(this.url + 'all');
             if (data.length > 0) {
-                let myCity = data.find(c => c.name === city);
-                let k = 'key: ' + myCity.key;
-                data = await functions.postData(this.url + 'delete', { k });
-                data = await functions.postData(this.url + 'all');
                 return data;
             } return 'ERROR';
         } catch (error) {
@@ -166,6 +161,22 @@ class Community {
         } return num;
     }
 
+    async deleteCity(city) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                let myCity = data.find(c => c.name === city);
+                let k = { key: myCity.key };
+
+                data = await functions.postData(this.url + 'delete', k);
+                data = await functions.postData(this.url + 'all');
+                console.log(data);
+                return data;
+            } return 'ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
 }
 
 export { City, Community };

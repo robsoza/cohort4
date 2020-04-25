@@ -1,4 +1,5 @@
 import domFunc from './domFunc.js'
+import cityDomFunc from './cityDomFunc.js'
 
 let initAmount = '';
 let newAccName = '';
@@ -100,18 +101,28 @@ let lat = '';
 let long = '';
 
 // input cityName eventListenner
-window.addEventListener('change', (e) => {
+window.addEventListener('change', async (e) => {
   if (e.target.id === 'id-city-name-input') {
-    domFunc.deleteNumErrorMsg();
+    cityDomFunc.deleteStrErrorMsg();
     cityName = e.target.value;
-    cityName = domFunc.checkAmountUserInput(cityName);
+    cityName = await cityDomFunc.checkCityNameUserInput(cityName);
+    console.log(cityName);
+  }
+});
+
+// input pop eventListenner
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-pop-input') {
+    cityDomFunc.deleteStrErrorMsg();
+    pop = e.target.value;
+    pop = domFunc.checkAmountUserInput(pop);
   }
 });
 
 // input lat eventListenner
 window.addEventListener('change', (e) => {
   if (e.target.id === 'id-lat-input') {
-    domFunc.deleteNumErrorMsg();
+    cityDomFunc.deleteStrErrorMsg();
     lat = e.target.value;
     lat = domFunc.checkAmountUserInput(lat);
   }
@@ -120,8 +131,28 @@ window.addEventListener('change', (e) => {
 // input long eventListenner
 window.addEventListener('change', (e) => {
   if (e.target.id === 'id-long-input') {
-    domFunc.deleteNumErrorMsg();
+    cityDomFunc.deleteStrErrorMsg();
     long = e.target.value;
     long = domFunc.checkAmountUserInput(long);
+  }
+});
+
+//submit transaction button event listener
+window.addEventListener('click', async (e) => {
+  if (e.target.id === 'button6') {
+    if (cityDomFunc.checkCityNameUserInput(cityName) === 'ERROR' || domFunc.inputIsError(pop) === 'ERROR' || domFunc.inputIsError(lat) === 'ERROR' || domFunc.inputIsError(long) === 'ERROR') {
+      cityDomFunc.showStrErrorMsg;
+    } else {
+      if (cityDomFunc.checkCityNameUserInput(cityName) != 'ERROR' || domFunc.inputIsError(pop) != 'ERROR' || domFunc.inputIsError(lat) != 'ERROR' || domFunc.inputIsError(long) != 'ERROR')
+        //make transaction and reset inputs
+        cityDomFunc.deleteStrErrorMsg();
+      await cityDomFunc.addCityToDom(cityName, lat, long, pop);
+
+      cityDomFunc.resetUserInputs();
+      cityName = '';
+      pop = '';
+      lat = '';
+      long = '';
+    }
   }
 });
