@@ -58,12 +58,9 @@ test('does the getCommunity function work?', async () => {
     const control = new Community;
     let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
     expect(data.status).toBe(200);
-    data = await control.createCity('Banff', 51.17578, -115.57274, 8142);
-    expect(data.status).toBe(200);
 
-    let data2 = await control.getCommunity();
-    expect(data2.status).toBe(200);
-    expect(data2.length).toBe(2);
+    let clone = await control.getCommunity();
+    expect(clone[0].name).toBe("Saskatoon");
 });
 
 test('does the whichSphere function work?', async () => {
@@ -111,8 +108,8 @@ test('does the isNewCity function work?', async () => {
     data = await control.createCity('Banff', 51.17578, -115.57274, 8142);
     expect(data.status).toBe(200);
 
-    expect(await control.isNewCity('Saskatoon')).toBe('ERROR');
-    expect(await control.isNewCity('NYC')).toBe('NYC');
+    expect(control.isNewCity('Saskatoon')).toBe('ERROR');
+    expect(control.isNewCity('NYC')).toBe('NYC');
 });
 
 test('does the deleteCity function work?', async () => {

@@ -1,6 +1,8 @@
 import domFunc from './domFunc.js'
 import cityDomFunc from './cityDomFunc.js'
 
+window.onload = () => cityDomFunc.addCommunityToDom();
+
 let initAmount = '';
 let newAccName = '';
 
@@ -101,12 +103,11 @@ let lat = '';
 let long = '';
 
 // input cityName eventListenner
-window.addEventListener('change', async (e) => {
+window.addEventListener('change', (e) => {
   if (e.target.id === 'id-city-name-input') {
     cityDomFunc.deleteStrErrorMsg();
     cityName = e.target.value;
-    cityName = await cityDomFunc.checkCityNameUserInput(cityName);
-    console.log(cityName);
+    cityName = cityDomFunc.checkCityNameUserInput(cityName);
   }
 });
 
@@ -115,7 +116,7 @@ window.addEventListener('change', (e) => {
   if (e.target.id === 'id-pop-input') {
     cityDomFunc.deleteStrErrorMsg();
     pop = e.target.value;
-    pop = domFunc.checkAmountUserInput(pop);
+    pop = cityDomFunc.checkNumUserInput(pop);
   }
 });
 
@@ -124,7 +125,7 @@ window.addEventListener('change', (e) => {
   if (e.target.id === 'id-lat-input') {
     cityDomFunc.deleteStrErrorMsg();
     lat = e.target.value;
-    lat = domFunc.checkAmountUserInput(lat);
+    lat = cityDomFunc.checkNumUserInput(lat);
   }
 });
 
@@ -133,20 +134,20 @@ window.addEventListener('change', (e) => {
   if (e.target.id === 'id-long-input') {
     cityDomFunc.deleteStrErrorMsg();
     long = e.target.value;
-    long = domFunc.checkAmountUserInput(long);
+    long = cityDomFunc.checkNumUserInput(long);
   }
 });
 
 //submit transaction button event listener
 window.addEventListener('click', async (e) => {
   if (e.target.id === 'button6') {
-    if (cityDomFunc.checkCityNameUserInput(cityName) === 'ERROR' || domFunc.inputIsError(pop) === 'ERROR' || domFunc.inputIsError(lat) === 'ERROR' || domFunc.inputIsError(long) === 'ERROR') {
+    if (cityDomFunc.checkCityNameUserInput(cityName) === 'ERROR' || cityDomFunc.checkNumUserInput(pop) === 'ERROR' || cityDomFunc.checkNumUserInput(lat) === 'ERROR' || cityDomFunc.checkNumUserInput(long) === 'ERROR') {
       cityDomFunc.showStrErrorMsg;
     } else {
-      if (cityDomFunc.checkCityNameUserInput(cityName) != 'ERROR' || domFunc.inputIsError(pop) != 'ERROR' || domFunc.inputIsError(lat) != 'ERROR' || domFunc.inputIsError(long) != 'ERROR')
+      if (cityDomFunc.checkCityNameUserInput(cityName) != 'ERROR' || cityDomFunc.checkNumUserInput(pop) != 'ERROR' || cityDomFunc.checkNumUserInput(lat) != 'ERROR' || cityDomFunc.checkNumUserInput(long) != 'ERROR')
         //make transaction and reset inputs
         cityDomFunc.deleteStrErrorMsg();
-      await cityDomFunc.addCityToDom(cityName, lat, long, pop);
+      await cityDomFunc.addCityToDatabase(cityName, lat, long, pop);
 
       cityDomFunc.resetUserInputs();
       cityName = '';
@@ -154,5 +155,31 @@ window.addEventListener('click', async (e) => {
       lat = '';
       long = '';
     }
+  }
+});
+
+// update population
+let updateType = '';
+let updatePopNum = 0;
+
+//select update type
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-update-pop') {
+    updateType = e.target.value;
+  }
+});
+
+//select update type
+window.addEventListener('change', (e) => {
+  if (e.target.id === 'id-update-num') {
+    updatePopNum = e.target.value;
+  }
+});
+
+//update pop btn eventlistener
+window.addEventListener('click', (e) => {
+  if (e.target.id === 'popBtn') {
+    updatePopNum = e.target.value;
+    cityDomFunc.updatePopulation(updateType, updatePopNum);
   }
 });

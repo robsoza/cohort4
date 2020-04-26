@@ -62,15 +62,36 @@ class Community {
 
     constructor() {
         this.url = 'http://localhost:5000/';
+        this.comms = [];
     }
 
     async createCity(city, lat, long, population) {
         try {
+            let k;
             let data = await functions.postData(this.url + 'all');
-            let myCity = new City(city, lat, long, population, data.length + 1);
-            data = await functions.postData(this.url + 'add', myCity);
-            data = await functions.postData(this.url + 'all');
-            return data;
+            if (data.status === 200) {
+                if (data.length === 0) { k = 0 } else {
+                    k = data.sort((a, b) => { return b.key - a.key });
+                    k = k[0].key;
+                }
+                let myCity = new City(city, lat, long, population, k + 1);
+                data = await functions.postData(this.url + 'add', myCity);
+                return data;
+            } return 'SERVER ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    async deleteCity(city) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                let myCity = data.find(c => c.name === city);
+                let k = { key: myCity.key };
+                data = await functions.postData(this.url + 'delete', k);
+                return data;
+            } return 'SERVER ERROR';
         } catch (error) {
             throw (error);
         }
@@ -80,25 +101,24 @@ class Community {
         try {
             let data = await functions.postData(this.url + 'all');
             if (data.length > 0) {
-                return data;
-            } return 'ERROR';
+                this.comms = [];
+                this.comms = await Object.assign(data, this.comms);
+                return this.comms;
+            } return 'SERVER ERROR';
         } catch (error) {
             throw (error);
         }
     }
 
-    async whichSphere(city) {
+    whichSphere(city) {
         try {
-            let data = await functions.postData(this.url + 'all');
-            if (data.length > 0) {
-                let myCity = data.find(c => c.name === city);
-                if (myCity.latitude > 0) {
-                    return "Northern Hemisphere";
-                } if (myCity.latitude < 0) {
-                    return 'Southern Hemisphere';
-                } if (myCity.latitude === 0) {
-                    return 'The Equator';
-                }
+            let myCity = this.comms.find(c => c.name === city);
+            if (myCity.latitude > 0) {
+                return "Northern Hemisphere";
+            } if (myCity.latitude < 0) {
+                return 'Southern Hemisphere';
+            } if (myCity.latitude === 0) {
+                return 'The Equator';
             } return 'ERROR';
         } catch (error) {
             throw (error);
@@ -142,11 +162,10 @@ class Community {
         }
     }
 
-    async isNewCity(city) {
+    isNewCity(city) {
         try {
-            let data = await functions.postData(this.url + 'all');
-            for (let c in data) {
-                if (data[c].name === city) {
+            for (let c in this.comms) {
+                if (this.comms[c].name === city) {
                     return 'ERROR';
                 }
             } return city;
@@ -159,23 +178,6 @@ class Community {
         if (isNaN(num)) {
             return 'ERROR';
         } return num;
-    }
-
-    async deleteCity(city) {
-        try {
-            let data = await functions.postData(this.url + 'all');
-            if (data.length > 0) {
-                let myCity = data.find(c => c.name === city);
-                let k = { key: myCity.key };
-
-                data = await functions.postData(this.url + 'delete', k);
-                data = await functions.postData(this.url + 'all');
-                console.log(data);
-                return data;
-            } return 'ERROR';
-        } catch (error) {
-            throw (error);
-        }
     }
 }
 

@@ -1,5 +1,5 @@
 import { Account, AccountController } from './account.js'
-import cityDomFunc from './cityDomFunc.js'
+
 const control = new AccountController;
 
 /**
@@ -205,7 +205,6 @@ const domFunc = {
 
     // append txn txn acc to history list
     let txnItem = document.createElement('li');
-    txnItem.style.backgroundColor = 'white';
     txnItem.className = myAcc.name + 'myAppend';
     txnItem.textContent = '      (' + type + ' ' + num + ')';
 
@@ -233,22 +232,22 @@ const domFunc = {
     if (txnNumMsg) {
       txnNumMsg.remove();
     }
-  }
+  },
+
+  // Click on a close button
+  closeButton: window.addEventListener('click', (e) => {
+    if (e.target.className === 'close') {
+      if (ii > 0) { ii--; }
+      let removeItems = document.getElementsByClassName(e.target.parentElement.className);
+      for (let i = removeItems.length - 1; i >= 0; i--) {
+        removeItems[i].remove();
+      }
+      let deleteAccName = e.target.parentElement.className.slice(0, -13);
+      control.deleteAcc(deleteAccName);
+      domFunc.showSummary();
+      domFunc.setAccTitleNums();
+    }
+  })
 };
 
 export default domFunc;
-
-// Click on a close button
-window.addEventListener('click', (e) => {
-  if (e.target.className === 'close') {
-    if (ii > 0) { ii--; }
-    let removeItems = document.getElementsByClassName(e.target.parentElement.className);
-    for (let i = removeItems.length - 1; i >= 0; i--) {
-      removeItems[i].remove();
-    }
-    let deleteAccName = e.target.parentElement.className.slice(0, -13);
-    control.deleteAcc(deleteAccName);
-    domFunc.showSummary();
-    domFunc.setAccTitleNums();
-  }
-});

@@ -106,9 +106,24 @@
         </fieldset>
     </div>
 
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="closeModal">&times;</span>
+            <h1 id="span-title"></h1>
+            <h3> Update Population</h3>
+            <select id="id-update-pop">
+                <option class="pop-update-type">Move type...</option>
+                <option value="Mouved In" class="pop-update-type">Move In</option>
+                <option value="Moved Out" class="pop-update-type">Move Out</option>
+            </select>
+            <input id="id-update-num" type="number" placeholder="num of people..."></input>
+            <button id="popBtn">Update Now</button>
+        </div>
 
-    <footer class="footer">© robsoza 2020</footer>
-    <script type="module" src="./scripts/index.js"></script>
+        <footer class="footer">© robsoza 2020</footer>
+        <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
