@@ -7,6 +7,7 @@ const control = new Community;
  */
 
 let strMsg = '';
+let updateCity = '';
 const newCityField = document.getElementById('id-msg');
 const cityHistory = document.getElementById('id-comm-history');
 const cityTitleNum = document.getElementsByClassName('cityNumSpan');
@@ -78,11 +79,11 @@ const cityDomFunc = {
     if (data != 'SERVER ERROR') {
 
       //get data from db and added to the dom
-      for (let city of data) {
-        let myCity = new City(city.name, city.latitude, city.longitude, city.population, { key: city.key });
+      for (let c of data) {
+        let myCity = new City(c.name, c.latitude, c.longitude, c.population, c.key);
         // append new acc to history list
         let cityCardName = document.createElement('p');
-        cityCardName.className = city.name + 'myAppend id-cp';
+        cityCardName.className = c.name + 'myAppend id-cp';
         cityCardName.style.backgroundColor = 'lightgray';
         cityCardName.textContent = 'City #';
         let cityNumSpan = document.createElement('span');
@@ -98,23 +99,23 @@ const cityDomFunc = {
 
         // create spans for each city
         let addedCityName = document.createElement('span');
-        addedCityName.className = city.name + 'name';
-        addedCityName.textContent = city.name;
+        addedCityName.className = c.name + 'name';
+        addedCityName.textContent = c.name;
 
         let addedCityPop = document.createElement('span');
-        addedCityPop.textContent = 'Population: ' + city.population + ',';
+        addedCityPop.textContent = 'Population: ' + c.population + ',';
 
         let addedCityLat = document.createElement('span');
-        addedCityLat.textContent = 'Lat: ' + city.latitude + ',';
+        addedCityLat.textContent = 'Lat: ' + c.latitude + ',';
 
         let addedCityLong = document.createElement('span');
-        addedCityLong.textContent = 'Long: ' + city.longitude + ',';
+        addedCityLong.textContent = 'Long: ' + c.longitude + ',';
 
         let howBig = document.createElement('span');
         howBig.textContent = 'is a ' + myCity.howBig();
 
         let semiSphere = document.createElement('span');
-        semiSphere.textContent = 'in The ' + control.whichSphere(city.name);
+        semiSphere.textContent = 'in The ' + control.whichSphere(c.name);
 
         // insert sapns into the list item
         cityItem.insertBefore(addedCityPop, cityItem.lastChild);
@@ -207,7 +208,8 @@ const cityDomFunc = {
   clickOnEditPopButton: window.addEventListener('click', (e) => {
     if (e.target.className === 'id-edit') {
       modal.style.display = "block";
-      cityDomFunc.addCityToModal(e.target.parentElement.className);
+      updateCity = e.target.parentElement.className.slice(0, -14);
+      cityDomFunc.addCityToModal(updateCity);
     }
   }),
 
@@ -227,19 +229,38 @@ const cityDomFunc = {
   addCityToModal: function addModalName(name) {
     let modelName = document.createElement('span');
     modelName.textContent = name.slice(0, -14);
-    document.getElementById('span-title').textContent = name.slice(0, -14);
+    document.getElementById('span-title').textContent = name;
   },
 
   // update population
-  updatePopulation: (num, name, type) => {
-    if (cityTitleNum.length > 0) {
-      if (type === 'Move In') {
-        control.log('moveIn');
-      } else if (type === 'Move Out') {
-        control.log('moveOut');
+  updatePopulation: async (type, num) => {
+    let data = control.getLocalData();
+    let c = data.find(x => x.name === updateCity);
+    c = new City(c.name, c.latitude, c.longitude, c.population, c.key);
+    if (data.length > 0) {
+      if (type === 'Moved In') {
+        c.movedIn(num);
+        data = await control.updatePopulation(c);
+        if (data.status = 200) {
+          cityDomFunc.resetModal();
+          cityDomFunc.addCommunityToDom();
+        }
+      } else if (type === 'Moved Out') {
+        c.movedOut(num);
+        data = await control.updatePopulation(c);
+        if (data.status = 200) {
+          cityDomFunc.resetModal();
+          cityDomFunc.addCommunityToDom();
+        }
       }
     }
   },
+
+  resetModal: () => {
+    document.getElementById('id-update-num').value = '';
+    document.getElementById('id-update-pop').value = '';
+    modal.style.display = "none";
+  }
 };
 
 export default cityDomFunc;

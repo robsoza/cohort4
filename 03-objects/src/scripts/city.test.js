@@ -59,16 +59,42 @@ test('does the getCommunity function work?', async () => {
     let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
     expect(data.status).toBe(200);
 
-    let clone = await control.getCommunity();
-    expect(clone[0].name).toBe("Saskatoon");
+    data = await control.getCommunity();
+    expect(data[0].name).toBe("Saskatoon");
+});
+
+test('does the getLocalData function work?', async () => {
+    const control = new Community;
+    let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
+    expect(data.status).toBe(200);
+
+    data = await control.getCommunity();
+    expect(data[0].name).toBe("Saskatoon");
+
+    data = await control.getLocalData();
+    expect(data[0].name).toBe("Saskatoon");
+});
+
+test('does the updatePopulation function work?', async () => {
+    const control = new Community;
+    let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
+    expect(data.status).toBe(200);
+    data = await control.getCommunity();
+    expect(data[0].name).toBe("Saskatoon");
+
+    let myCity = new City('Saskatoon', 52.13049, -106.65926, 278501, 1);
+    await control.updatePopulation(myCity);
+    let update = await control.getCommunity();
+    expect(update[0].population).toBe(278501);
 });
 
 test('does the whichSphere function work?', async () => {
     const control = new Community;
     let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
     expect(data.status).toBe(200);
-
-    expect(await control.whichSphere("Saskatoon")).toBe("Northern Hemisphere");
+    data = await control.getCommunity();
+    if (data.status == 200)
+        expect(control.whichSphere("Saskatoon")).toBe("Northern Hemisphere");
 });
 
 test('does the getMostNorthern function work?', async () => {
@@ -101,17 +127,6 @@ test('does the getPopulation function work?', async () => {
     expect(await control.getPopulation()).toBe("286,642");
 });
 
-test('does the isNewCity function work?', async () => {
-    const control = new Community;
-    let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
-    expect(data.status).toBe(200);
-    data = await control.createCity('Banff', 51.17578, -115.57274, 8142);
-    expect(data.status).toBe(200);
-
-    expect(control.isNewCity('Saskatoon')).toBe('ERROR');
-    expect(control.isNewCity('NYC')).toBe('NYC');
-});
-
 test('does the deleteCity function work?', async () => {
     const control = new Community;
     let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
@@ -119,18 +134,37 @@ test('does the deleteCity function work?', async () => {
     data = await control.createCity('Banff', 51.17578, -115.57274, 8142);
     expect(data.status).toBe(200);
 
-
     data = await control.deleteCity('Saskatoon');
     expect(data.status).toBe(200);
 });
 
-test('does the isAcoordinate function work?', async () => {
+test('does the isNewCity function work?', async () => {
     const control = new Community;
     let data = await control.createCity('Saskatoon', 52.13049, -106.65926, 278500);
     expect(data.status).toBe(200);
     data = await control.createCity('Banff', 51.17578, -115.57274, 8142);
     expect(data.status).toBe(200);
+    let clone = await control.getCommunity();
+    if (clone.status == 200)
+        expect(control.isNewCity('Saskatoon')).toBe('ERROR');
+    expect(control.isNewCity('NYC')).toBe('NYC');
+});
 
+test('does the isAcoordinate function work?', async () => {
+    const control = new Community;
     expect(control.isAcoordinate('Saskatoon')).toBe('ERROR');
     expect(control.isAcoordinate(5)).toBe(5);
+});
+
+// 130E - Exercise - Object Reference
+test('does the Object Reference function work?', async () => {
+    const control = new Community;
+    let myCity = await control.createCity('MyCity', 1, 2, 3);
+    let myFav = myCity;
+    console.log(myCity.population);
+    console.log(myFav.population);
+
+    myCity.population = 5;
+    console.log(myCity);
+    console.log(myFav);
 });

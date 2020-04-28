@@ -179,7 +179,11 @@ window.addEventListener('change', (e) => {
 //update pop btn eventlistener
 window.addEventListener('click', (e) => {
   if (e.target.id === 'popBtn') {
-    updatePopNum = e.target.value;
-    cityDomFunc.updatePopulation(updateType, updatePopNum);
+    if (updateType != '' && updatePopNum > 0) {
+      cityDomFunc.updatePopulation(updateType, updatePopNum);
+      updateType = '';
+      updatePopNum = '';
+      cityDomFunc.resetModal();
+    }
   }
 });

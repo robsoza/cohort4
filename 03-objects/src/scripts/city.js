@@ -69,27 +69,13 @@ class Community {
         try {
             let k;
             let data = await functions.postData(this.url + 'all');
+            if (data.length === 0) { k = 0 } else {
+                k = data.sort((a, b) => { return b.key - a.key });
+                k = k[0].key;
+            }
+            let myCity = new City(city, lat, long, population, k + 1);
+            data = await functions.postData(this.url + 'add', myCity);
             if (data.status === 200) {
-                if (data.length === 0) { k = 0 } else {
-                    k = data.sort((a, b) => { return b.key - a.key });
-                    k = k[0].key;
-                }
-                let myCity = new City(city, lat, long, population, k + 1);
-                data = await functions.postData(this.url + 'add', myCity);
-                return data;
-            } return 'SERVER ERROR';
-        } catch (error) {
-            throw (error);
-        }
-    }
-
-    async deleteCity(city) {
-        try {
-            let data = await functions.postData(this.url + 'all');
-            if (data.length > 0) {
-                let myCity = data.find(c => c.name === city);
-                let k = { key: myCity.key };
-                data = await functions.postData(this.url + 'delete', k);
                 return data;
             } return 'SERVER ERROR';
         } catch (error) {
@@ -102,8 +88,26 @@ class Community {
             let data = await functions.postData(this.url + 'all');
             if (data.length > 0) {
                 this.comms = [];
-                this.comms = await Object.assign(data, this.comms);
+                this.comms = await JSON.parse(JSON.stringify(data));
                 return this.comms;
+            } return 'SERVER ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    getLocalData() {
+        if (this.comms.length > 0) {
+            return this.comms;
+        }
+    }
+
+    async updatePopulation(c) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.status === 200) {
+                data = await functions.postData(this.url + 'update', { key: c.key, name: c.name, latitude: c.latitude, longitude: c.longitude, population: c.population });
+                return data;
             } return 'SERVER ERROR';
         } catch (error) {
             throw (error);
@@ -157,6 +161,20 @@ class Community {
                 pop = pop.reduce((a, b) => (Number(a) + Number(b)));
                 return Number(pop).toLocaleString();
             } return 'ERROR';
+        } catch (error) {
+            throw (error);
+        }
+    }
+
+    async deleteCity(city) {
+        try {
+            let data = await functions.postData(this.url + 'all');
+            if (data.length > 0) {
+                let myCity = data.find(c => c.name === city);
+                let k = { key: myCity.key };
+                data = await functions.postData(this.url + 'delete', k);
+                return data;
+            } return 'SERVER ERROR';
         } catch (error) {
             throw (error);
         }
