@@ -1,35 +1,55 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Logos, MyLogo } from './components/myLogo'
 
-import rocket from './svg/rocket.svg';
-import target from './svg/target.svg';
-import origami from './svg/origami.svg';
-import soft from './svg/soft.svg';
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = { myState: "false" };
+  }
 
-function App() {
-  return (
-    <div className="App">
-    <img src={rocket} className="My-logo" alt="logo" />
-    <img src={target} className="My-logo" alt="logo" />
-    <img src={origami} className="My-logo" alt="logo" />
-    <img src={soft} className="My-logo" alt="logo" />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+  onPushMe = () => {
+    this.setState({ myState: true })
+    this.changeSwitch();
+  }
+
+  changeSwitch = () => {
+    if (this.counter % 2 === 0) {
+      this.switch = true;
+    } else {
+      this.switch = false;
+    }
+    this.update();
+  }
+
+  update = () => {
+    this.setState({ state: "state" });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <MyLogo src={Logos[0].src} className="My-logo" alt="logo" onClick={this.onPushMe} />
+        <MyLogo src={Logos[1].src} className="My-logo" alt="logo" onClick={this.onPushMe} />
+        <MyLogo src={Logos[2].src} className="My-logo" alt="logo" onClick={this.onPushMe} />
+        <MyLogo src={Logos[3].src} className="My-logo" alt="logo" onClick={this.onPushMe} />
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
         </a>
-      </header>
-    </div>
-  );
+        </header>
+      </div>
+    );
+  }
 }
-
 export default App;

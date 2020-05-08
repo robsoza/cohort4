@@ -9,8 +9,12 @@
 
 .My-logo {
   display: inline-block;
-  height: 20vmin;
-  pointer-events: none;
+  height: 18vmin;
+  transition: all .2s ease-in-out;
+}
+
+.My-logo:hover {
+  transform: scale(1.1);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -38,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
