@@ -5,30 +5,32 @@ import target from '../svg/target.svg';
 import origami from '../svg/origami.svg';
 import cloud from '../svg/cloud.svg';
 
-const Logos = [
-    { id: 1, src: rocket},
-    { id: 2, src: target },
-    { id: 3, src: origami },
-    { id: 4, src: cloud }
+const LogosData = [
+    { id: 1, src: rocket, className: "My-logo", alt: 'logo', clicked: true },
+    { id: 2, src: target, className: "My-logo", alt: 'logo', clicked: false },
+    { id: 3, src: origami, className: "My-logo", alt: 'logo', clicked: false },
+    { id: 4, src: cloud, className: "My-logo", alt: 'logo', clicked: false }
 ]
 
-const changeStyle = {
-    color: "#cdcdcd",
-}
-
 function MyLogo(props) {
+    const clickStyle = {
+        color: "blue",
+        border: "solid"
+    }
+
     return (
         <div className="My-logo" >
             <img
-                id={props.id}
-                src={props.src}
-                className={props.className}
-                alt={props.alt}
-                onClick={props.onClick}
-                style={props.changeStyle}
+                id={props.logo.id}
+                src={props.logo.src}
+                className={props.logo.className}
+                alt={props.logo.alt}
+                onClick={() => props.handleChange(props.logo.id)}
+            
+                style={props.logo.clicked ? clickStyle : null}
             />
         </div>
     )
 }
 
-export { Logos, MyLogo };
+export { LogosData, MyLogo };
