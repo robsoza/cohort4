@@ -6,7 +6,7 @@ import origami from '../svg/origami.svg';
 import cloud from '../svg/cloud.svg';
 
 const LogosData = [
-    { id: 1, src: rocket, className: "My-logo", alt: 'logo', clicked: true },
+    { id: 1, src: rocket, className: "My-logo", alt: 'logo', clicked: false },
     { id: 2, src: target, className: "My-logo", alt: 'logo', clicked: false },
     { id: 3, src: origami, className: "My-logo", alt: 'logo', clicked: false },
     { id: 4, src: cloud, className: "My-logo", alt: 'logo', clicked: false }
@@ -15,7 +15,8 @@ const LogosData = [
 function MyLogo(props) {
     const clickStyle = {
         color: "blue",
-        border: "solid"
+        border: "solid",
+        transform: "rotate(-90deg)",
     }
 
     return (
@@ -26,7 +27,6 @@ function MyLogo(props) {
                 className={props.logo.className}
                 alt={props.logo.alt}
                 onClick={() => props.handleChange(props.logo.id)}
-            
                 style={props.logo.clicked ? clickStyle : null}
             />
         </div>

@@ -8,6 +8,7 @@
 }
 
 .My-logo {
+  margin: 5px;
   display: inline-block;
   height: 18vmin;
   transition: all .2s ease-in-out;
