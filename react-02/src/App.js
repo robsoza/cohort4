@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { LogosData, MyLogo } from './components/myLogo'
+import { LogosData, MyLogo } from './components/MyLogo'
+import Game from './components/TicTacToe'
 
 class App extends React.Component {
   constructor() {
@@ -33,6 +34,7 @@ class App extends React.Component {
     return (
       <div className="App">
         {logoItems}
+        <Game />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>

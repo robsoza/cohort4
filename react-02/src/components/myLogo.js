@@ -1,22 +1,24 @@
 import React from 'react';
 
+import game from '../svg/game.svg';
 import rocket from '../svg/rocket.svg';
 import target from '../svg/target.svg';
 import origami from '../svg/origami.svg';
 import cloud from '../svg/cloud.svg';
 
 const LogosData = [
-    { id: 1, src: rocket, className: "My-logo", alt: 'logo', clicked: false },
-    { id: 2, src: target, className: "My-logo", alt: 'logo', clicked: false },
-    { id: 3, src: origami, className: "My-logo", alt: 'logo', clicked: false },
-    { id: 4, src: cloud, className: "My-logo", alt: 'logo', clicked: false }
+    { id: 1, src: game, className: "My-logo", alt: 'logo', clicked: false },
+    { id: 2, src: rocket, className: "My-logo", alt: 'logo', clicked: false },
+    { id: 3, src: target, className: "My-logo", alt: 'logo', clicked: false },
+    { id: 4, src: origami, className: "My-logo", alt: 'logo', clicked: false },
+    { id: 5, src: cloud, className: "My-logo", alt: 'logo', clicked: false }
 ]
 
 function MyLogo(props) {
     const clickStyle = {
         color: "blue",
         border: "solid",
-        transform: "rotate(-90deg)",
+        transform: "rotate(-360deg)",
     }
 
     return (
