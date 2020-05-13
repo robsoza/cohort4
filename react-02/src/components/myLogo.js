@@ -12,11 +12,11 @@ import LearnReact from '../components/LearnReact'
 
 const LogosData = [
     { id: 1, src: reactlogo, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
-    { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', active: false, page: <TicTacToe />},
+    { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', active: false, page: <TicTacToe /> },
     { id: 3, src: rocket, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
     { id: 4, src: target, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
     { id: 5, src: origami, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
-    { id: 6, src: cloud, className: "My-logo", alt: 'logo',active: false, page: <LearnReact /> }
+    { id: 6, src: cloud, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> }
 ]
 
 function MyLogo(props) {
@@ -27,7 +27,8 @@ function MyLogo(props) {
     }
 
     return (
-        <div className="My-logo" >
+
+        <div className='My-logo'>
             <img
                 id={props.logo.id}
                 src={props.logo.src}

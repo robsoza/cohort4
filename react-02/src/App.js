@@ -7,6 +7,7 @@ class App extends React.Component {
     super()
     this.state = {
       logos: LogosData,
+      className: "MyLogo",
       mypage: LogosData[0].page
     };
     this.handleChange = this.handleChange.bind(this);
@@ -16,10 +17,13 @@ class App extends React.Component {
     this.setState(prevState => {
       const updatedLogos = prevState.logos.map(logo => {
         if (logo.id === id) {
-          logo.clicked = true;
+          logo.active = true;
+          logo.className = "Active-logo"
           this.update(logo);
+  
         } else {
-          logo.clicked = false
+          logo.active = false
+          logo.className = "My-logo";
         }
         return logo
       })
@@ -30,11 +34,13 @@ class App extends React.Component {
   }
 
   update = (logo) => {
-    this.setState({ mypage: logo.page });
+    this.setState({
+       mypage: logo.page,
+    });
   }
 
   render() {
-    const logoItems = this.state.logos.map(logo => <MyLogo key={logo.id} logo={logo} handleChange={this.handleChange} />)
+  const logoItems = this.state.logos.map(logo => <MyLogo key={logo.id} logo={logo} handleChange={this.handleChange} />)
 
     return (
       <div className="App">
