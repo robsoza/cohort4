@@ -1,3 +1,7 @@
+body {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
 }
@@ -7,7 +11,8 @@
   pointer-events: none;
 }
 
-.My-logo, .Active-logo {
+.My-logo,
+.Active-logo {
   margin: 15px;
   display: inline-block;
   /* contain: content; */
@@ -24,13 +29,13 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+
   .Active-logo {
     animation: Counter-logo-spin infinite 20s linear;
   }
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -65,6 +70,21 @@
 }
 
 /* Tic-Tac-Toe */
+.active-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  /* margin-top: 100px; */
+}
 
 ol,
 ul {
@@ -82,18 +102,19 @@ ul {
 }
 
 .square {
+  color: orange;
   background: #fff;
-  border: 1px solid #999;
+  border: 3px solid skyblue;
   float: left;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 54px;
+  height: 64px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 64px;
 }
 
 .square:focus {
@@ -112,5 +133,6 @@ ul {
 }
 
 .game-info {
+  color: yellow;
   margin-left: 20px;
 }

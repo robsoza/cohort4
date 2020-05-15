@@ -18,9 +18,8 @@ class App extends React.Component {
       const updatedLogos = prevState.logos.map(logo => {
         if (logo.id === id) {
           logo.active = true;
-          logo.className = "Active-logo"
+          logo.className = "Active-logo";
           this.update(logo);
-  
         } else {
           logo.active = false
           logo.className = "My-logo";
@@ -35,19 +34,24 @@ class App extends React.Component {
 
   update = (logo) => {
     this.setState({
-       mypage: logo.page,
+      mypage: logo.page,
     });
   }
 
   render() {
-  const logoItems = this.state.logos.map(logo => <MyLogo key={logo.id} logo={logo} handleChange={this.handleChange} />)
+    const logoItems = this.state.logos.map(logo => <MyLogo key={logo.id} logo={logo} handleChange={this.handleChange} />)
 
     return (
       <div className="App">
-        {logoItems}
-        {this.state.mypage}
+        <div>
+          {logoItems}
+        </div>
+        <div className="active-page">
+          {this.state.mypage}
+        </div>
       </div>
     );
   }
 }
+
 export default App;

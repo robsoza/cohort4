@@ -119,6 +119,7 @@ class Game extends React.Component {
                 <div className="game-info">
                     <div>{status}</div>
                     <ol>{moves}</ol>
+                    <h1>Tic Tac Toe</h1>
                 </div>
             </div>
         );
