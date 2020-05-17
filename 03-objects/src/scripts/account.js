@@ -49,9 +49,9 @@ class AccountController {
 
     accsTotal() {
         let value = this.accs.map((x) => x.balance);
- 
-            value = value.reduce((a, b) => (Number(a) + Number(b)));
-            return '$' + Number.parseFloat(value).toFixed(2);
+
+        value = value.reduce((a, b) => (Number(a) + Number(b)));
+        return '$' + Number.parseFloat(value).toFixed(2);
     }
 
     biggestAcc() {

@@ -2,6 +2,11 @@ body {
   background-color: #282c34;
 }
 
+.navbar{
+  position: fixed;
+  width: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -133,6 +138,6 @@ ul {
 }
 
 .game-info {
-  color: yellow;
+  color: #f4c430;
   margin-left: 20px;
 }

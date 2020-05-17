@@ -43,7 +43,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div>
+        <div className="navbar">
           {logoItems}
         </div>
         <div className="active-page">

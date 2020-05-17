@@ -1,27 +1,25 @@
 import React from 'react';
-
+//logo's svg
 import reactlogo from '../svg/reactlogo.svg';
 import tictactoe from '../svg/tictactoe.svg';
-import rocket from '../svg/rocket.svg';
-import target from '../svg/target.svg';
-import cloud from '../svg/cloud.svg';
-
+import account from '../svg/account.svg';
+import city from '../svg/city.svg';
+//components
 import TicTacToe from '../components/TicTacToe'
 import LearnReact from '../components/LearnReact'
 
 const LogosData = [
-    { id: 1, src: reactlogo, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
+    { id: 1, src: reactlogo, className: "My-logo", alt: 'logo', active: true, page: <LearnReact /> },
     { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', active: false, page: <TicTacToe /> },
-    { id: 3, src: rocket, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
-    { id: 4, src: target, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
-    { id: 5, src: cloud, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> }
+    { id: 3, src: account, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
+    { id: 4, src: city, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
 ]
 
 function MyLogo(props) {
     const activeStyle = {
         color: "blue",
         border: "solid",
-        transform: "rotate(-360deg)",
+        transform: "rotate(360deg)",
     }
 
     return (
