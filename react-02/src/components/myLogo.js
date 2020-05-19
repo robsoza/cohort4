@@ -7,11 +7,12 @@ import city from '../svg/city.svg';
 //components
 import TicTacToe from '../components/TicTacToe'
 import LearnReact from '../components/LearnReact'
+import Account from '../components/Account'
 
 const LogosData = [
     { id: 1, src: reactlogo, className: "My-logo", alt: 'logo', active: true, page: <LearnReact /> },
     { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', active: false, page: <TicTacToe /> },
-    { id: 3, src: account, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
+    { id: 3, src: account, className: "My-logo", alt: 'logo', active: false, page: <Account /> },
     { id: 4, src: city, className: "My-logo", alt: 'logo', active: false, page: <LearnReact /> },
 ]
 

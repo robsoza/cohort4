@@ -74,6 +74,19 @@ body {
   }
 }
 
+input {
+  text-align: center;
+  align-items: center;
+  margin: 10px;
+}
+
+label {
+  text-align: center;
+  align-items: center;
+  margin: 10px;
+  color:#f4c430
+}
+
 /* Tic-Tac-Toe */
 .active-page {
   display: flex;
