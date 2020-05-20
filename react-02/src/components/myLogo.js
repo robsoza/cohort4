@@ -24,7 +24,6 @@ function MyLogo(props) {
     }
 
     return (
-
         <div className='My-logo'>
             <img
                 id={props.logo.id}
