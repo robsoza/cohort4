@@ -3,7 +3,7 @@ import CreateAccount from './CreateAccount';
 import MakeTransaction from './MakeTransaction'
 import AccountHistory from './AccountHistory'
 
-function Account() {
+function AccountComponent() {
     return (
         <div>
             <h1 className="title"> MY ACCOUNTS </h1>
@@ -16,7 +16,4 @@ function Account() {
     )
 }
 
-
-
-
-export default Account;
+export default AccountComponent;
