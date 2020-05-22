@@ -1,4 +1,5 @@
 body {
+  margin: 1em;
   background-color: #282c34;
 }
 
@@ -24,6 +25,7 @@ body {
 h3 {
   color: #f4c430;
 }
+
 .My-logo:hover {
   transform: scale(1.1);
 }
@@ -42,9 +44,6 @@ h3 {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* font-size: calc(10px + 2vmin); */
   color: white;
 }
 
@@ -75,13 +74,13 @@ h3 {
 input {
   text-align: center;
   align-items: center;
-  margin: 10px;
 }
 
 label {
-  text-align: justify;
+  display: flex;
+  color: #f4c430;
+  margin: 5px;
   align-items: center;
-  margin: 10px;
 }
 
 /* Tic-Tac-Toe */
@@ -96,8 +95,6 @@ label {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  
-  /* margin-top: 100px; */
 }
 
 ol,
@@ -151,53 +148,29 @@ ul {
   margin-left: 20px;
 }
 
-legend {
-  outline: 2px solid greenyellow;
-  padding: 3px;
-  text-align: left;
-  color: whitesmoke;
-  background:#4CAF50
-}
-
 /* Account & City Apps*/
 a {
   padding: 5px 5px 5px 20px;
 }
 
 h1 {
+  margin: 1em;
   margin-top: 160;
   outline: 1px solid greenyellow;
   text-align: center;
-  background: green;
+  background: rgb(49, 146, 49);
   color: white;
+  padding: 0px 10px 0px 10px;
 }
 
 label {
   padding: 5px 5px 5px 50px;
 }
 
-span {
-  color: green;
-  padding: 0px 0px 0px 5px;
-}
-
-legend {
-  outline: 1px solid greenyellow;
-  padding: 3px;
-  text-align: left;
-  color: whitesmoke;
-  background: green
-}
-
-fieldset {
-  opacity: 0.8;
-  background: white;
-}
-
 input[type=text],
 select,
 input {
-  width: 100%;
+  width: 90%;
   padding: 5px 5px;
   display: inline-block;
   border: 1px solid #ccc;
@@ -219,7 +192,6 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
-/*  */
 button {
   border: none;
   padding: 5px;
@@ -231,83 +203,22 @@ button {
   cursor: pointer;
 }
 
-.button4,
-.button5,
-.button6, .popBtn {
-  background-color: #bbb;
-}
-
-.dropdown {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  right: 0%;
-  padding: 6px 10px;
-  transform: translate(0%, -50%);
-  border-radius: 50%;
-  color: gold;
-
-}
-
-/* container */
-.container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    "accs txns"
-    "his his"
-}
-
-.accs {
-  grid-area: accs;
-}
-
-.txns {
-  grid-area: txns;
-}
-
-.his {
-  grid-area: his;
-  height: auto;
-}
-
-.id-add-city {
-  text-align: center;
-  display: grid;
-  grid-template-rows: ;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.h1City,
-.id-city,
-.id-comm, #span-title {
-  outline: 1px solid greenyellow;
-  background-color: blue;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 li {
   text-align: center;
 }
 
 ol {
-  list-style: none;
   padding: 0;
   margin: 0;
 }
 
 ol li {
-  /* border: 1px solid #ddd; */
   margin-top: -1px;
-  /* Prevent double borders */
-  background-color: #f6f6f6;
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
   padding: 5px;
   font-size: 16px;
-  color: black;
-  /* display: block; */
+  color: white;
   position: relative;
 }
 
@@ -319,95 +230,34 @@ ol tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.close, .closeModal,
-.id-close, .id-edit {
-  color: white;
-  border: 1px solid gray;
-  cursor: pointer;
-  top: 50%;
-  right: 0%;
-  padding: 0px 10px;
-  background: gray;
-  margin-right: 5px;
+ul {
+  list-style: none;
 }
 
-.close:hover, .closeModal:hover,
-.id-close:hover, .id-edit:hover {
-  background: red;
-  color: white;
+.accList li:hover {
+  transform: scale(1.05);
+  color: blue;
 }
 
-/* Summary table */
-.customers,
-.customers2 {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.customers td,
-.customers th,
-.customers2 td,
-.customers2 th {
-  text-align: center;
-  border: 1px solid #eee;
-  padding: 3px;
-  border-bottom: none;
-}
-
-.customers td,
-.customers2 td {
-  border: 1px solid lightgray;
-  border-top: none;
-}
-
-.customers tr:hover,
-.customers2 tr:hover {
-  background-color: white;
-}
-
-.customers th,
-.customers2 th {
-  padding-top: 3px;
-  padding-bottom: 1px;
-  text-align: left;
-  background-color: white;
-  text-align: center;
-}
-
-.id-p,
-.id-cp {
-  text-align: center;
-}
-
-/* The Modal (background) */
-.modal {
-  text-align: center;
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-}
-
-footer {
-  color: lightblue;
-  position: relative;
-  bottom: 0;
+.footer {
+  display: inline;
+  align-items: center;
+  bottom: 5px;
   margin: 10px;
+}
+
+.clstatus {
+  color: white
+}
+
+.clsuccess {
+  color: green
+}
+
+.clwarning {
+  color: orange
+}
+
+.clerror {
+  color: red
 }

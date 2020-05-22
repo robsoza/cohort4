@@ -1,6 +1,9 @@
 import funcs from './AccountFunc';
-
 global.fetch = require('node-fetch');
+
+beforeEach(async () => {
+    await funcs.postData(funcs.url + 'clear');
+})
 
 test('test plumbing', () => {
     expect(funcs.hello()).toBe("Hello World");
@@ -26,11 +29,11 @@ test('test getNewAccount', () => {
     let acc1 = accsCtrl.getNewAccount();
 
     expect(acc1.name).toBe('');
-    expect(acc1.balance).toBe(0);
+    expect(acc1.balance).toBe('');
     expect(acc1.key).toBe('');
 
     acc1.deposit(10);
-    expect(acc1.balance).toBe(10);
+    expect(acc1.balance).toBe('10');
 
     acc1.withdraw(5);
     expect(acc1.balance).toBe(5);
@@ -98,10 +101,32 @@ test('test load Accs from api', async () => {
 
     } catch (e) {
         console.log("*** Start the server please ***");
-        console.log(e);
         expect("").toBe(e.message);
     }
 });
+
+test('does that delete function work', async () => {
+    const accsCtrl = new funcs.Accs();
+
+    let acc1 = accsCtrl.getNewAccount();
+    acc1.name = 'Checking';
+    acc1.balance = 20;
+    await accsCtrl.addOrUpdate(acc1);
+
+
+    let acc2 = accsCtrl.getNewAccount();
+    acc2.name = 'Savings';
+    acc2.balance = 20;
+    await accsCtrl.addOrUpdate(acc2);
+
+    expect(accsCtrl.length()).toBe(2);
+
+    await accsCtrl.delete(acc1);
+    expect(accsCtrl.length()).toBe(2);
+
+});
+
+
 
 /*
     This tests an interesting problem found in user testing.
@@ -127,7 +152,6 @@ test('test load account instance from account copy', async () => {
 });
 
 //Make sure addOrUpdate updates the internal storage
-
 test('test addOrUpdate updates internal storage', async () => {
 
     // clear the server

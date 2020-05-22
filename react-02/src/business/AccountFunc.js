@@ -75,15 +75,23 @@ class Accs {
         await postData(theUrl, account);
         this.accs[account.key] = account;
     }
+
+    async delete(account) {
+        let theUrl;
+        if (account.key) {
+            theUrl = url + "delete"
+        }
+        await postData(theUrl, { key: account.key });
+    }
 }
 
 class Account {
     static lastKey = 0;
     constructor(obj) {
-        const defaults = { name: "", balance: 0, key: "" }
+        const defaults = { name: "", balance: '', key: "" }
         const data = { ...defaults, ...obj };
         this.name = data.name;
-        this.balance = Number(data.balance);
+        this.balance = data.balance;
         this.key = data.key;
     }
 

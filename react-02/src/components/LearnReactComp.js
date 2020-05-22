@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 
-function LearnReact() {
+function LearnReactComp() {
     return (
         <div className="App-header">
             <a
@@ -10,8 +10,8 @@ function LearnReact() {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <h1>LEARN REACT</h1>
-              </a>
+                <h1>Learn React</h1>
+            </a>
             <img src={logo} className="App-logo" alt="logo" />
             <p>
                 Edit <code>src/App.js</code> and save to reload.
@@ -21,4 +21,4 @@ function LearnReact() {
     );
 }
 
-export default LearnReact;
+export default LearnReactComp;

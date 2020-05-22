@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { LogosData, MyLogo } from './components/MyLogo'
+import { LogosData, MyLogoComp } from './components/MyLogoComp';
+import FooterComp from './components/FooterComp';
 
 class App extends React.Component {
   constructor() {
@@ -39,7 +40,7 @@ class App extends React.Component {
   }
 
   render() {
-    const logoItems = this.state.logos.map(logo => <MyLogo key={logo.id} logo={logo} handleChange={this.handleChange} />)
+    const logoItems = this.state.logos.map(logo => <MyLogoComp key={logo.id} logo={logo} handleChange={this.handleChange} />)
 
     return (
       <div className="App">
@@ -49,6 +50,9 @@ class App extends React.Component {
         <div className="active-page">
           {this.state.mypage}
         </div>
+        <footer>
+          <FooterComp />
+        </footer>
       </div>
     );
   }

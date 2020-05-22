@@ -110,7 +110,7 @@ class Game extends React.Component {
 
         return (
             <div>
-                <h1>TIC TAC TOE</h1>
+                <h1>Tic Tac Toe</h1>
                 <h3>{status}</h3>
                 <div className="game">
                     <div className="game-board">
@@ -120,7 +120,7 @@ class Game extends React.Component {
                         />
                     </div>
                     <div className="game-info">
-                        <ol>{moves}</ol>
+                        <ul>{moves}</ul>
                     </div>
                 </div>
             </div>
