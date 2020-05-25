@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AccListComp(props) {
+function AccountsListComp(props) {
 
     let myAccsList;
 
@@ -24,12 +24,15 @@ function AccListComp(props) {
     return (
         <div>
             <h1>My Accounts</h1>
-            <ol className="accList" onClick={onClick}>
-                {myAccsList}
-            </ol>
-            <button onClick={onAdd}>Add</button>
+            <fieldset>
+                <legend>Account History</legend>
+                <ol className="accList" onClick={onClick}>
+                    {myAccsList}
+                </ol>
+                <button onClick={onAdd}>Add</button>
+            </fieldset>
         </div>
     )
 }
 
-export default AccListComp;
+export default AccountsListComp;

@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-import AccFormComp from './AccFormComp';
-import AccListComp from './AccListComp';
-import Loading from './LoadingComp'
 import funcs from '../business/AccountFunc';
+import Loading from './LoadingComp';
+import AccountFormComp from './AccountFormComp';
+import AccountsListComp from './AccountsListComp';
+import TransactionFormComp from './TransactionFormComp';
 
-function AccAppComp() {
-    // useState
+function AccountComp() {
     const [accsCtrl, setAccsCtrl] = useState();
     const [account, setAccount] = useState();
     const [loading, setLoading] = useState();
     const [message, setMessage] = useState({ text: "", class: "" });
-    const [toShow, setToShow] = useState();
+    const [onDom, setOnDom] = useState();
 
     useEffect(() => {
         // This effect will run any time a state variable changes
     });
-
-    /*
-      This will only run once because the second parm to
-      useEffect is what to monitor. In this case it is an emply
-      array. The empty array will never change
-    */
 
     useEffect(() => {
         // Load the accs from the API only the first time
@@ -31,7 +25,7 @@ function AccAppComp() {
                 const myAccs = new funcs.Accs()
                 setAccsCtrl(myAccs);
                 await myAccs.getAccs();
-                setToShow('list');
+                setOnDom('acc-list');
                 userMsg("Accounts Loaded", "status");
             } catch (e) {
                 userMsg("***** Turn the server on please! *****", "error");
@@ -51,57 +45,66 @@ function AccAppComp() {
         setLoading('');
     }
 
-    // on save account
+    // onSave
     async function onSave(account) {
         await accsCtrl.addOrUpdate(account);
-        setToShow('list');
+        setOnDom('acc-list');
     }
+
+    // onAdd
+    const onAdd = () => {
+        setAccount(accsCtrl.getNewAccount());
+        setOnDom('acc-form');
+        userMsg();
+      }
 
     // on delete account
     async function onDelete(account) {
         await accsCtrl.delete(account);
         await accsCtrl.getAccs();
-        setToShow('list');
+        setOnDom('acc-list');
         userMsg();
     }
 
+    // Show onCancel
     function onCancel() {
-        setToShow('list');
+        setOnDom('acc-list');
         userMsg();
     }
 
-    // Add a new account to the list
-    const onAdd = () => {
-        setAccount(accsCtrl.getNewAccount());
-        setToShow('form');
-        userMsg();
-    }
-
-    // Show an item from the AccountList
+    // Show transaction form
     function onShow(key) {
         setAccount(accsCtrl.get(key));
-        setToShow('form');
+        setOnDom('txn-form');
         userMsg();
-        console.log(key, 'AccountApp.onShow');
     }
 
+    // set the message based on the class
     function userMsg(msg, type) {
-        // set the class based on the type of message
         const cls = (type) ? 'cl' + type : 'clstatus';
         setMessage({ text: msg, class: cls });
     }
 
     let output;
-    if (toShow === "list") {
+    if (onDom === "acc-list") {
         output =
-            <AccListComp
+            <AccountsListComp
                 accs={accsCtrl.accs}
-                showOne={onShow}
                 onAdd={onAdd}
+                showOne={onShow}
+                userMsg={userMsg}
             />
-    } else if (toShow === "form") {
+    } if (onDom === "acc-form") {
         output =
-            <AccFormComp
+            <AccountFormComp
+                account={account}
+                save={onSave}
+                cancel={onCancel}
+                userMsg={userMsg}
+            />
+    } else if (onDom === "txn-form") {
+        output =
+            <TransactionFormComp
                 account={account}
                 save={onSave}
                 delete={onDelete}
@@ -121,4 +124,4 @@ function AccAppComp() {
     );
 }
 
-export default AccAppComp;
+export default AccountComp;

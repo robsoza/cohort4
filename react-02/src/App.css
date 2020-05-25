@@ -1,10 +1,7 @@
 body {
-  margin: 1em;
-  background-color: #282c34;
-}
-
-.App {
   text-align: center;
+  margin: 2em;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -14,16 +11,11 @@ body {
 
 .My-logo,
 .Active-logo {
-  margin: 15px;
+  margin-right: 15px;
   display: inline-block;
-  /* contain: content; */
-  height: 15vmin;
-  width: 15vmin;
+  height: 12vmin;
+  width: 12vmin;
   transition: all .2s ease-in-out;
-}
-
-h3 {
-  color: #f4c430;
 }
 
 .My-logo:hover {
@@ -38,13 +30,6 @@ h3 {
   .Active-logo {
     animation: Counter-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  color: white;
 }
 
 .App-link {
@@ -71,36 +56,23 @@ h3 {
   }
 }
 
-input {
-  text-align: center;
-  align-items: center;
+p {
+  color: white
+}
+
+h3 {
+  text-align: left;
+  color: #f4c430;
 }
 
 label {
-  display: flex;
+  display: inline-block;
+  text-align: center;
   color: #f4c430;
   margin: 5px;
-  align-items: center;
 }
 
 /* Tic-Tac-Toe */
-.active-page {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-}
-
-.game {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-
-ol,
-ul {
-  padding-left: 30px;
-}
 
 .board-row:after {
   clear: both;
@@ -119,13 +91,14 @@ ul {
   float: left;
   font-size: 30px;
   font-weight: bold;
-  line-height: 54px;
-  height: 64px;
+  line-height: 42px;
+  height: 42px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 64px;
+  width: 42px;
+  align-items: center;
 }
 
 .square:focus {
@@ -134,13 +107,6 @@ ul {
 
 .kbd-navigation .square:focus {
   background: #ddd;
-}
-
-.game {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
 }
 
 .game-info {
@@ -154,23 +120,23 @@ a {
 }
 
 h1 {
-  margin: 1em;
   margin-top: 160;
-  outline: 1px solid greenyellow;
   text-align: center;
-  background: rgb(49, 146, 49);
+  align-items: center;
+  background: #0E538C;
   color: white;
   padding: 0px 10px 0px 10px;
 }
 
 label {
-  padding: 5px 5px 5px 50px;
+  padding: 5px 5px 5px 5px;
 }
 
 input[type=text],
 select,
 input {
-  width: 90%;
+  background-color: whitesmoke;
+  width: 100%;
   padding: 5px 5px;
   display: inline-block;
   border: 1px solid #ccc;
@@ -181,7 +147,7 @@ input {
 
 input[type=submit] {
   width: 100%;
-  background-color: #D5F3FE;
+  background-color: rgb(15, 84, 109);
   color: white;
   border: none;
   border-radius: 4px;
@@ -194,56 +160,48 @@ input[type=submit]:hover {
 
 button {
   border: none;
-  padding: 5px;
+  margin: 2px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 5px 5px;
+  font-size: 14px;
   cursor: pointer;
 }
 
 li {
+  margin: 0px 0px 2px 0px;
   text-align: center;
 }
 
 ol {
+  list-style-position: inside;
   padding: 0;
-  margin: 0;
+  margin: 10px;
 }
 
 ol li {
   margin-top: -1px;
-  background-color: #485461;
-  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
-  padding: 5px;
   font-size: 16px;
   color: white;
   position: relative;
 }
 
 ol li:hover {
-  background-color: #eee;
-}
-
-ol tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: rgb(240, 240, 240);
 }
 
 ul {
-  list-style: none;
+  display: inline;
+  list-style-type: none;
+}
+
+fieldset {
+  text-align: center;
 }
 
 .accList li:hover {
-  transform: scale(1.05);
+  transform: scale(1);
   color: blue;
-}
-
-.footer {
-  display: inline;
-  align-items: center;
-  bottom: 5px;
-  margin: 10px;
 }
 
 .clstatus {
@@ -260,4 +218,37 @@ ul {
 
 .clerror {
   color: red
+}
+
+legend {
+  padding: 5px 15px 5px 15px;
+  text-align: left;
+  font-weight: bold;
+  color: #282c34;
+  background: white
+}
+
+.footer {
+  overflow: none;
+  position: relative;
+  display: inline;
+  align-items: center;
+  bottom: 0px;
+  margin: 15px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas:
+    "game-his game-board game-board"
+}
+
+.game-board {
+  grid-area: game-board;
+}
+
+.game-his {
+  padding: 0%;
+  grid-area: game-his;
 }

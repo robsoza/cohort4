@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { LogosData, MyLogoComp } from './components/MyLogoComp';
+import { LogosData, NavbarComp } from './components/NavbarComp';
 import FooterComp from './components/FooterComp';
 
 class App extends React.Component {
@@ -8,8 +8,6 @@ class App extends React.Component {
     super()
     this.state = {
       logos: LogosData,
-      className: "MyLogo",
-      mypage: LogosData[0].page
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -20,7 +18,6 @@ class App extends React.Component {
         if (logo.id === id) {
           logo.active = true;
           logo.className = "Active-logo";
-          this.update(logo);
         } else {
           logo.active = false
           logo.className = "My-logo";
@@ -33,14 +30,9 @@ class App extends React.Component {
     })
   }
 
-  update = (logo) => {
-    this.setState({
-      mypage: logo.page,
-    });
-  }
-
   render() {
-    const logoItems = this.state.logos.map(logo => <MyLogoComp key={logo.id} logo={logo} handleChange={this.handleChange} />)
+    const logoItems = this.state.logos.map(logo => <NavbarComp key={logo.id} logo={logo} handleChange={this.handleChange} />)
+    let activeLogo = this.state.logos.find(e => e.className === "Active-logo");
 
     return (
       <div className="App">
@@ -48,7 +40,7 @@ class App extends React.Component {
           {logoItems}
         </div>
         <div className="active-page">
-          {this.state.mypage}
+          {activeLogo.page}
         </div>
         <footer>
           <FooterComp />

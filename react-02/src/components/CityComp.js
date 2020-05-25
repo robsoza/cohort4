@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CityAppComp() {
+function CityComp() {
     return (
         <div>
             <h1>My City</h1>
@@ -8,4 +8,4 @@ function CityAppComp() {
     )
 }
 
-export default CityAppComp;
+export default CityComp;

@@ -88,10 +88,10 @@ class Accs {
 class Account {
     static lastKey = 0;
     constructor(obj) {
-        const defaults = { name: "", balance: '', key: "" }
+        const defaults = { balance: '', name: "", key: "" }
         const data = { ...defaults, ...obj };
-        this.name = data.name;
         this.balance = data.balance;
+        this.name = data.name;
         this.key = data.key;
     }
 
