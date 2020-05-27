@@ -37,6 +37,7 @@ test('test getNewAccount', () => {
 
     acc1.withdraw(5);
     expect(acc1.balance).toBe(5);
+
 });
 
 test('test load Accs from api', async () => {
@@ -105,6 +106,51 @@ test('test load Accs from api', async () => {
     }
 });
 
+test('does that addTransaction function work', async () => {
+
+    // crreate controller
+    const accsCtrl = new funcs.Accs();
+
+    const url = funcs.url;
+    const postData = funcs.postData;
+
+    // clear the server and check length
+    let data = await postData(url + 'clear');
+    await accsCtrl.getAccs();
+    expect(accsCtrl.length()).toBe(0);
+
+    // add first account
+    let account = accsCtrl.getNewAccount();
+    account.name = 'Checking';
+    account.balance = 20;
+    await accsCtrl.addOrUpdate(account);
+
+    // check accs length
+    await accsCtrl.getAccs();
+    expect(accsCtrl.length()).toBe(1);
+    expect(account.key).toBe(1);
+
+    // deposit transaction info
+    let transaction = { key: 1, amount: 20, name: "Checking", type: "deposit" };
+    await accsCtrl.addTransaction(transaction);
+    expect(data.status).toBe(200);
+
+    await accsCtrl.getAccs();
+    account = accsCtrl.get('1');
+    expect(account.balance).toBe(40);
+
+    // withdraw transaction info
+    transaction = { key: 1, amount: 10, name: "Checking", type: "withdraw" };
+    await accsCtrl.addTransaction(transaction);
+    expect(data.status).toBe(200);
+
+
+    await accsCtrl.getAccs();
+    account = accsCtrl.get('1');
+    expect(account.balance).toBe(30);
+
+});
+
 test('does that delete function work', async () => {
     const accsCtrl = new funcs.Accs();
 
@@ -112,7 +158,6 @@ test('does that delete function work', async () => {
     acc1.name = 'Checking';
     acc1.balance = 20;
     await accsCtrl.addOrUpdate(acc1);
-
 
     let acc2 = accsCtrl.getNewAccount();
     acc2.name = 'Savings';
@@ -126,14 +171,7 @@ test('does that delete function work', async () => {
 
 });
 
-
-
-/*
-    This tests an interesting problem found in user testing.
-    When an instance of a account Class is copied into a simple object
-    the account methods are not copied only the properties are copied.
-*/
-
+//test deep cloning copies methods too
 test('test load account instance from account copy', async () => {
     const accsCtrl = new funcs.Accs();
 

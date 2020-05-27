@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AccountsListComp(props) {
+function AccountListComp(props) {
 
     let myAccsList;
 
@@ -8,7 +8,7 @@ function AccountsListComp(props) {
         myAccsList = Object.keys(props.accs).map(k => {
             const acc = props.accs[k];
             return (
-                <li key={acc.key} mykey={acc.key}> {acc.name} ${Number(acc.balance).toFixed(2)}</li>
+                <li key={acc.key} mykey={acc.key}>{acc.name} ${Number(acc.balance).toFixed(2)}</li>
             )
         });
     }
@@ -26,7 +26,7 @@ function AccountsListComp(props) {
             <h1>My Accounts</h1>
             <fieldset>
                 <legend>Account History</legend>
-                <ol className="accList" onClick={onClick}>
+                <ol className="clList accList" onClick={onClick}>
                     {myAccsList}
                 </ol>
                 <button onClick={onAdd}>Add</button>
@@ -35,4 +35,4 @@ function AccountsListComp(props) {
     )
 }
 
-export default AccountsListComp;
+export default AccountListComp;

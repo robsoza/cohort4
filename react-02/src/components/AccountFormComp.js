@@ -29,6 +29,7 @@ function AccountFormComp(props) {
                 focusElement('name');
                 throw new Error('Name can not be blank');
             }
+
             props.save(accountToSave);
             props.userMsg("Saved", "status");
         } catch (e) {

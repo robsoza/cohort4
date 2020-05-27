@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import funcs from '../business/AccountFunc';
 import Loading from './LoadingComp';
 import AccountFormComp from './AccountFormComp';
-import AccountsListComp from './AccountsListComp';
+import AccountsListComp from './AccountListComp';
 import TransactionFormComp from './TransactionFormComp';
 
 function AccountComp() {
@@ -85,6 +85,12 @@ function AccountComp() {
         setMessage({ text: msg, class: cls });
     }
 
+    async function onTrans (transaction) {
+        await accsCtrl.addTransaction(transaction);
+        setOnDom('acc-list');
+        userMsg();
+    }
+
     let output;
     if (onDom === "acc-list") {
         output =
@@ -106,7 +112,7 @@ function AccountComp() {
         output =
             <TransactionFormComp
                 account={account}
-                save={onSave}
+                trans={onTrans}
                 delete={onDelete}
                 cancel={onCancel}
                 userMsg={userMsg}

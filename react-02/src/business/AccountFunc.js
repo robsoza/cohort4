@@ -76,6 +76,23 @@ class Accs {
         this.accs[account.key] = account;
     }
 
+    async addTransaction(transaction) {
+        
+        let theUrl = url + "update";
+        let account = this.get(transaction.key);
+        account = new Account(account);
+
+        if (transaction.type === "deposit") {
+            account.deposit(transaction.amount);
+        } else if (transaction.type === "withdraw") {
+            account.withdraw(transaction.amount);
+        }
+ 
+        await postData(theUrl, account);
+        this.accs[account.key] = account;
+
+    }
+
     async delete(account) {
         let theUrl;
         if (account.key) {

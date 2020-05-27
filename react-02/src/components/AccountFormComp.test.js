@@ -60,7 +60,7 @@ test('test the basic AccountFormComp', async () => {
     expect(mockCancelCallback.mock.calls.length).toBe(1);
 });
 
-test('test all the attriutes render and are saveed for the basic AccountForm', async () => {
+test('test all the attriutes render and are saved for the basic AccountForm', async () => {
     const dummyData = {
         name: 'namexx',
         balance: '33',
@@ -120,7 +120,6 @@ test('test validation works', async () => {
 
     // Should not have done an save
     expect(mockSaveCallback.mock.calls.length).toBe(0);
-        console.log(mockSaveCallback.mock.calls)
     // Should have sent balance can't be blank msg
     expect(mockUserMsgCallback.mock.calls.length).toBe(1);
     expect(mockUserMsgCallback.mock.calls[0][0]).toMatch(/balance/i);

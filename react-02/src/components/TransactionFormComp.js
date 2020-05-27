@@ -9,32 +9,36 @@ function TransactionFormComp(props) {
         el.select();
     }
 
-    function onAdd(e) {
-        // Get all the input values into a account object to add
-        const accountToMakeTransaction = {};
-        accountToMakeTransaction.key = account.key;
+    function onSave(e) {
 
-        const idaccountform = document.getElementById('idtxnform');
-        const inputs = idaccountform.getElementsByTagName('input');
+        const transaction = {};
+        transaction.key = account.key;
+        const inputs = document.querySelectorAll('input,select');
 
         for (let i = 0; i < inputs.length; i++) {
-            accountToMakeTransaction[inputs[i].name] = inputs[i].value;
+            transaction[inputs[i].name] = inputs[i].value;
         }
-        console.log(accountToMakeTransaction)
-        // try {
-        //     if (!accountToAdd.name) {
-        //         focusElement('name');
-        //         throw new Error('Name can not be blank');
-        //     }
-        //     if (!accountToAdd.amount) {
-        //         focusElement('txn-amount');
-        //         throw new Error('Amount can not be blank');
-        //     }
-        //     props.add(accountToAdd);
-        //     props.userMsg("Added", "clstatus");
-        // } catch (e) {
-        //     props.userMsg(e.message, "error");
-        // }
+
+        try {
+            if (!transaction.amount) {
+                focusElement('amount');
+                throw new Error('Amount can not be blank');
+            }
+
+            if (!transaction.name) {
+                focusElement('name');
+                throw new Error('Name can not be blank');
+            }
+
+            if (!transaction.type) {
+                throw new Error('Type can not be blank');
+            }
+
+            props.trans(transaction);
+            props.userMsg("Added", "clstatus");
+        } catch (e) {
+            props.userMsg(e.message, "error");
+        }
         e.preventDefault();
     }
 
@@ -48,7 +52,6 @@ function TransactionFormComp(props) {
             accountToDelete[inputs[i].name] = inputs[i].value;
         }
 
-        // Do some simple validation
         try {
             if (!accountToDelete.name) {
                 focusElement('name');
@@ -73,25 +76,22 @@ function TransactionFormComp(props) {
             <h1>My Accounts</h1>
             <fieldset>
                 <legend>Make A Transaction</legend>
-                <form id="idtxnform" onSubmit={onAdd}>
-                    <div>
-                        <label>Transaction Amount:</label>
-                        <input name="txn-amount" placeholder="Enter amount..." />
+                <form id="idtxnform" onSubmit={onSave}>
+                    <label>Transaction Amount:</label>
+                    <input name="amount" placeholder="Enter amount..." />
 
-                        <label>Account's Name:</label>
-                        <input name="name" defaultValue={account.name} />
+                    <label>Account's Name:</label>
+                    <input name='name' defaultValue={account.name} disabled />
 
-                        <label>Transaction's Type:</label>
-                        <select name="txn-type">
-                            <option value="">Select a type...</option>
-                            <option value="deposit">Deposit</option>
-                            <option value="withdraw">Withdraw</option>
-                        </select>
-                    </div>
-
+                    <label>Transaction's Type:</label>
+                    <select name='type'>
+                        <option value=''>Select a type...</option>
+                        <option value="deposit">Deposit</option>
+                        <option value="withdraw">Withdraw</option>
+                    </select>
                     <div>
                         <label>&nbsp;</label>
-                        <button onClick={onAdd}>Add</button>
+                        <button onClick={onSave}>Save</button>
                         <button onClick={onDelete}>Delete</button>
                         <button onClick={onCancel}>Cancel</button>
                     </div>
