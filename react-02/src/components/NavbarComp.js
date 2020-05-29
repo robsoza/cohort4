@@ -13,17 +13,17 @@ import AccountComp from './AccountComp'
 import CityComp from './CityComp';
 
 const LogosData = [
-    { id: 1, src: reactlogo, className: "Active-logo", alt: 'logo', active: true, page: <LearnReactComp /> },
-    { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', active: false, page: <TicTacToeComp /> },
-    { id: 3, src: account, className: "My-logo", alt: 'logo', active: false, page: <AccountComp /> },
-    { id: 4, src: city, className: "My-logo", alt: 'logo', active: false, page: <CityComp /> },
+    { id: 1, src: reactlogo, className: "Active-logo", alt: 'logo', page: <LearnReactComp /> },
+    { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', page: <TicTacToeComp /> },
+    { id: 3, src: account, className: "My-logo", alt: 'logo', page: <AccountComp /> },
+    { id: 4, src: city, className: "My-logo", alt: 'logo', page: <CityComp /> },
 ]
 
 function NavbarComp(props) {
     const activeStyle = {
         color: "blue",
         border: "solid",
-        transform: "rotate(360deg)",
+        transform: "rotate(-360deg)",
     }
 
     return (
@@ -34,7 +34,7 @@ function NavbarComp(props) {
                 className={props.logo.className}
                 alt={props.logo.alt}
                 onClick={() => props.handleChange(props.logo.id)}
-                style={props.logo.active ? activeStyle : null}
+                style={props.logo.className === "Active-logo" ? activeStyle : null}
             />
         </div>
     )

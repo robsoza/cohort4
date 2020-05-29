@@ -77,20 +77,27 @@ class Accs {
     }
 
     async addTransaction(transaction) {
-        
         let theUrl = url + "update";
         let account = this.get(transaction.key);
         account = new Account(account);
 
         if (transaction.type === "deposit") {
-            account.deposit(transaction.amount);
+            account.deposit(Number(transaction.amount));
         } else if (transaction.type === "withdraw") {
-            account.withdraw(transaction.amount);
+            account.withdraw(Number(transaction.amount));
         }
- 
+
         await postData(theUrl, account);
         this.accs[account.key] = account;
+    }
 
+    total() {
+        const a = this.accs;
+        let total = 0;
+        Object.keys(a).forEach(function (key) {
+            total += a[key].balance;
+        })
+        return total;
     }
 
     async delete(account) {
@@ -105,9 +112,9 @@ class Accs {
 class Account {
     static lastKey = 0;
     constructor(obj) {
-        const defaults = { balance: '', name: "", key: "" }
+        const defaults = { balance: "", name: "", key: "" }
         const data = { ...defaults, ...obj };
-        this.balance = data.balance;
+        this.balance = Number(data.balance);
         this.name = data.name;
         this.key = data.key;
     }

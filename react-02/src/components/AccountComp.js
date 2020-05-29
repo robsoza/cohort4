@@ -5,6 +5,7 @@ import Loading from './LoadingComp';
 import AccountFormComp from './AccountFormComp';
 import AccountsListComp from './AccountListComp';
 import TransactionFormComp from './TransactionFormComp';
+import AccountSummaryComp from './AccountSummaryComp';
 
 function AccountComp() {
     const [accsCtrl, setAccsCtrl] = useState();
@@ -22,9 +23,9 @@ function AccountComp() {
         async function fetchData() {
             try {
                 startLoadingAnimation();
-                const myAccs = new funcs.Accs()
-                setAccsCtrl(myAccs);
-                await myAccs.getAccs();
+                const accsCtrl = new funcs.Accs();
+                setAccsCtrl(accsCtrl);
+                await accsCtrl.getAccs();
                 setOnDom('acc-list');
                 userMsg("Accounts Loaded", "status");
             } catch (e) {
@@ -35,7 +36,6 @@ function AccountComp() {
         }
         fetchData();
     }, []);
-
 
     function startLoadingAnimation() {
         setLoading(<Loading />);
@@ -56,7 +56,7 @@ function AccountComp() {
         setAccount(accsCtrl.getNewAccount());
         setOnDom('acc-form');
         userMsg();
-      }
+    }
 
     // on delete account
     async function onDelete(account) {
@@ -85,7 +85,7 @@ function AccountComp() {
         setMessage({ text: msg, class: cls });
     }
 
-    async function onTrans (transaction) {
+    async function onTrans(transaction) {
         await accsCtrl.addTransaction(transaction);
         setOnDom('acc-list');
         userMsg();
@@ -94,12 +94,17 @@ function AccountComp() {
     let output;
     if (onDom === "acc-list") {
         output =
-            <AccountsListComp
-                accs={accsCtrl.accs}
-                onAdd={onAdd}
-                showOne={onShow}
-                userMsg={userMsg}
-            />
+            <div>
+                <AccountSummaryComp
+                    accs={accsCtrl.accs}
+                />
+                <AccountsListComp
+                    accs={accsCtrl.accs}
+                    onAdd={onAdd}
+                    showOne={onShow}
+                    userMsg={userMsg}
+                />
+            </div>
     } if (onDom === "acc-form") {
         output =
             <AccountFormComp

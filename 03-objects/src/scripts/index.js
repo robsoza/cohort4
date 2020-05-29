@@ -176,7 +176,7 @@ window.addEventListener('change', (e) => {
   }
 });
 
-//update pop btn eventlistener
+//update population btn eventlistener
 window.addEventListener('click', (e) => {
   if (e.target.id === 'popBtn') {
     if (updateType != '' && updatePopNum > 0) {

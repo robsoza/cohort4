@@ -125,9 +125,15 @@ test('does that addTransaction function work', async () => {
     account.balance = 20;
     await accsCtrl.addOrUpdate(account);
 
+    // add second account
+    let account2 = accsCtrl.getNewAccount();
+    account2.name = 'Saving';
+    account2.balance = 30;
+    await accsCtrl.addOrUpdate(account2);
+
     // check accs length
     await accsCtrl.getAccs();
-    expect(accsCtrl.length()).toBe(1);
+    expect(accsCtrl.length()).toBe(2);
     expect(account.key).toBe(1);
 
     // deposit transaction info
@@ -140,14 +146,16 @@ test('does that addTransaction function work', async () => {
     expect(account.balance).toBe(40);
 
     // withdraw transaction info
-    transaction = { key: 1, amount: 10, name: "Checking", type: "withdraw" };
+    transaction = { key: 1, amount: 30, name: "Checking", type: "withdraw" };
     await accsCtrl.addTransaction(transaction);
     expect(data.status).toBe(200);
 
 
     await accsCtrl.getAccs();
     account = accsCtrl.get('1');
-    expect(account.balance).toBe(30);
+    expect(account.balance).toBe(10);
+
+    expect(accsCtrl.total()).toBe(40);
 
 });
 

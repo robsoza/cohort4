@@ -51,10 +51,21 @@ function AccountFormComp(props) {
                     <legend>Create an Account</legend>
                     <div>
                         <label>Initial balance:</label>
-                        <input name="balance" defaultValue={account.balance} className="input-control" placeholder='amount...' type='number' />
+                        <input
+                            name="balance"
+                            defaultValue={account.balance}
+                            className="input-control"
+                            placeholder='amount...'
+                            type='number'
+                        />
 
                         <label>Account's Name:</label>
-                        <input name="name" defaultValue={account.name} className="input-control" placeholder='name...' />
+                        <input
+                            name="name"
+                            defaultValue={account.name}
+                            className="input-control"
+                            placeholder='name...'
+                        />
                     </div>
 
                     <div>

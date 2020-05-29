@@ -221,7 +221,7 @@ fieldset {
 }
 
 legend {
-  padding: 5px 15px 5px 15px;
+  padding: 0px 5px 0px 5px;
   text-align: left;
   font-weight: bold;
   color: #282c34;
@@ -251,4 +251,39 @@ legend {
 .game-his {
   padding: 0%;
   grid-area: game-his;
+}
+
+table {
+  width: 100%;
+}
+
+.customers td,
+.customers th,
+.customers2 td,
+.customers2 th {
+  text-align: center;
+  border: 1px solid #eee;
+  padding: 3px;
+  border-bottom: none;
+}
+
+.customers td,
+.customers2 td {
+  border: 1px solid lightgray;
+  border-top: none;
+  background-color: white;
+}
+
+.customers tr:hover,
+.customers2 tr:hover {
+  background-color: white;
+}
+
+.customers th,
+.customers2 th {
+  padding-top: 3px;
+  padding-bottom: 1px;
+  text-align: left;
+  background-color: white;
+  text-align: center;
 }

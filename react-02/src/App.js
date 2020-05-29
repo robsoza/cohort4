@@ -16,10 +16,8 @@ class App extends React.Component {
     this.setState(prevState => {
       const updatedLogos = prevState.logos.map(logo => {
         if (logo.id === id) {
-          logo.active = true;
           logo.className = "Active-logo";
         } else {
-          logo.active = false
           logo.className = "My-logo";
         }
         return logo

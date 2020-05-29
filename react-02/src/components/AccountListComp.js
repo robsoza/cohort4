@@ -23,7 +23,6 @@ function AccountListComp(props) {
 
     return (
         <div>
-            <h1>My Accounts</h1>
             <fieldset>
                 <legend>Account History</legend>
                 <ol className="clList accList" onClick={onClick}>
