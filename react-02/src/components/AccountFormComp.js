@@ -25,9 +25,15 @@ function AccountFormComp(props) {
                 focusElement('balance');
                 throw new Error('Balance can not be blank');
             }
+            if (isNaN(accountToSave.balance)) {
+                throw new Error('Balance must be a Number');
+            }
             if (!accountToSave.name) {
                 focusElement('name');
                 throw new Error('Name can not be blank');
+            }
+            if (!isNewAcc(accountToSave.name)) {
+                throw new Error('Account exists');
             }
 
             props.save(accountToSave);
@@ -38,9 +44,17 @@ function AccountFormComp(props) {
         e.preventDefault();
     }
 
+    function isNewAcc(name) {
+        name = name.toUpperCase()
+        Object.keys(props.accs).forEach(key => {
+            let accName = props.accs[key].name.toUpperCase();
+            if (accName === name) { name = null }
+        }); return name;
+    }
+
     function onCancel(e) {
-        props.cancel(account);
-        e.preventDefault();
+        props.cancel(account)
+        e.preventDefault()
     }
 
     return (
@@ -56,7 +70,6 @@ function AccountFormComp(props) {
                             defaultValue={account.balance}
                             className="input-control"
                             placeholder='amount...'
-                            type='number'
                         />
 
                         <label>Account's Name:</label>

@@ -112,7 +112,7 @@ class Accs {
 class Account {
     static lastKey = 0;
     constructor(obj) {
-        const defaults = { balance: "", name: "", key: "" }
+        const defaults = { balance: '', name: "", key: "" }
         const data = { ...defaults, ...obj };
         this.balance = Number(data.balance);
         this.name = data.name;

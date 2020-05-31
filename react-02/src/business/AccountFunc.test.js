@@ -29,11 +29,11 @@ test('test getNewAccount', () => {
     let acc1 = accsCtrl.getNewAccount();
 
     expect(acc1.name).toBe('');
-    expect(acc1.balance).toBe('');
+    expect(acc1.balance).toBe(0);
     expect(acc1.key).toBe('');
 
     acc1.deposit(10);
-    expect(acc1.balance).toBe('10');
+    expect(acc1.balance).toBe(10);
 
     acc1.withdraw(5);
     expect(acc1.balance).toBe(5);

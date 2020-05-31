@@ -81,7 +81,7 @@ function TransactionFormComp(props) {
                     <input name="amount" placeholder="Enter amount..." />
 
                     <label>Account's Name:</label>
-                    <input name='name' defaultValue={account.name} disabled />
+                    <input name='name' defaultValue={account.name} />
 
                     <label>Transaction's Type:</label>
                     <select name='type'>

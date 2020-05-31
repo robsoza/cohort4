@@ -26,7 +26,7 @@ function AccountComp() {
                 const accsCtrl = new funcs.Accs();
                 setAccsCtrl(accsCtrl);
                 await accsCtrl.getAccs();
-                setOnDom('acc-list');
+                setOnDom('account-list');
                 userMsg("Accounts Loaded", "status");
             } catch (e) {
                 userMsg("***** Turn the server on please! *****", "error");
@@ -48,13 +48,13 @@ function AccountComp() {
     // onSave
     async function onSave(account) {
         await accsCtrl.addOrUpdate(account);
-        setOnDom('acc-list');
+        setOnDom('account-list');
     }
 
     // onAdd
     const onAdd = () => {
         setAccount(accsCtrl.getNewAccount());
-        setOnDom('acc-form');
+        setOnDom('account-form');
         userMsg();
     }
 
@@ -62,20 +62,20 @@ function AccountComp() {
     async function onDelete(account) {
         await accsCtrl.delete(account);
         await accsCtrl.getAccs();
-        setOnDom('acc-list');
+        setOnDom('account-list');
         userMsg();
     }
 
     // Show onCancel
     function onCancel() {
-        setOnDom('acc-list');
+        setOnDom('account-list');
         userMsg();
     }
 
     // Show transaction form
     function onShow(key) {
         setAccount(accsCtrl.get(key));
-        setOnDom('txn-form');
+        setOnDom('transaction-form');
         userMsg();
     }
 
@@ -87,12 +87,12 @@ function AccountComp() {
 
     async function onTrans(transaction) {
         await accsCtrl.addTransaction(transaction);
-        setOnDom('acc-list');
+        setOnDom('account-list');
         userMsg();
     }
 
     let output;
-    if (onDom === "acc-list") {
+    if (onDom === "account-list") {
         output =
             <div>
                 <AccountSummaryComp
@@ -105,15 +105,16 @@ function AccountComp() {
                     userMsg={userMsg}
                 />
             </div>
-    } if (onDom === "acc-form") {
+    } if (onDom === "account-form") {
         output =
             <AccountFormComp
                 account={account}
+                accs={accsCtrl.accs}
                 save={onSave}
                 cancel={onCancel}
                 userMsg={userMsg}
             />
-    } else if (onDom === "txn-form") {
+    } else if (onDom === "transaction-form") {
         output =
             <TransactionFormComp
                 account={account}

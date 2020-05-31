@@ -23,10 +23,12 @@ test('test the basic AccountFormComp', async () => {
     // Render the form
     render(<AccountFormComp
         account={account}
+        accs={accsCtrl.accs}
         save={mockSaveCallback}
         cancel={mockCancelCallback}
         userMsg={mockUserMsgCallback}
     />);
+
     // screen.debug()
 
     // Did the names render correctly
@@ -40,11 +42,11 @@ test('test the basic AccountFormComp', async () => {
     // Trigger a Save
     click('Save');
 
-    expect(getValue('name')).toBe('Checkings');
-    expect(getValue('balance')).toBe('35');
-
     // The onSaveOrUpdate mock should have been called once
     expect(mockSaveCallback.mock.calls.length).toBe(1);
+
+    expect(getValue('name')).toBe('Checkings');
+    expect(getValue('balance')).toBe('35');
 
     // Grab the first parm sent to the mock Save object (which should be the account to Save)
     const saveAccount = mockSaveCallback.mock.calls[0][0];
@@ -60,13 +62,15 @@ test('test the basic AccountFormComp', async () => {
     expect(mockCancelCallback.mock.calls.length).toBe(1);
 });
 
-test('test all the attriutes render and are saved for the basic AccountForm', async () => {
+test('test render and saved for the basic AccountForm', async () => {
+    const accsCtrl = new funcs.Accs()
     const dummyData = {
         name: 'namexx',
         balance: '33',
     };
 
     const mockSaveCallback = jest.fn();
+    const mockCancelCallback = jest.fn();
     const mockUserMsgCallback = jest.fn();
 
     const account = {};
@@ -77,9 +81,12 @@ test('test all the attriutes render and are saved for the basic AccountForm', as
     // Render the form
     render(<AccountFormComp
         account={account}
+        accs={accsCtrl.accs}
         save={mockSaveCallback}
+        cancel={mockCancelCallback}
         userMsg={mockUserMsgCallback}
     />);
+
     // screen.debug()
 
     // make sure every field rendered correctly
@@ -95,7 +102,6 @@ test('test all the attriutes render and are saved for the basic AccountForm', as
     // (which should be the account to save)
     const saveAccount = mockSaveCallback.mock.calls[0][0];
 
-    // console.log(saveAccount);
     for (let k in saveAccount) {
         expect(saveAccount[k]).toBe(dummyData[k]);
     }
@@ -103,14 +109,18 @@ test('test all the attriutes render and are saved for the basic AccountForm', as
 
 test('test validation works', async () => {
 
+    const accsCtrl = new funcs.Accs()
     const account = {};
     const mockSaveCallback = jest.fn();
+    const mockCancelCallback = jest.fn();
     const mockUserMsgCallback = jest.fn();
 
     // Render the form
     render(<AccountFormComp
         account={account}
+        accs={accsCtrl.accs}
         save={mockSaveCallback}
+        cancel={mockCancelCallback}
         userMsg={mockUserMsgCallback}
     />);
     // screen.debug()
