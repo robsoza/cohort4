@@ -1,27 +1,13 @@
 import funcs from './AccountFunc';
+import postData from './Fetch';
 global.fetch = require('node-fetch');
 
-beforeEach(async () => {
-    await funcs.postData(funcs.url + 'clear');
+afterEach(async () => {
+    await postData(funcs.url + 'clear');
 })
 
 test('test plumbing', () => {
     expect(funcs.hello()).toBe("Hello World");
-});
-
-test('test postdata gives a good error if api server not started', async () => {
-    try {
-        // dummy url:port that does not exist
-        const url = 'http://localhost:5678/';
-        const data = await funcs.postData(url);
-        // The above line should throw an error and we should never get to the next line
-        expect("").toBe("This bad port # should have caused an exception.");
-    }
-    catch (e) {
-        expect(e.code).toBe("ECONNREFUSED");
-    }
-    finally {
-    }
 });
 
 test('test getNewAccount', () => {
@@ -47,7 +33,6 @@ test('test load Accs from api', async () => {
 
     try {
         const url = funcs.url;
-        const postData = funcs.postData;
 
         // clear the server and check length
         let data = await postData(url + 'clear');
@@ -112,7 +97,6 @@ test('does that addTransaction function work', async () => {
     const accsCtrl = new funcs.Accs();
 
     const url = funcs.url;
-    const postData = funcs.postData;
 
     // clear the server and check length
     let data = await postData(url + 'clear');
@@ -175,8 +159,8 @@ test('does that delete function work', async () => {
     expect(accsCtrl.length()).toBe(2);
 
     await accsCtrl.delete(acc1);
-    expect(accsCtrl.length()).toBe(2);
-
+    await accsCtrl.getAccs();
+    expect(accsCtrl.length()).toBe(1);
 });
 
 //test deep cloning copies methods too
@@ -184,7 +168,7 @@ test('test load account instance from account copy', async () => {
     const accsCtrl = new funcs.Accs();
 
     // clear the server
-    let data = await funcs.postData(funcs.url + 'clear');
+    let data = await postData(funcs.url + 'clear');
 
     // create new account
     let account;
@@ -201,7 +185,7 @@ test('test load account instance from account copy', async () => {
 test('test addOrUpdate updates internal storage', async () => {
 
     // clear the server
-    let data = await funcs.postData(funcs.url + 'clear');
+    let data = await postData(funcs.url + 'clear');
     funcs.Account.lastKey = 0;
     const accsCtrl = new funcs.Accs();
 

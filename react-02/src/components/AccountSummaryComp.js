@@ -12,7 +12,7 @@ function AccountSummaryComp(props) {
         });
     };
 
-    let total; let smallest; let biggest;
+    let total, smallest, biggest;
     if (value.length) {
         total = value.map((x) => x.balance);
         total = total.reduce((a, b) => Number(a) + Number(b));

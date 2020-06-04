@@ -1,32 +1,9 @@
+import postData from './Fetch.js'
 const url = 'http://localhost:5000/';
 
 // test the plumbing
 function hello() {
     return "Hello World";
-}
-
-async function postData(url = '', data = {}) {
-    // Default options are marked with *
-
-    const response = await fetch(url, {
-        method: 'POST',     // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors',       // no-cors, *cors, same-origin
-        cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: 'follow',         // manual, *follow, error
-        referrer: 'no-referrer',    // no-referrer, *client
-        body: JSON.stringify(data)  // body data type must match "Content-Type" header
-    });
-
-    const json = await response.json();    // parses JSON response into native JavaScript objects
-    json.status = response.status;
-    json.statusText = response.statusText;
-
-    return json;
 }
 
 class Accs {
@@ -78,8 +55,7 @@ class Accs {
 
     async addTransaction(transaction) {
         let theUrl = url + "update";
-        let account = this.get(transaction.key);
-        account = new Account(account);
+        let account = new Account(this.get(transaction.key));
 
         if (transaction.type === "deposit") {
             account.deposit(Number(transaction.amount));
@@ -87,8 +63,13 @@ class Accs {
             account.withdraw(Number(transaction.amount));
         }
 
-        await postData(theUrl, account);
-        this.accs[account.key] = account;
+        let updateAccount = this.getNewAccount();
+        updateAccount.name = transaction.name;
+        updateAccount.balance = account.balance;
+        updateAccount.key = account.key;
+
+        await postData(theUrl, updateAccount);
+        this.accs[account.key] = updateAccount;
     }
 
     total() {
@@ -105,7 +86,8 @@ class Accs {
         if (account.key) {
             theUrl = url + "delete"
         }
-        await postData(theUrl, { key: account.key });
+        await postData(theUrl, account);
+        this.accs[account.key] = account;
     }
 }
 
@@ -133,4 +115,4 @@ class Account {
     }
 }
 
-export default { Account, Accs, hello, url, postData };
+export default { Account, Accs, hello, url };

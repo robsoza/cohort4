@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import funcs from '../business/AccountFunc';
+import accountFunc from '../business/AccountFunc';
 import Loading from './LoadingComp';
 import AccountFormComp from './AccountFormComp';
-import AccountsListComp from './AccountListComp';
+import AccountListComp from './AccountListComp';
 import TransactionFormComp from './TransactionFormComp';
 import AccountSummaryComp from './AccountSummaryComp';
 
@@ -23,7 +23,7 @@ function AccountComp() {
         async function fetchData() {
             try {
                 startLoadingAnimation();
-                const accsCtrl = new funcs.Accs();
+                const accsCtrl = new accountFunc.Accs();
                 setAccsCtrl(accsCtrl);
                 await accsCtrl.getAccs();
                 setOnDom('account-list');
@@ -98,7 +98,7 @@ function AccountComp() {
                 <AccountSummaryComp
                     accs={accsCtrl.accs}
                 />
-                <AccountsListComp
+                <AccountListComp
                     accs={accsCtrl.accs}
                     onAdd={onAdd}
                     showOne={onShow}

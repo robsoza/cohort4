@@ -199,7 +199,7 @@ fieldset {
   text-align: center;
 }
 
-.accList li:hover {
+.accList li:hover, .cityList li:hover {
   transform: scale(1);
   color: blue;
 }

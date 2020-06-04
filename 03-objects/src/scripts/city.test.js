@@ -4,7 +4,7 @@ import functions from './fetch.js'
 global.fetch = require('node-fetch');
 const url = 'http://localhost:5000/';
 
-beforeEach(async () => {
+afterEach(async () => {
     await functions.postData(url + 'clear');
 })
 
