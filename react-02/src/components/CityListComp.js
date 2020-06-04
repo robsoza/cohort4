@@ -6,15 +6,14 @@ function CityListComp(props) {
     let myCityList;
     if (props.community) {
         myCityList = Object.keys(props.community).map(k => {
-            const myCity = props.community[k];
-            console.log(myCity);
+            const c = props.community[k];
             return (
-                <li key={myCity.key} mykey={myCity.key}>{myCity.city}<br></br>
-                    <span> Lat: {myCity.latitude}</span>,
-                    <span> long: {myCity.longitude}</span>,
-                    <span> pupulation: {myCity.population}</span><br></br>
-                    <span> Is a {howBig(myCity)}</span>,
-                    <span> in the {whichSphere(myCity)}</span>
+                <li key={c.key} mykey={c.key}> {c.city} <br></br>
+                    <span mykey={c.key}> Lat: {c.latitude}</span>,
+                    <span mykey={c.key}> long: {c.longitude}</span>,
+                    <span mykey={c.key}> pupulation: {c.population}</span><br></br>
+                    <span mykey={c.key}> Is a {howBig(c)}</span>,
+                    <span mykey={c.key}> in the {whichSphere(c)}</span>
                 </li>
             )
         });
@@ -50,7 +49,6 @@ function CityListComp(props) {
         Object.keys(cityData).forEach(k => {
             randomCity = cityData[Math.floor(Math.random() * cityData.length)]
         });
-        console.log(randomCity)
 
         try {
             if (!randomCity) {

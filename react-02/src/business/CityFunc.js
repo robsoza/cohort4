@@ -46,14 +46,14 @@ class Community {
         this.community[city.key] = city;
     }
 
-    async populationUpdate(PopulationUpdate) {
+    async populationUpdate(cityUpdate) {
         let theUrl = url + "update";
-        let city = new City(this.get(PopulationUpdate.key));
+        let city = new City(this.get(cityUpdate.key));
 
-        if (PopulationUpdate.type === "movedIn") {
-            city.movedIn(Number(PopulationUpdate.amount));
-        } else if (PopulationUpdate.type === "movedOut") {
-            city.movedOut(Number(PopulationUpdate.amount));
+        if (cityUpdate.type === "movedIn") {
+            city.movedIn(Number(cityUpdate.numOfPeople));
+        } else if (cityUpdate.type === "movedOut") {
+            city.movedOut(Number(cityUpdate.numOfPeople));
         }
 
         await postData(theUrl, city);

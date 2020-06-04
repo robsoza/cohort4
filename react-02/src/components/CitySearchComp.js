@@ -41,7 +41,7 @@ function CitySearchComp(props) {
             if (!isNewCity(myCity.city)) {
                 throw new Error('City exists');
             }
-            console.log(myCity);
+
             props.save(myCity);
             props.userMsg("Saved", "status");
             input = "";

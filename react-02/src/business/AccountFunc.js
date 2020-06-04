@@ -1,11 +1,3 @@
-import postData from './Fetch.js'
-const url = 'http://localhost:5000/';
-
-// test the plumbing
-function hello() {
-    return "Hello World";
-}
-
 class Accs {
 
     constructor() {
@@ -25,36 +17,24 @@ class Accs {
         return new Account({});
     }
 
-    async getAccs() {
-        const data = await postData(url + "all");
-
-        // create a dictionary of accs and keep track of the last key
-        const accs = {};
-        data.forEach(x => {
-            accs[x.key] = x;
-            this.lastKey = (x.key > this.lastKey) ? x.key : this.lastKey;
-        });
-
-        this.accs = accs;
+    getAccs() {
+        let accs = this.accs;
+        return accs;
     }
 
-    async addOrUpdate(account) {
-        let theUrl;
-
-        if (account.key) {
-            theUrl = url + "update"
-        } else {
-            theUrl = url + "add"
-            this.lastKey++;
-            account.key = this.lastKey;
+    addOrUpdate(account) {
+        let defaults;
+        this.lastKey++;
+        account.key = this.lastKey;
+        defaults = {
+            name: account.name,
+            balance: account.balance,
+            key: account.key
         }
-
-        await postData(theUrl, account);
-        this.accs[account.key] = account;
+        this.accs[account.key] = { ...defaults };
     }
 
-    async addTransaction(transaction) {
-        let theUrl = url + "update";
+    addTransaction(transaction) {
         let account = new Account(this.get(transaction.key));
 
         if (transaction.type === "deposit") {
@@ -63,31 +43,18 @@ class Accs {
             account.withdraw(Number(transaction.amount));
         }
 
-        let updateAccount = this.getNewAccount();
-        updateAccount.name = transaction.name;
-        updateAccount.balance = account.balance;
-        updateAccount.key = account.key;
-
-        await postData(theUrl, updateAccount);
-        this.accs[account.key] = updateAccount;
-    }
-
-    total() {
-        const a = this.accs;
-        let total = 0;
-        Object.keys(a).forEach(function (key) {
-            total += a[key].balance;
-        })
-        return total;
-    }
-
-    async delete(account) {
-        let theUrl;
-        if (account.key) {
-            theUrl = url + "delete"
+        let defaults = {
+            name: transaction.name,
+            balance: account.balance,
+            key: transaction.key
         }
-        await postData(theUrl, account);
-        this.accs[account.key] = account;
+        this.accs[transaction.key] = { ...defaults };
+    }
+
+    delete(account) {
+        if (account.key) {
+            delete this.accs[account.key]
+        }
     }
 }
 
@@ -115,4 +82,4 @@ class Account {
     }
 }
 
-export default { Account, Accs, hello, url };
+export default { Account, Accs };

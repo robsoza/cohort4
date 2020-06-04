@@ -49,6 +49,7 @@ function CityComp() {
     async function onSave(city) {
         await communityCtrl.addOrUpdate(city);
         setOnDom('city-list');
+        userMsg();
     }
 
     // on delete city
@@ -78,8 +79,8 @@ function CityComp() {
         setMessage({ text: msg, class: cls });
     }
 
-    async function updatePopulation(PopulationUpdate) {
-        await communityCtrl.PopulationUpdate(PopulationUpdate);
+    async function updatePopulation(cityUpdate) {
+        await communityCtrl.populationUpdate(cityUpdate);
         setOnDom('city-list');
         userMsg();
     }
@@ -88,12 +89,11 @@ function CityComp() {
     if (onDom === "city-list") {
         output =
             <div>
-            <CitySearchComp
-                community={communityCtrl.community}
-                save={onSave}
-                userMsg={userMsg}
-            />
-
+                <CitySearchComp
+                    community={communityCtrl.community}
+                    save={onSave}
+                    userMsg={userMsg}
+                />
                 <CitySummaryComp
                     community={communityCtrl.community}
                 />

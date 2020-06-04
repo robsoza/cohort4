@@ -15,17 +15,13 @@ function AccountComp() {
     const [onDom, setOnDom] = useState();
 
     useEffect(() => {
-        // This effect will run any time a state variable changes
-    });
-
-    useEffect(() => {
         // Load the accs from the API only the first time
-        async function fetchData() {
+        function fetchData() {
             try {
                 startLoadingAnimation();
                 const accsCtrl = new accountFunc.Accs();
                 setAccsCtrl(accsCtrl);
-                await accsCtrl.getAccs();
+                accsCtrl.getAccs();
                 setOnDom('account-list');
                 userMsg("Accounts Loaded", "status");
             } catch (e) {
@@ -46,8 +42,8 @@ function AccountComp() {
     }
 
     // onSave
-    async function onSave(account) {
-        await accsCtrl.addOrUpdate(account);
+    function onSave(account) {
+        accsCtrl.addOrUpdate(account);
         setOnDom('account-list');
     }
 
@@ -59,9 +55,9 @@ function AccountComp() {
     }
 
     // on delete account
-    async function onDelete(account) {
-        await accsCtrl.delete(account);
-        await accsCtrl.getAccs();
+    function onDelete(account) {
+        accsCtrl.delete(account);
+        accsCtrl.getAccs();
         setOnDom('account-list');
         userMsg();
     }
@@ -85,8 +81,8 @@ function AccountComp() {
         setMessage({ text: msg, class: cls });
     }
 
-    async function onTrans(transaction) {
-        await accsCtrl.addTransaction(transaction);
+    function onTrans(transaction) {
+        accsCtrl.addTransaction(transaction);
         setOnDom('account-list');
         userMsg();
     }

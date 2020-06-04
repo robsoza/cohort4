@@ -5,6 +5,8 @@ import reactlogo from '../svg/reactlogo.svg';
 import tictactoe from '../svg/tictactoe.svg';
 import account from '../svg/account.svg';
 import city from '../svg/city.svg';
+import link from '../svg/link.svg';
+import queue from '../svg/queue.svg';
 
 //components
 import TicTacToeComp from './TicTacToeComp'
@@ -17,6 +19,8 @@ const LogosData = [
     { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', page: <TicTacToeComp /> },
     { id: 3, src: account, className: "My-logo", alt: 'logo', page: <AccountComp /> },
     { id: 4, src: city, className: "My-logo", alt: 'logo', page: <CityComp /> },
+    { id: 5, src: link, className: "My-logo", alt: 'logo', page: <CityComp /> },
+    { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <CityComp /> }
 ]
 
 function NavbarComp(props) {

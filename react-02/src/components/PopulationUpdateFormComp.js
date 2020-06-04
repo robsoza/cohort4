@@ -2,40 +2,40 @@ import React from 'react';
 
 function PopulationUpdateFormComp(props) {
     let city = props.city;
-    console.log(city);
+
     function focusElement(name) {
-        const cityForm = document.getElementById('idcityform');
-        const el = cityForm.querySelector(`[name=${name}]`);
+        const el = document.querySelector(`[name=${name}]`);
         el.focus();
         el.select();
     }
 
     function onSave(e) {
-        const update = {};
-        update.key = city.key;
-        const idcityform = document.getElementById('idcityform');
+        const cityUpdate = {};
+        cityUpdate.key = city.key;
+
+        const idcityform = document.getElementById('idpopulationform');
         const inputs = idcityform.querySelectorAll('input,select');
 
         for (let i = 0; i < inputs.length; i++) {
-            update[inputs[i].name] = inputs[i].value;
+            cityUpdate[inputs[i].name] = inputs[i].value;
         }
 
         try {
-            if (!update.numOfPeople) {
+            if (!cityUpdate.numOfPeople) {
                 focusElement('numOfPeople');
                 throw new Error('Number of People can not be blank');
             }
 
-            if (!update.city) {
+            if (!cityUpdate.city) {
                 focusElement('city');
                 throw new Error('Name can not be blank');
             }
 
-            if (!update.type) {
+            if (!cityUpdate.type) {
                 throw new Error('Type can not be blank');
             }
-
-            props.updatePopulation(update);
+            console.log(cityUpdate)
+            props.update(cityUpdate);
             props.userMsg("Added", "clstatus");
         } catch (e) {
             props.userMsg(e.message, "error");
