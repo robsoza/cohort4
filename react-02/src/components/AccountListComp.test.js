@@ -25,7 +25,7 @@ test('test the basic AccountListComp', () => {
     // screen.debug()
 
     // find screen text from h1 'My Accounts'
-    screen.getByText(/accounts/i);
+    screen.getByText(/account/i);
 
     //name has to be in one element with the key
     click('Acc1 $30.00');

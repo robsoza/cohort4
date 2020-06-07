@@ -16,7 +16,7 @@ function AccountComp() {
 
     useEffect(() => {
         // Load the accs from the API only the first time
-        function fetchData() {
+        function getData() {
             try {
                 startLoadingAnimation();
                 const accsCtrl = new accountFunc.Accs();
@@ -30,7 +30,7 @@ function AccountComp() {
                 endLoadingAnimation();
             }
         }
-        fetchData();
+        getData();
     }, []);
 
     function startLoadingAnimation() {

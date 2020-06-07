@@ -13,13 +13,14 @@ import TicTacToeComp from './TicTacToeComp'
 import LearnReactComp from './LearnReactComp'
 import AccountComp from './AccountComp'
 import CityComp from './CityComp';
+import LinkedList from './LinkedListComp';
 
 const LogosData = [
     { id: 1, src: reactlogo, className: "Active-logo", alt: 'logo', page: <LearnReactComp /> },
     { id: 2, src: tictactoe, className: "My-logo", alt: 'logo', page: <TicTacToeComp /> },
     { id: 3, src: account, className: "My-logo", alt: 'logo', page: <AccountComp /> },
     { id: 4, src: city, className: "My-logo", alt: 'logo', page: <CityComp /> },
-    { id: 5, src: link, className: "My-logo", alt: 'logo', page: <CityComp /> },
+    { id: 5, src: link, className: "My-logo", alt: 'logo', page: <LinkedList /> },
     { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <CityComp /> }
 ]
 

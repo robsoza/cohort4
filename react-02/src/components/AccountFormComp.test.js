@@ -4,7 +4,7 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 import funcs from "../business/AccountFunc";
 import AccountFormComp from './AccountFormComp';
 
-test('test the basic AccountFormComp', async () => {
+test('test the basic AccountFormComp', () => {
     //create a mock function to simulate the save, cancel, and userMsg
     // https://jestjs.io/docs/en/mock-functions
 
@@ -14,7 +14,7 @@ test('test the basic AccountFormComp', async () => {
 
     // create an accs controller and a new account
     const accsCtrl = new funcs.Accs()
-    const account = accsCtrl.getNewAccount();
+    let account = accsCtrl.getNewAccount();
 
     // default a few values
     account.name = 'Savings';
@@ -62,7 +62,7 @@ test('test the basic AccountFormComp', async () => {
     expect(mockCancelCallback.mock.calls.length).toBe(1);
 });
 
-test('test render and saved for the basic AccountForm', async () => {
+test('test render and saved for the basic AccountForm', () => {
     const accsCtrl = new funcs.Accs()
     const dummyData = {
         name: 'namexx',
@@ -73,7 +73,7 @@ test('test render and saved for the basic AccountForm', async () => {
     const mockCancelCallback = jest.fn();
     const mockUserMsgCallback = jest.fn();
 
-    const account = {};
+    let account = {};
     for (let k in dummyData) {
         account[k] = dummyData[k];
     }
@@ -107,7 +107,7 @@ test('test render and saved for the basic AccountForm', async () => {
     }
 });
 
-test('test validation works', async () => {
+test('test validation works', () => {
 
     const accsCtrl = new funcs.Accs()
     const account = {};

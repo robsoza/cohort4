@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      logos: LogosData,
+      logos: LogosData
     };
     this.handleChange = this.handleChange.bind(this);
   }
