@@ -15,6 +15,10 @@ function AccountComp() {
     const [onDom, setOnDom] = useState();
 
     useEffect(() => {
+        console.log('----useEffect: general');
+      });
+
+    useEffect(() => {
         // Load the accs from the API only the first time
         function getData() {
             try {

@@ -1,157 +1,113 @@
-class ListNode {
-    constructor(subject, amount, key) {
+//test plumming
+function test1() {
+    return 'hi'
+}
+
+class Node {
+    constructor(subject, amount) {
+        this.subject = subject
+        this.amount = amount
         this.forwardNode = null;
-        this.subject = subject;
-        this.amount = amount;
-        this.key = key;
+        this.backwardNode = null;
     }
 }
 
 class LinkedList {
     constructor() {
         this.head = null;
-        this.length = 0;
-        this.lastKey = 0;
-    }
-
-    length() {
-        return this.length;
-    }
-
-    head() {
-        return this.head;
-    }
-
-    getNewList() {
-        return new LinkedList();
+        this.tail = null;
+        this.currentNode = null;
     }
 
     insert(subject, amount) {
-        this.lastKey++;
-        let node = new ListNode(subject, amount, this.lastKey);
+        let newNode = new Node(subject, amount);
         if (!this.head) {
-            this.head = node;
+            this.head = newNode;
+            this.tail = newNode;
+            this.currentNode = newNode;
         } else {
-            let currentNode = this.head;
-            while (currentNode.forwardNode) {
-                currentNode = currentNode.forwardNode;
-            }
-            currentNode.forwardNode = node;
+            this.tail.forwardNode = newNode;
+            newNode.backwardNode = this.tail;
+            this.tail = newNode;
+            this.currentNode = this.tail;
         }
-        this.length++;
-    };
-
-    delete(subject) {
-        let currentNode = this.head;
-        let previousNode;
-        if (currentNode.subject === subject) {
-            this.head = currentNode.forwardNode;
-        } else {
-            while (currentNode.subject !== subject) {
-                previousNode = currentNode;
-                currentNode = currentNode.forwardNode;
-            }
-            previousNode.forwardNode = currentNode.forwardNode;
-        }
-        this.length--;
-    };
-
-    isEmpty() {
-        return this.length === 0;
-    };
-
-    indexOf(subject) {
-        let currentNode = this.head;
-        let index = -1;
-        while (currentNode) {
-            index++;
-            if (currentNode.subject === subject) {
-                return index;
-            } currentNode = currentNode.forwardNode;
-        } return -1;
-    };
-
-    subjectAt(index) {
-        let currentNode = this.head;
-        let count = 0;
-        while (count < index) {
-            count++;
-            currentNode = currentNode.forwardNode
-        } return currentNode.subject;
-    };
-
-    insertAt(index, subject) {
-        let node = new ListNode(subject);
-        let currentNode = this.head;
-        let previousNode;
-        let currentIndex = 0;
-
-        if (index > this.length) {
-            return false;
-        }
-
-        if (index === 0) {
-            node.forwardNode = currentNode;
-            this.head = node;
-        } else {
-            while (currentIndex < index) {
-                currentIndex++;
-                previousNode = currentNode;
-                currentNode = currentNode.forwardNode;
-            }
-            node.forwardNode = currentNode;
-            previousNode.forwardNode = node;
-        }
-        this.length++;
     }
 
-    deleteAt(index) {
-        let currentNode = this.head;
-        let previousNode;
-        let currentIndex = 0;
-        if (index < 0 || index >= this.length) {
-            return null
+    first() {
+        if (this.head) {
+            this.currentNode = this.head
+            return this.currentNode.subject;
         }
-        if (index === 0) {
-            this.head = currentNode.forwardNode;
-        } else {
-            while (currentIndex < index) {
-                currentIndex++;
-                previousNode = currentNode;
-                currentNode = currentNode.forwardNode;
-            }
-            previousNode.forwardNode = currentNode.forwardNode
-        }
-        this.length--;
-        return currentNode.subject;
-    }
-
-    show() {
-        let output = '[';
-        let currentNode = this.head;
-
-        while (currentNode) {
-            output += currentNode.subject;
-            output += ' ';
-            output += currentNode.amount;
-            if (currentNode.forwardNode) {
-                output += ',';
-                output += ' ';
-            }
-            currentNode = currentNode.forwardNode;
-        }
-        output += ']';
-        return output
+        return null
     }
 
     last() {
-        let currentNode = this.head;
-        let count = 0;
-        while (count < this.length - 1) {
-            count++;
-            currentNode = currentNode.forwardNode
-        } return currentNode.subject;
-    };
+        this.currentNode = this.tail
+        return this.currentNode.subject;
+    }
+
+    next() {
+        if (this.currentNode.forwardNode) {
+            this.currentNode = this.currentNode.forwardNode;
+        }
+        return this.currentNode.subject;
+    }
+
+    previous() {
+        if (this.currentNode.backwardNode) {
+            this.currentNode = this.currentNode.backwardNode;
+        }
+        return this.currentNode.subject;
+    }
+
+    show() {
+        return `subject: ${this.currentNode.subject}, amount: ${this.currentNode.amount}`
+    }
+
+    delete() {
+        if (this.currentNode) {
+            if (this.currentNode === this.head) {
+                if (this.currentNode === this.tail) {
+                    this.head = null;
+                    this.tail = null;
+                    this.currentNode = null;
+                } else {
+                    this.head = this.currentNode.forwardNode;
+                    this.head.backwardNode = null;
+                    this.currentNode = this.head;
+                }
+
+            } else if (this.currentNode === this.tail) {
+                if (this.currentNode === this.head) {
+                    this.head = null;
+                    this.tail = null;
+                    this.currentNode = null;
+                } else {
+                    this.tail = this.currentNode.backwardNode;
+                    this.tail.forwardNode = null;
+                    this.currentNode = this.tail
+                }
+
+            } else {
+                this.currentNode.backwardNode.forwardNode = this.currentNode.forwardNode;
+                this.currentNode.forwardNode.backwardNode = this.currentNode.backwardNode;
+                this.currentNode = this.currentNode.backwardNode;
+            }
+        }
+        else return 'list is empty'
+    }
+
+    total() {
+        let total = 0;
+        let tempNode = this.head;
+        if (tempNode) {
+            while (tempNode !== null) {
+                total += parseInt(tempNode.amount);
+                tempNode = tempNode.forwardNode
+            }
+        }
+        return total;
+    }
 }
 
-export default { Node, LinkedList };
+export default { test1, Node, LinkedList };

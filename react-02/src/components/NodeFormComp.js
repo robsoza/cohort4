@@ -10,8 +10,8 @@ function ListNodeFormComp(props) {
 
     function onSave(e) {
 
-        const name = document.querySelector('input[name="name"]').value;
-        const rate = document.querySelector('input[name="rate"]:checked').value;
+        let name = document.querySelector('input[name="name"]').value;
+        let rate = document.querySelector('input[name="rate"]:checked').value;
 
         // Do some simple validation
         try {
@@ -24,9 +24,11 @@ function ListNodeFormComp(props) {
                 focusElement('rate');
                 throw new Error('rate can not be blank');
             }
-            console.log(myNum)
+
             props.save(name, rate);
             props.userMsg("Saved", "status");
+            document.querySelector('input[name="name"]').value = "";
+
         } catch (e) {
             props.userMsg(e.message, "error");
         }
@@ -35,13 +37,13 @@ function ListNodeFormComp(props) {
 
     const [data] = useState({ one: "1", two: "2", three: "3", four: "4", five: "5" });
     const [myNum, setMyNum] = useInput('3');
-    
+
     function useInput(initialValue) {
         const [value, setValue] = useState(initialValue);
         function handleChange(e) {
             setValue(e.target.value);
         }
-            return [value, handleChange];  
+        return [value, handleChange];
     }
 
     return (
@@ -49,9 +51,9 @@ function ListNodeFormComp(props) {
             <h1>My LinkedList</h1>
             <form id="idnodeform" onSubmit={onSave}>
                 <fieldset>
-                    <legend>How do you feel today:</legend>
+                    <legend>Subject & amount:</legend>
                     <div>
-                        <label>Enter name & number:</label>
+                        <label>Enter subject & amount:</label>
                         <input
                             name="name"
                             placeholder='name...'
@@ -89,7 +91,7 @@ function ListNodeFormComp(props) {
                         /> 5
                     </label>
                     <div>
-                        <button onClick={onSave}> Add </button>
+                        <button onClick={onSave}> Insert </button>
                     </div>
                 </fieldset>
             </form>

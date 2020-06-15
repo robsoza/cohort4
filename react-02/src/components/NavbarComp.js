@@ -14,6 +14,7 @@ import LearnReactComp from './LearnReactComp'
 import AccountComp from './AccountComp'
 import CityComp from './CityComp';
 import LinkedList from './LinkedListComp';
+import QueuStack from './QueueStackComp';
 
 const LogosData = [
     { id: 1, src: reactlogo, className: "Active-logo", alt: 'logo', page: <LearnReactComp /> },
@@ -21,7 +22,7 @@ const LogosData = [
     { id: 3, src: account, className: "My-logo", alt: 'logo', page: <AccountComp /> },
     { id: 4, src: city, className: "My-logo", alt: 'logo', page: <CityComp /> },
     { id: 5, src: link, className: "My-logo", alt: 'logo', page: <LinkedList /> },
-    { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <CityComp /> }
+    { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <QueuStack /> }
 ]
 
 function NavbarComp(props) {

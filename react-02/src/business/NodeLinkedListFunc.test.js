@@ -1,36 +1,63 @@
-import funcs from './NodeLinkedListFunc';
+import func from './NodeLinkedListFunc';
 
-test('test LinkedList', () => {
-    const control = new funcs.LinkedList();
-    let list = control.getNewList();
-    
-    list.insert('rob', 5);
-    list.insert('bob', 5);
-    expect(list.length).toBe(2);
+test('test plumming', () => {
+    expect(func.test1()).toBe('hi')
+})
 
-    list.insert('ric', 3);
-    expect(list.length).toBe(3);
+test('test LinkedList Function', () => {
+//create list
+let list = new func.LinkedList();
 
-    list.insert('meg', 2);
-    expect(list.length).toBe(4);
+//insert first and test
+list.insert('a', 1);
+expect(list.total()).toBe(1);
+expect(list.first()).toBe('a');
+expect(list.show()).toBe('subject: a, amount: 1');
+expect(list.next()).toBe('a');
+expect(list.last()).toBe('a');
+expect(list.previous()).toBe('a');
+list.delete();
+expect(list.first()).toBe(null);
+expect(list.delete()).toBe('list is empty');
+expect(list.total()).toBe(0);
 
-    list.delete("ric");
-    expect(list.length).toBe(3);
-    expect(list.indexOf('ric')).toBe(-1);
-  
-    expect(list.isEmpty()).toBe(false);
-    expect(list.indexOf('meg')).toBe(2);
+//insert second and test
+list.insert('a', 1);
+list.insert('b', 2);
+expect(list.show()).toBe('subject: b, amount: 2');
+expect(list.first()).toBe('a');
+expect(list.next()).toBe('b');
+expect(list.last()).toBe('b');
+expect(list.previous()).toBe('a');
 
-    expect(list.subjectAt(0)).toBe('rob');
+//delete
+list.delete();
+expect(list.show()).toBe('subject: b, amount: 2');
 
-    list.insertAt(0, 'mac');
-    expect(list.subjectAt(0)).toBe('mac');
+//insert third and test
+list.insert('c', 3);
+expect(list.show()).toBe('subject: c, amount: 3');
+expect(list.total()).toBe(5);
 
-    list.deleteAt(0);
-    expect(list.subjectAt(0)).toBe('rob');
-    expect(list.length).toBe(3);
+//delete
+list.delete();
+expect(list.show()).toBe('subject: b, amount: 2');
 
-    expect(list.show()).toEqual('[rob 5, bob 5, meg 2]');
-    expect(list.last()).toBe('meg');
-    
+//insert more
+list.insert('d', 4);
+expect(list.previous()).toBe('b');
+
+list.insert('e', 5);
+list.insert('f', 6);
+list.insert('g', 7);
+
+//previous
+expect(list.previous()).toBe('f');
+expect(list.previous()).toBe('e');
+expect(list.previous()).toBe('d');
+
+//next
+expect(list.next()).toBe('e');
+expect(list.next()).toBe('f');
+expect(list.next()).toBe('g');
 });

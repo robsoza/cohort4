@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
-
 import nodeFunc from '../business/NodeLinkedListFunc';
 import Loading from './LoadingComp';
 import NodeFormComp from './NodeFormComp';
 import NodeListComp from './NodeListComp';
 
-function NodeComp() {
-    const [listCtrl, setListCtrl] = useState();
-    const [list, setList] = useState();
+function LinkedListComp(props) {
+    const [ctrl] = useState(new nodeFunc.LinkedList());
+    const [node, setNode] = useState();
+    const [total, setTotal] = useState();
     const [loading, setLoading] = useState();
     const [message, setMessage] = useState({ text: "", class: "" });
-    const [onDom, setOnDom] = useState();
+
+    useEffect(() => {
+        console.log('----useEffect: general');
+    });
 
     useEffect(() => {
         // Load the list only the first time
         function getData() {
             try {
                 startLoadingAnimation();
-                const listCtrl = new nodeFunc.LinkedList();
-                setListCtrl(listCtrl);
-                setList(listCtrl.getNewList());
-                setOnDom('node-list');
-                userMsg("Nodes Loaded", "status");
+                userMsg("LinkedList", "status");
             } catch (e) {
                 userMsg("***** Turn the server on please! *****", "error");
             } finally {
@@ -40,18 +39,49 @@ function NodeComp() {
     }
 
     // onSave
-    function onSave(name, rate) {
-        list.insert(name, rate);
-        setOnDom('node-list');
+    function onSave(subject, amount) {
+        ctrl.insert(subject, amount);
+        setNode(ctrl.show())
+        setTotal('Total: ' + ctrl.total());
         userMsg();
     }
 
-    // on delete node
-    function onDelete(node) {
-        listCtrl.delete(node);
-        listCtrl.get();
-        setOnDom('node-list');
-        userMsg();
+    function onClick(buttonName) {
+        //if not first
+        if (!ctrl.currentNode) {
+            userMsg("list is empty", "status")
+        }
+        //first
+        else if (buttonName === "first") {
+            ctrl.first();
+            setNode(ctrl.show());
+        }
+        //last
+        else if (buttonName === "last") {
+            ctrl.last();
+            setNode(ctrl.show());
+        }
+        //next
+        else if (buttonName === "next") {
+            ctrl.next();
+            setNode(ctrl.show());
+        }
+        //previous
+        else if (buttonName === "previous") {
+            ctrl.previous();
+            setNode(ctrl.show());
+        }
+        //delete
+        else if (buttonName === "delete") {
+            ctrl.delete();
+            if (!ctrl.currentNode) {
+                setTotal('Total: ' + ctrl.total());
+                setNode("LinkedList");
+            } else {
+                setNode(ctrl.show())
+                setTotal('Total: ' + ctrl.total());
+            }
+        }
     }
 
     // set the message based on the class
@@ -60,32 +90,19 @@ function NodeComp() {
         setMessage({ text: msg, class: cls });
     }
 
-    let output;
-    if (onDom === "node-list") {
-        output =
-            <div>
-                <NodeFormComp
-                    list={list}
-                    ctrl={listCtrl.list}
-                    save={onSave}
-                    userMsg={userMsg}
-                />
+    const linkedlist = <NodeListComp onClick={onClick} node={node} total={total} />
 
-                <NodeListComp
-                    list={list}
-                    ctrl={listCtrl.list}
-                    userMsg={userMsg}
-                />
-            </div>
-    } else if (onDom === "node-form") {
-        output =
+    const output =
+        <div>
             <NodeFormComp
-                list={list}
-                ctrl={listCtrl.list}
+                list={ctrl.list}
                 save={onSave}
                 userMsg={userMsg}
             />
-    }
+            <div className="node-list">
+                {linkedlist}
+            </div>
+        </div>
 
     return (
         <div>
@@ -98,4 +115,4 @@ function NodeComp() {
     );
 }
 
-export default NodeComp;
+export default LinkedListComp;
