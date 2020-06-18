@@ -36,7 +36,7 @@ function ListNodeFormComp(props) {
     }
 
     const [data] = useState({ one: "1", two: "2", three: "3", four: "4", five: "5" });
-    const [myNum, setMyNum] = useInput('3');
+    const [myNum, setMyNum] = useInput('1');
 
     function useInput(initialValue) {
         const [value, setValue] = useState(initialValue);
@@ -48,7 +48,7 @@ function ListNodeFormComp(props) {
 
     return (
         <div>
-            <h1>My LinkedList</h1>
+            <h1>LinkedList</h1>
             <form id="idnodeform" onSubmit={onSave}>
                 <fieldset>
                     <legend>Subject & amount:</legend>

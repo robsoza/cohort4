@@ -28,7 +28,7 @@ function AccountSummaryComp(props) {
 
     return (
         <div>
-            <h1>My Accounts</h1>
+            <h1>Accounts</h1>
             <fieldset id="his">
                 <legend>Account's Summary</legend>
                 <table className="customers">

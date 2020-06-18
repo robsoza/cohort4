@@ -1,13 +1,26 @@
 import React from 'react';
 import './App.css';
-import { LogosData, NavbarComp } from './components/NavbarComp';
-import FooterComp from './components/FooterComp';
+import { ThemeContext, themes } from './components/Theme/ThemeContextComp';
+import { LogosData, NavbarComp } from './components/Navbar/NavbarComp';
+import FooterComp from './components/Footer/FooterComp';
 
 class App extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
+    this.toggleTheme = () => {
+      this.setState(state => ({
+        theme:
+          state.theme === themes.dark
+            ? themes.light
+            : themes.dark,
+      }));
+    };
+
     this.state = {
-      logos: LogosData
+      logos: LogosData,
+      theme: themes.light,
+      toggleTheme: this.toggleTheme,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -33,17 +46,23 @@ class App extends React.Component {
     let activeLogo = this.state.logos.find(e => e.className === "Active-logo");
 
     return (
-      <div className="App">
-        <div className="navbar">
-          {logoItems}
-        </div>
-        <div className="active-page">
-          {activeLogo.page}
-        </div>
-        <footer>
-          <FooterComp />
-        </footer>
-      </div>
+      <ThemeContext.Provider value={this.state}>
+        <ThemeContext.Consumer>
+          {({ theme }) => (
+            <div className="App" style={{ backgroundColor: theme.background }}>
+              <div className="navbar">
+                {logoItems}
+              </div>
+              <div className="active-page">
+                {activeLogo.page}
+              </div>
+              <footer>
+                <FooterComp />
+              </footer>
+            </div>
+          )}
+        </ThemeContext.Consumer>
+      </ThemeContext.Provider>
     );
   }
 }

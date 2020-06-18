@@ -20,6 +20,5 @@ test('renders AccountComp', async () => {
     });
 
     // screen.debug();
-
-    screen.getByText(/my accounts/i);
+    screen.getByText(/summary/i);
 });

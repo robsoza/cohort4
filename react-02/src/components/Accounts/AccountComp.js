@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import accountFunc from '../business/AccountFunc';
-import Loading from './LoadingComp';
+import accountFunc from '../../business/AccountFunc';
+import Loading from '../Loading/LoadingComp';
 import AccountFormComp from './AccountFormComp';
 import AccountListComp from './AccountListComp';
 import TransactionFormComp from './TransactionFormComp';

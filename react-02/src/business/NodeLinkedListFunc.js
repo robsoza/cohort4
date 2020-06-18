@@ -61,7 +61,7 @@ class LinkedList {
     }
 
     show() {
-        return `subject: ${this.currentNode.subject}, amount: ${this.currentNode.amount}`
+        return `${this.currentNode.subject} ${this.currentNode.amount}`
     }
 
     delete() {

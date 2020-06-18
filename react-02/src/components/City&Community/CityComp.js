@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import cityFunc from '../business/CityFunc';
-import Loading from './LoadingComp';
+import cityFunc from '../../business/CityFunc';
+import Loading from '../Loading/LoadingComp';
 import CitySearchComp from './CitySearchComp';
 import CityListComp from './CityListComp';
 import PopulationUpdateFormComp from './PopulationUpdateFormComp';

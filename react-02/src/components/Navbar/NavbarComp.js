@@ -1,20 +1,22 @@
 import React from 'react';
 
 //logo's svg
-import reactlogo from '../svg/reactlogo.svg';
-import tictactoe from '../svg/tictactoe.svg';
-import account from '../svg/account.svg';
-import city from '../svg/city.svg';
-import link from '../svg/link.svg';
-import queue from '../svg/queue.svg';
+import reactlogo from '../../svg/reactlogo.svg';
+import tictactoe from '../../svg/tictactoe.svg';
+import account from '../../svg/account.svg';
+import city from '../../svg/city.svg';
+import link from '../../svg/link.svg';
+import queue from '../../svg/queue.svg';
+import theme from '../../svg/theme.svg';
 
 //components
-import TicTacToeComp from './TicTacToeComp'
-import LearnReactComp from './LearnReactComp'
-import AccountComp from './AccountComp'
-import CityComp from './CityComp';
-import LinkedList from './LinkedListComp';
-import QueuStack from './QueueStackComp';
+import TicTacToeComp from '../TicTacToe/TicTacToeComp';
+import LearnReactComp from '../LearnReact/LearnReactComp';
+import AccountComp from '../Accounts/AccountComp';
+import CityComp from '../City&Community/CityComp';
+import LinkedList from '../LinkedList/LinkedListComp';
+import QueuStack from '../Queue&Stack/QueueStackComp';
+import Theme from '../Theme/ThemeButtonComp';
 
 const LogosData = [
     { id: 1, src: reactlogo, className: "Active-logo", alt: 'logo', page: <LearnReactComp /> },
@@ -22,7 +24,8 @@ const LogosData = [
     { id: 3, src: account, className: "My-logo", alt: 'logo', page: <AccountComp /> },
     { id: 4, src: city, className: "My-logo", alt: 'logo', page: <CityComp /> },
     { id: 5, src: link, className: "My-logo", alt: 'logo', page: <LinkedList /> },
-    { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <QueuStack /> }
+    { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <QueuStack /> },
+    { id: 7, src: theme, className: "My-logo", alt: 'logo', page: <Theme /> }
 ]
 
 function NavbarComp(props) {

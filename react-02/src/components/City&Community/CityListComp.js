@@ -1,5 +1,5 @@
 import React from 'react';
-import cityData from '../json/cityData.json'
+import cityData from '../../json/cityData.json'
 
 function CityListComp(props) {
 

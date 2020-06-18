@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import nodeFunc from '../business/NodeLinkedListFunc';
-import Loading from './LoadingComp';
+import nodeFunc from '../../business/NodeLinkedListFunc';
+import Loading from '../Loading/LoadingComp';
 import NodeFormComp from './NodeFormComp';
 import NodeListComp from './NodeListComp';
 

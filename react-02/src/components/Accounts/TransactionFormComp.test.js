@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from '@testing-library/react';
-import funcs from "../business/AccountFunc";
+import funcs from "../../business/AccountFunc";
 import TransactionFormComp from './TransactionFormComp';
 
 //test render and onSave

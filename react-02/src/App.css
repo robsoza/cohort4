@@ -11,10 +11,10 @@ body {
 
 .My-logo,
 .Active-logo {
-  margin-right: 15px;
+  margin-right: 20px;
   display: inline-block;
-  height: 12vmin;
-  width: 12vmin;
+  height: 15vmin;
+  width: 15vmin;
   transition: all .2s ease-in-out;
 }
 
@@ -159,8 +159,9 @@ input[type=submit]:hover {
 }
 
 button {
-  border: none;
-  margin: 2px;
+  padding: 0.5em;
+  border: solid;
+  margin: 0.5em;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -199,7 +200,8 @@ fieldset {
   text-align: center;
 }
 
-.accList li:hover, .cityList li:hover {
+.accList li:hover,
+.cityList li:hover {
   transform: scale(1);
   color: blue;
 }
@@ -289,20 +291,38 @@ table {
 }
 
 .my-node {
-font-size: 1.5em;
+  font-size: 1.5em;
 }
 
-textarea{  
+textarea {
   color: white;
   font-weight: bold;
   height: 150px;
   overflow: hidden;
-  padding:5px;
-  width:250px;
-  font-size:2.5em;
-  margin:50px auto;
-  display:block;
-  border-radius:10px;
+  padding: 5px;
+  width: 250px;
+  font-size: 2.5em;
+  margin: 50px auto;
+  border-radius: 10px;
   text-align: center;
   background-color: #0E538C;
+}
+
+.fifo-lifo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "ctrl fifo lifo"
+}
+
+.ctrl {
+  grid-area: ctrl;
+}
+
+.fifo {
+  grid-area: fifo;
+}
+
+.lifo {
+  grid-area: lifo;
 }

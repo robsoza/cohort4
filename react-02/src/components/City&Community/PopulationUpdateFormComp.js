@@ -74,7 +74,7 @@ function PopulationUpdateFormComp(props) {
 
     return (
         <div>
-            <h1>My Citys</h1>
+            <h1>City</h1>
             <fieldset>
                 <legend>Make A Population Update</legend>
                 <form id="idpopulationform" onSubmit={onSave}>

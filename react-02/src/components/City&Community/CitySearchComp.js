@@ -1,5 +1,5 @@
 import React from 'react';
-import cityData from '../json/cityData.json'
+import cityData from '../../json/cityData.json'
 
 function CitySearchComp(props) {
 
@@ -61,7 +61,7 @@ function CitySearchComp(props) {
 
     return (
         <div>
-            <h1>My Community</h1>
+            <h1>Community</h1>
             <form id="idcityform" onSubmit={onSave}>
                 <fieldset>
                     <legend>Add a City</legend>

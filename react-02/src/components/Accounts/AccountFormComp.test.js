@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render, screen, act } from '@testing-library/react';
 
-import funcs from "../business/AccountFunc";
+import funcs from "../../business/AccountFunc";
 import AccountFormComp from './AccountFormComp';
 
 test('test the basic AccountFormComp', () => {
