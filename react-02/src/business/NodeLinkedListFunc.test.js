@@ -1,64 +1,103 @@
-import func from './NodeLinkedListFunc';
+import funcs from './NodeLinkedListFunc.js';
 
-test('test plumming', () => {
-    expect(func.test1()).toBe('hi')
-})
+test('Our Plumbing', () => {
+    console.log(funcs.functions.hello());
+});
 
-test('test LinkedList Function', () => {
-//create list
-let list = new func.LinkedList();
+test('Our Node Class', () => {
+    let node = new funcs.Node('id1', 'a', 1);
+    expect(node.id).toBe('id1');
+    expect(node.subject).toBe('a');
+    expect(node.amount).toBe(1);
+});
 
-//insert first and test
-list.insert('a', 1);
-expect(list.total()).toBe(1);
-expect(list.first()).toBe('a');
-expect(list.show()).toBe('a 1');
-expect(list.next()).toBe('a');
-expect(list.last()).toBe('a');
-expect(list.previous()).toBe('a');
-list.delete();
-expect(list.first()).toBe(null);
-expect(list.delete()).toBe('list is empty');
-expect(list.total()).toBe(0);
+test('Our LinkedList', () => {
+    const linkedList = new funcs.LinkedList();
+    expect(linkedList.current).toBeNull();
 
-//insert second and test
-list.insert('a', 1);
-list.insert('b', 2);
-expect(list.show()).toBe('b 2');
-expect(list.first()).toBe('a');
-expect(list.next()).toBe('b');
-expect(list.last()).toBe('b');
-expect(list.previous()).toBe('a');
+    expect(linkedList.first()).toBe('Empty List');
 
-//delete
-list.delete();
-expect(list.show()).toBe('b 2');
+    linkedList.insert('a', 1);
+    expect(linkedList.get().id).toBe('id1');
+    expect(linkedList.next().id).toBe('id1');
+    expect(linkedList.next().id).toBe('id1');
+    expect(linkedList.prev().id).toBe('id1');
+    expect(linkedList.prev().id).toBe('id1');
 
-//insert third and test
-list.insert('c', 3);
-expect(list.show()).toBe('c 3');
-expect(list.total()).toBe(5);
+    linkedList.insert('b', 2);
+    expect(linkedList.get().id).toBe('id2');
+    expect(linkedList.next().id).toBe('id1');
+    expect(linkedList.next().id).toBe('id2');
+    expect(linkedList.prev().id).toBe('id1');
+    expect(linkedList.prev().id).toBe('id2');
 
-//delete
-list.delete();
-expect(list.show()).toBe('b 2');
+    linkedList.insert('c', 3);
+    expect(linkedList.get().id).toBe('id3');
+    expect(linkedList.next().id).toBe('id1');
+    expect(linkedList.next().id).toBe('id2');
+    expect(linkedList.prev().id).toBe('id1');
+    expect(linkedList.prev().id).toBe('id3');
 
-//insert more
-list.insert('d', 4);
-expect(list.previous()).toBe('b');
+    expect(linkedList.first().id).toBe('id1');
+    expect(linkedList.last().id).toBe('id3');
+    expect(linkedList.total()).toBe(6);
+    expect(linkedList.show()).toBe('c 3');
+});
 
-list.insert('e', 5);
-list.insert('f', 6);
-list.insert('g', 7);
+test('Our LinkedList delete', () => {
+    const linkedList = new funcs.LinkedList();
+    expect(linkedList.first()).toBe('Empty List');
 
-//previous
-expect(list.previous()).toBe('f');
-expect(list.previous()).toBe('e');
-expect(list.previous()).toBe('d');
+    linkedList.insert('a', 1);
+    expect(linkedList.first().id).toBe('id1');
 
-//next
-expect(list.next()).toBe('e');
-expect(list.next()).toBe('f');
-expect(list.next()).toBe('g');
+    expect(linkedList.next().id).toBe('id1');
+    expect(linkedList.next().id).toBe('id1');
+    expect(linkedList.prev().id).toBe('id1');
+    expect(linkedList.prev().id).toBe('id1');
+
+    linkedList.delete()
+    expect(linkedList.first()).toBe('Empty List');
+
+    linkedList.insert('a', 1);
+    linkedList.insert('b', 2);
+    linkedList.insert('c', 3);
+
+    expect(linkedList.get().id).toBe('id3');
+    linkedList.delete();
+    expect(linkedList.get().id).toBe('id1');
+    expect(linkedList.next().id).toBe('id2');
+    expect(linkedList.next().id).toBe('id1');
+
+    linkedList.delete('id1');
+    expect(linkedList.get().id).toBe('id2');
+
+    linkedList.delete('id2');
+    expect(linkedList.get()).toBe('Empty List');
+    expect(linkedList.first()).toBe('Empty List');
+    expect(linkedList.last()).toBe('Empty List');
+    expect(linkedList.next()).toBe('Empty List');
+    expect(linkedList.prev()).toBe('Empty List');
+
+    linkedList.insert('a', 1);
+    linkedList.insert('b', 2);
+    linkedList.insert('c', 3);
+    linkedList.delete();
+    linkedList.delete();
+    linkedList.delete();
+    linkedList.delete();
+
+    linkedList.insert('a', 1);
+    linkedList.insert('b', 2);
+    linkedList.insert('c', 3);
+    linkedList.insert('d', 4);
+    linkedList.delete();
+    expect(linkedList.next().id).toBe('id2');
+    linkedList.delete();
+    expect(linkedList.next().id).toBe('id1');
+    linkedList.delete();
+    linkedList.delete();
+    linkedList.delete();
+    expect(linkedList.first()).toBe('Empty List');
 
 });

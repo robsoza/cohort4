@@ -2,7 +2,9 @@ import React from 'react';
 import './App.css';
 import { ThemeContext, themes } from './components/Theme/ThemeContextComp';
 import { LogosData, NavbarComp } from './components/Navbar/NavbarComp';
+// import func from '../business/FifoLifoFunc';
 import FooterComp from './components/Footer/FooterComp';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +23,8 @@ class App extends React.Component {
       logos: LogosData,
       theme: themes.light,
       toggleTheme: this.toggleTheme,
+      // queueCtrl: new func.FifoQueue(),
+      // stackCtrl: new func.LifoStack()
     };
     this.handleChange = this.handleChange.bind(this);
   }

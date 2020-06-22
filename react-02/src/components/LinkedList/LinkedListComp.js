@@ -48,7 +48,7 @@ function LinkedListComp(props) {
 
     function onClick(buttonName) {
         //if not first
-        if (!ctrl.currentNode) {
+        if (!ctrl.current) {
             userMsg("list is empty", "status")
         }
         //first
@@ -68,13 +68,13 @@ function LinkedListComp(props) {
         }
         //previous
         else if (buttonName === "previous") {
-            ctrl.previous();
+            ctrl.prev();
             setNode(ctrl.show());
         }
         //delete
         else if (buttonName === "delete") {
             ctrl.delete();
-            if (!ctrl.currentNode) {
+            if (!ctrl.current) {
                 setTotal('Total: ' + ctrl.total());
                 setNode("LinkedList");
             } else {

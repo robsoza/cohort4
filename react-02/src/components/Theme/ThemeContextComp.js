@@ -1,4 +1,8 @@
 import React from 'react';
+import func from '../../business/QueueStackFunc';
+
+// export const fifoContext = React.createContext(new func.FifoQueue());
+// export const stackContext = React.createContext(new func.LifoStack());
 
 export const themes = {
     light: {

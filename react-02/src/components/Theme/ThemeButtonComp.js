@@ -4,7 +4,7 @@ import { ThemeContext } from './ThemeContextComp';
 function ThemeButtonComp() {
     return (
         <ThemeContext.Consumer>
-            {({ theme, toggleTheme }) => (
+            {({ toggleTheme }) => (
                 <div>
                     <h1>Settings</h1>
                     <fieldset>
