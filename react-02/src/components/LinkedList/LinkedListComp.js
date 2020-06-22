@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import nodeFunc from '../../business/NodeLinkedListFunc';
+import React, { useEffect, useContext } from 'react';
+// import nodeFunc from '../../business/NodeLinkedListFunc';
 import Loading from '../Loading/LoadingComp';
 import NodeFormComp from './NodeFormComp';
 import NodeListComp from './NodeListComp';
+import { AppContext } from '../AppContext';
 
 function LinkedListComp(props) {
-    const [ctrl] = useState(new nodeFunc.LinkedList());
-    const [node, setNode] = useState();
-    const [total, setTotal] = useState();
-    const [loading, setLoading] = useState();
-    const [message, setMessage] = useState({ text: "", class: "" });
+    const context = useContext(AppContext);
+    // const [ctrl] = useState(new nodeFunc.LinkedList());
+    // const [node, setNode] = useState();
+    // const [total, setTotal] = useState();
+    // const [loading, setLoading] = useState();
+    // const [message, setMessage] = useState({ text: "", class: "" });
 
     useEffect(() => {
         console.log('----useEffect: general');
@@ -31,55 +33,99 @@ function LinkedListComp(props) {
     }, []);
 
     function startLoadingAnimation() {
-        setLoading(<Loading />);
+        // setLoading(<Loading />);
+        context.handleStateChange(
+            [{
+                state: 'loading',
+                newState: <Loading />
+            }]
+        )
     }
 
     function endLoadingAnimation() {
-        setLoading('');
+        // setLoading('');
+        context.handleStateChange(
+            [{
+                state: 'loading',
+                newState: ''
+            }]
+        )
     }
 
     // onSave
     function onSave(subject, amount) {
-        ctrl.insert(subject, amount);
-        setNode(ctrl.show())
-        setTotal('Total: ' + ctrl.total());
-        userMsg();
+        context.ctrl.insert(subject, amount);
+        context.handleStateChange([{
+            state: 'node',
+            newState: context.ctrl.show()
+        }]);
+        context.handleStateChange([{
+            state: 'total',
+            newState: 'Total: ' + context.ctrl.total()
+        }]);
+        userMsg("added", "status");
+
     }
 
     function onClick(buttonName) {
         //if not first
-        if (!ctrl.current) {
+        if (!context.ctrl.current) {
             userMsg("list is empty", "status")
         }
         //first
         else if (buttonName === "first") {
-            ctrl.first();
-            setNode(ctrl.show());
+            context.ctrl.first();
+            context.handleStateChange([{
+                state: 'node',
+                newState: context.ctrl.show()
+            }])
         }
         //last
         else if (buttonName === "last") {
-            ctrl.last();
-            setNode(ctrl.show());
+            context.ctrl.last();
+            context.handleStateChange([{
+                state: 'node',
+                newState: context.ctrl.show()
+            }])
         }
         //next
         else if (buttonName === "next") {
-            ctrl.next();
-            setNode(ctrl.show());
+            context.ctrl.next();
+            context.handleStateChange([{
+                state: 'node',
+                newState: context.ctrl.show()
+            }])
         }
         //previous
         else if (buttonName === "previous") {
-            ctrl.prev();
-            setNode(ctrl.show());
+            context.ctrl.prev();
+            context.handleStateChange([{
+                state: 'node',
+                newState: context.ctrl.show()
+            }])
         }
         //delete
         else if (buttonName === "delete") {
-            ctrl.delete();
-            if (!ctrl.current) {
-                setTotal('Total: ' + ctrl.total());
-                setNode("LinkedList");
+            context.ctrl.delete();
+            if (!context.ctrl.current) {
+                context.handleStateChange([{
+                    state: 'total',
+                    newState: 'Total: ' + context.ctrl.total()
+                }])
+                context.handleStateChange([{
+                    state: 'node',
+                    newState: 'LinkedList'
+                }])
+
             } else {
-                setNode(ctrl.show())
-                setTotal('Total: ' + ctrl.total());
+                context.handleStateChange([{
+                    state: 'node',
+                    newState: context.ctrl.show()
+                }])
+                context.handleStateChange([{
+                    state: 'total',
+                    newState: 'Total: ' + context.ctrl.total()
+                }])
             }
         }
     }
@@ -87,15 +133,18 @@ function LinkedListComp(props) {
     // set the message based on the class
     function userMsg(msg, type) {
         const cls = (type) ? 'cl' + type : 'clstatus';
-        setMessage({ text: msg, class: cls });
+        context.handleStateChange([{
+            state: 'message',
+            newState: { text: msg, class: cls }
+        }])
     }
 
-    const linkedlist = <NodeListComp onClick={onClick} node={node} total={total} />
+    const linkedlist = <NodeListComp onClick={onClick} node={context.state.node} total={context.state.total} />
 
     const output =
         <div>
             <NodeFormComp
-                list={ctrl.list}
+                list={context.ctrl.list}
                 save={onSave}
                 userMsg={userMsg}
             />
@@ -108,9 +157,9 @@ function LinkedListComp(props) {
         <div>
             <main className="App-main">
                 {output}
-                {loading}
+                {context.state.loading}
             </main>
-            <label className={message.class}>{message.text}</label>
+            <label className={context.state.message.class}>{context.state.message.text}</label>
         </div>
     );
 }

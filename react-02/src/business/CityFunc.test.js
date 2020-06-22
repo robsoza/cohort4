@@ -76,7 +76,7 @@ test('test load Community from api', async () => {
         city1.population = 40
 
         await ctrl.addOrUpdate(city1);
-
+        
         // check updated community info
         await ctrl.getCommunity();
         city1 = ctrl.get('1');

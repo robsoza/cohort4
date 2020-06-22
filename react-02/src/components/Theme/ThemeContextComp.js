@@ -1,5 +1,5 @@
 import React from 'react';
-import func from '../../business/QueueStackFunc';
+// import func from '../../business/QueueStackFunc';
 
 // export const fifoContext = React.createContext(new func.FifoQueue());
 // export const stackContext = React.createContext(new func.LifoStack());
