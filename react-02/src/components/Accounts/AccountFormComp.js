@@ -19,7 +19,7 @@ function AccountFormComp(props) {
         for (let i = 0; i < inputs.length; i++) {
             accountToSave[inputs[i].name] = inputs[i].value;
         }
- 
+
         // Do some simple validation
         try {
             if (!accountToSave.balance) {

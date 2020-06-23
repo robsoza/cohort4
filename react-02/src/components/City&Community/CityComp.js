@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import cityFunc from '../../business/CityFunc';
 import Loading from '../Loading/LoadingComp';
 import CitySearchComp from './CitySearchComp';
@@ -15,7 +14,7 @@ function CityComp() {
     const [onDom, setOnDom] = useState();
 
     useEffect(() => {
-        // This effect will run any time a state variable changes
+        setTimeout(() => { userMsg() }, 9000);
     });
 
     useEffect(() => {
@@ -49,7 +48,7 @@ function CityComp() {
     async function onSave(city) {
         await communityCtrl.addOrUpdate(city);
         setOnDom('city-list');
-        userMsg();
+        userMsg("saved", "status");
     }
 
     // on delete city
@@ -57,7 +56,7 @@ function CityComp() {
         await communityCtrl.delete(city);
         await communityCtrl.getCommunity();
         setOnDom('city-list');
-        userMsg();
+        userMsg("deleted", "status");
     }
 
     // Show onCancel
@@ -70,7 +69,7 @@ function CityComp() {
     function onShow(key) {
         setCity(communityCtrl.get(key));
         setOnDom('PopulationUpdate-form');
-        userMsg();
+        userMsg("update population", "status");
     }
 
     // set the message colour based on the class

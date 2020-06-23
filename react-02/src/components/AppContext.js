@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import App from '../App';
-import LinkedList from '../business/NodeLinkedListFunc.js'
-
+import LinkedListFunc from '../business/NodeLinkedListFunc'
+import AccountFunc from '../business/AccountFunc'
 
 export const AppContext = React.createContext();
 
 export class ContextProvider extends Component {
-    ctrl = new LinkedList.LinkedList();
+    listCtrl = new LinkedListFunc.LinkedList();
+    accsCtrl = new AccountFunc.Accs();
 
     state = {
-        node: "",
-        total: "",
-        loading: "",
-        message: { text: "", class: "" }
+        node: "", 
+        total: "", 
+        loading: "", 
+        listMessage: { text: "", class: "" },
+        account: "", 
+        onDom: "", 
+        accMessage: { text: "", class: "" },
     }
 
     handleStateChange = (states) => {
@@ -24,6 +28,7 @@ export class ContextProvider extends Component {
 
         }
     }
+    
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -35,7 +40,8 @@ export class ContextProvider extends Component {
             <AppContext.Provider
                 value={{
                     state: this.state,
-                    ctrl: this.ctrl,
+                    listCtrl: this.listCtrl,
+                    accsCtrl: this.accsCtrl,
                     handleStateChange: this.handleStateChange,
                     handleChange: this.handleChange
                 }}>

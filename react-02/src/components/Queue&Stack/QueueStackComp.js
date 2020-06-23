@@ -13,9 +13,7 @@ function QueueStackComp() {
     const [message, setMessage] = useState({ text: "", class: "" });
 
     useEffect(() => {
-        setTimeout(function(){ userMsg()}, 9000);
-        // This effect will run any time a state variable changes
-        console.log('----useEffect: general');
+        setTimeout(() => { userMsg() }, 9000);
     });
 
     useEffect(() => {

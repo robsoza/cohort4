@@ -1,123 +1,137 @@
-import React, { useState, useEffect } from 'react';
-
-import accountFunc from '../../business/AccountFunc';
-import Loading from '../Loading/LoadingComp';
+import React, { useEffect, useContext, useRef } from 'react';
+// import accountFunc from '../../business/AccountFunc';
 import AccountFormComp from './AccountFormComp';
 import AccountListComp from './AccountListComp';
 import TransactionFormComp from './TransactionFormComp';
 import AccountSummaryComp from './AccountSummaryComp';
+import { AppContext } from '../AppContext';
 
 function AccountComp() {
-    const [accsCtrl, setAccsCtrl] = useState();
-    const [account, setAccount] = useState();
-    const [loading, setLoading] = useState();
-    const [message, setMessage] = useState({ text: "", class: "" });
-    const [onDom, setOnDom] = useState();
+    const context = useContext(AppContext);
+    const isCurrent = useRef(true);
+    // const [accsCtrl, setAccsCtrl] = useState();
+    // const [account, setAccount] = useState();
+    // const [accMessage, setAccMessage] = useState({ text: "", class: "" });
+    // const [onDom, setOnDom] = useState();
 
-    useEffect(() => {
-        console.log('----useEffect: general');
-      });
+    useEffect(() => { if (isCurrent.current) { getData() } });
+    useEffect(() => { isCurrent.current = false; setTimeout(() => { userMsg() }, 9000); });
 
-    useEffect(() => {
-        // Load the accs from the API only the first time
-        function getData() {
-            try {
-                startLoadingAnimation();
-                const accsCtrl = new accountFunc.Accs();
-                setAccsCtrl(accsCtrl);
-                accsCtrl.getAccs();
-                setOnDom('account-list');
-                userMsg("Accounts Loaded", "status");
-            } catch (e) {
-                userMsg("***** Turn the server on please! *****", "error");
-            } finally {
-                endLoadingAnimation();
+    function getData() {
+        try {
+            if (isCurrent.current) {
+                context.accsCtrl.getAccs();
+                context.handleStateChange([{
+                    state: 'onDom',
+                    newState: 'account-list'
+                }]);
+                userMsg("My Accounts", "status");
             }
+        } catch (e) {
+            userMsg("***** accounts not loaded! *****", "error");
         }
-        getData();
-    }, []);
-
-    function startLoadingAnimation() {
-        setLoading(<Loading />);
-    }
-
-    function endLoadingAnimation() {
-        setLoading('');
     }
 
     // onSave
     function onSave(account) {
-        accsCtrl.addOrUpdate(account);
-        setOnDom('account-list');
+        context.accsCtrl.addOrUpdate(account);
+        context.handleStateChange([{
+            state: 'onDom',
+            newState: 'account-list'
+        }]);
     }
 
     // onAdd
     const onAdd = () => {
-        setAccount(accsCtrl.getNewAccount());
-        setOnDom('account-form');
-        userMsg();
+        context.handleStateChange([{
+            state: 'account',
+            newState: context.accsCtrl.getNewAccount()
+        }]);
+        context.handleStateChange([{
+            state: 'onDom',
+            newState: 'account-form'
+        }]);
+        userMsg("add new account", "status");
     }
 
     // on delete account
     function onDelete(account) {
-        accsCtrl.delete(account);
-        accsCtrl.getAccs();
-        setOnDom('account-list');
-        userMsg();
+        context.accsCtrl.delete(account);
+        context.accsCtrl.getAccs();
+        context.handleStateChange([{
+            state: 'onDom',
+            newState: 'account-list'
+        }]);
+        userMsg("saved", "status");
     }
 
     // Show onCancel
     function onCancel() {
-        setOnDom('account-list');
-        userMsg();
+        context.handleStateChange([{
+            state: 'onDom',
+            newState: 'account-list'
+        }]);
+        userMsg("canceled", "status");
     }
 
     // Show transaction form
     function onShow(key) {
-        setAccount(accsCtrl.get(key));
-        setOnDom('transaction-form');
-        userMsg();
+        context.handleStateChange([{
+            state: 'account',
+            newState: context.accsCtrl.get(key)
+        }]);
+        context.handleStateChange([{
+            state: 'onDom',
+            newState: 'transaction-form'
+        }]);
+        userMsg("transaction from", "status");
     }
 
     // set the message based on the class
     function userMsg(msg, type) {
         const cls = (type) ? 'cl' + type : 'clstatus';
-        setMessage({ text: msg, class: cls });
+        context.handleStateChange([{
+            state: 'accMessage',
+            newState: { text: msg, class: cls }
+        }])
     }
 
     function onTrans(transaction) {
-        accsCtrl.addTransaction(transaction);
-        setOnDom('account-list');
-        userMsg();
+        context.accsCtrl.addTransaction(transaction);
+        context.handleStateChange([{
+            state: 'onDom',
+            newState: 'account-list'
+        }]);
+        userMsg("saved", "status");
     }
 
     let output;
-    if (onDom === "account-list") {
+    if (context.state.onDom === "account-list") {
         output =
             <div>
                 <AccountSummaryComp
-                    accs={accsCtrl.accs}
+                    accs={context.accsCtrl.accs}
                 />
                 <AccountListComp
-                    accs={accsCtrl.accs}
+                    accs={context.accsCtrl.accs}
                     onAdd={onAdd}
                     showOne={onShow}
                     userMsg={userMsg}
                 />
             </div>
-    } if (onDom === "account-form") {
+    } if (context.state.onDom === "account-form") {
         output =
             <AccountFormComp
-                account={account}
-                accs={accsCtrl.accs}
+                account={context.state.account}
+                accs={context.accsCtrl.accs}
                 save={onSave}
                 cancel={onCancel}
                 userMsg={userMsg}
             />
-    } else if (onDom === "transaction-form") {
+    } else if (context.state.onDom === "transaction-form") {
         output =
             <TransactionFormComp
-                account={account}
+                account={context.state.account}
                 trans={onTrans}
                 delete={onDelete}
                 cancel={onCancel}
@@ -129,9 +143,8 @@ function AccountComp() {
         <div>
             <main className="App-main">
                 {output}
-                {loading}
             </main>
-            <label className={message.class}>{message.text}</label>
+            <label className={context.state.accMessage.class}>{context.state.accMessage.text}</label>
         </div>
     );
 }
