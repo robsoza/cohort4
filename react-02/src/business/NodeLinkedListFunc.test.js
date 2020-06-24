@@ -1,7 +1,7 @@
 import funcs from './NodeLinkedListFunc.js';
 
 test('Our Plumbing', () => {
-    console.log(funcs.functions.hello());
+    expect(funcs.functions.hello()).toBeTruthy();
 });
 
 test('Our Node Class', () => {

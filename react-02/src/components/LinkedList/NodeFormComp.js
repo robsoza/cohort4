@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ListNodeFormComp(props) {
+export default function ListNodeFormComp(props) {
 
     function focusElement(name) {
         const el = document.querySelector(`[name=${name}]`);
@@ -98,5 +98,3 @@ function ListNodeFormComp(props) {
         </div>
     )
 }
-
-export default ListNodeFormComp;

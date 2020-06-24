@@ -21,7 +21,7 @@ class Community {
     }
 
     async getCommunity() {
-        const data = await postData(url + "all");
+        const data = await postData(url + 'all');
         const community = {};
         data.forEach(x => {
             community[x.key] = x;
@@ -35,9 +35,9 @@ class Community {
         let theUrl;
 
         if (city.key) {
-            theUrl = url + "update"
+            theUrl = url + 'update'
         } else {
-            theUrl = url + "add"
+            theUrl = url + 'add'
             this.lastKey++;
             city.key = this.lastKey;
         }
@@ -47,12 +47,12 @@ class Community {
     }
 
     async populationUpdate(cityUpdate) {
-        let theUrl = url + "update";
+        let theUrl = url + 'update';
         let city = new City(this.get(cityUpdate.key));
 
-        if (cityUpdate.type === "movedIn") {
+        if (cityUpdate.type === 'movedIn') {
             city.movedIn(Number(cityUpdate.numOfPeople));
-        } else if (cityUpdate.type === "movedOut") {
+        } else if (cityUpdate.type === 'movedOut') {
             city.movedOut(Number(cityUpdate.numOfPeople));
         }
 
@@ -72,7 +72,7 @@ class Community {
     async delete(city) {
         let theUrl;
         if (city.key) {
-            theUrl = url + "delete";
+            theUrl = url + 'delete';
         }
         await postData(theUrl, city);
         this.community[city.key] = city;
@@ -82,7 +82,7 @@ class Community {
 class City {
     static lastKey = 0;
     constructor(obj) {
-        const defaults = { city: '', latitude: "", longitude: "", population: "", country: "", key: "" }
+        const defaults = { city: '', latitude: '', longitude: '', population: '', country: '', key: '' }
         const data = { ...defaults, ...obj };
         this.city = data.city;
         this.latitude = Number(data.latitude);

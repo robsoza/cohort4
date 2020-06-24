@@ -6,15 +6,16 @@ import CityListComp from './CityListComp';
 import PopulationUpdateFormComp from './PopulationUpdateFormComp';
 import CitySummaryComp from './CitySummaryComp';
 
-function CityComp() {
+export default function CityComp() {
     const [communityCtrl, setCommunityCtrl] = useState();
     const [city, setCity] = useState();
     const [loading, setLoading] = useState();
-    const [message, setMessage] = useState({ text: "", class: "" });
+    const [message, setMessage] = useState({ text: '', class: '' });
     const [onDom, setOnDom] = useState();
 
     useEffect(() => {
-        setTimeout(() => { userMsg() }, 9000);
+        const timer = setTimeout(() => { userMsg() }, 5000);
+        return () => clearTimeout(timer);
     });
 
     useEffect(() => {
@@ -124,5 +125,3 @@ function CityComp() {
         </div>
     );
 }
-
-export default CityComp;

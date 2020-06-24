@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CitySummaryComp(props) {
+export default function CitySummaryComp(props) {
     let data = [];
 
     if (props.community) {
@@ -49,5 +49,3 @@ function CitySummaryComp(props) {
         </div>
     )
 }
-
-export default CitySummaryComp;

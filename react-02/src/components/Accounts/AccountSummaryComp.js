@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-function AccountSummaryComp(props) {
+export default function AccountSummaryComp(props) {
     let value = [];
 
     if (props.accs) {
@@ -50,5 +50,3 @@ function AccountSummaryComp(props) {
         </div>
     )
 }
-
-export default AccountSummaryComp;

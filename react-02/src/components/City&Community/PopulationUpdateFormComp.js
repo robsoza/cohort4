@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PopulationUpdateFormComp(props) {
+export default function PopulationUpdateFormComp(props) {
     let city = props.city;
 
     function focusElement(name) {
@@ -101,5 +101,3 @@ function PopulationUpdateFormComp(props) {
         </div>
     )
 }
-
-export default PopulationUpdateFormComp;

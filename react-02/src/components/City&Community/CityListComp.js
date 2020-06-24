@@ -1,7 +1,7 @@
 import React from 'react';
 import cityData from '../../json/cityData.json'
 
-function CityListComp(props) {
+export default function CityListComp(props) {
 
     let myCityList;
     if (props.community) {
@@ -91,5 +91,3 @@ function CityListComp(props) {
         </div>
     )
 }
-
-export default CityListComp;

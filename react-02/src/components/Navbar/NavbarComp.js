@@ -15,7 +15,7 @@ import LearnReactComp from '../LearnReact/LearnReactComp';
 import AccountComp from '../Accounts/AccountComp';
 import CityComp from '../City&Community/CityComp';
 import LinkedList from '../LinkedList/LinkedListComp';
-import QueuStack from '../Queue&Stack/QueueStackComp';
+import QueueStack from '../Queue&Stack/QueueStackComp';
 import Theme from '../Theme/ThemeButtonComp';
 
 const LogosData = [
@@ -24,7 +24,7 @@ const LogosData = [
     { id: 3, src: account, className: "My-logo", alt: 'logo', page: <AccountComp /> },
     { id: 4, src: city, className: "My-logo", alt: 'logo', page: <CityComp /> },
     { id: 5, src: link, className: "My-logo", alt: 'logo', page: <LinkedList /> },
-    { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <QueuStack /> },
+    { id: 6, src: queue, className: "My-logo", alt: 'logo', page: <QueueStack /> },
     { id: 7, src: theme, className: "My-logo", alt: 'logo', page: <Theme /> }
 ]
 

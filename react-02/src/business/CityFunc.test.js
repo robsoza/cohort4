@@ -70,7 +70,7 @@ test('test load Community from api', async () => {
 
         // update city1 info
         city1 = ctrl.get('1');
-        city1.city = "City1+";
+        city1.city = 'City1+';
         city1.latitude = 20;
         city1.longitude = 30;
         city1.population = 40
@@ -93,8 +93,8 @@ test('test load Community from api', async () => {
         expect(ctrl2.lastKey).toBe(2);
 
     } catch (e) {
-        console.log("*** Start the server please ***");
-        // expect("").toBe(e.message);
+        console.log('*** Start the server please ***');
+        // expect('').toBe(e.message);
     }
 });
 
@@ -137,7 +137,7 @@ test('does that updatePopulation function work', async () => {
     expect(city2.key).toBe(2);
 
     // movedin
-    let updateCity = { key: 1, numOfPeople: "20", city: "city1", type: "movedIn" };
+    let updateCity = { key: 1, numOfPeople: '20', city: 'city1', type: 'movedIn' };
     await ctrl.populationUpdate(updateCity);
     expect(data.status).toBe(200);
     city1 = await ctrl.get(1);

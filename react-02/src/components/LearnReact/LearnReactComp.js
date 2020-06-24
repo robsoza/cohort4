@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../logo.svg';
 
-function LearnReactComp() {
+export default function LearnReactComp() {
     return (
         <div className="App-header">
             <h1>Javascript</h1>
@@ -23,5 +23,3 @@ function LearnReactComp() {
         </div>
     );
 }
-
-export default LearnReactComp;

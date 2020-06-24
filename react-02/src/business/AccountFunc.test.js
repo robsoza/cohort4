@@ -54,7 +54,7 @@ test('test load Accs from api', () => {
 
         // update acc1 info
         account = accsCtrl.get('1');
-        account.name = "Loans";
+        account.name = 'Loans';
         account.balance = 35;
         accsCtrl.addOrUpdate(account);
 
@@ -74,7 +74,7 @@ test('test load Accs from api', () => {
 
     } catch (e) {
         // console.log(e);
-        // expect("").toBe(e.message);
+        // expect('').toBe(e.message);
     }
 });
 
@@ -102,13 +102,13 @@ test('does that addTransaction function work', () => {
     expect(account2.key).toBe(2);
 
     // deposit transaction info
-    let transaction = { key: 1, amount: 20, name: "Checking", type: "deposit" };
+    let transaction = { key: 1, amount: 20, name: 'Checking', type: 'deposit' };
     accsCtrl.addTransaction(transaction);
     account = accsCtrl.get(1);
     expect(account.balance).toBe(40);
 
     // withdraw transaction info
-    let transaction2 = { key: 1, amount: 30, name: "Checking", type: "withdraw" };
+    let transaction2 = { key: 1, amount: 30, name: 'Checking', type: 'withdraw' };
     accsCtrl.addTransaction(transaction2);
 
     account = accsCtrl.get(1);
@@ -142,7 +142,7 @@ test('test load account instance from account copy', () => {
     // create new account
     let account;
     account = accsCtrl.getNewAccount();
-    account.name = "Checking";
+    account.name = 'Checking';
     account.balance = 35;
 
     // deep clone the new account
@@ -158,7 +158,7 @@ test('test addOrUpdate updates internal storage', () => {
 
     let acc1, acc2;
     acc1 = accsCtrl.getNewAccount();
-    acc1.name = "Loan";
+    acc1.name = 'Loan';
     acc1.balance = 30;
     accsCtrl.addOrUpdate(acc1);
 
@@ -167,7 +167,7 @@ test('test addOrUpdate updates internal storage', () => {
     acc2 = accsCtrl.get('1');
     expect(acc2.name).toBe('Loan');
 
-    acc2.name = "Savings";
+    acc2.name = 'Savings';
     accsCtrl.addOrUpdate(acc2);
     acc1 = accsCtrl.get('1');
     expect(acc1.name).toBe('Savings');

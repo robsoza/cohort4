@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NodeListComp(props) {
+export default function NodeListComp(props) {
 
     const onClick = (e) => {
         props.onClick(e.target.name)
@@ -23,5 +23,3 @@ function NodeListComp(props) {
         </div>
     )
 }
-
-export default NodeListComp;

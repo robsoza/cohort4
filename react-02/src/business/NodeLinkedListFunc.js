@@ -1,6 +1,6 @@
 const functions = {
     hello() {
-        return "Hello World";
+        return 'Hello World';
     }
 }
 

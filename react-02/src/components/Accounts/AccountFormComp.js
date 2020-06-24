@@ -1,6 +1,7 @@
 import React from 'react';
 
-function AccountFormComp(props) {
+export default function AccountFormComp(props) {
+    
     const account = props.account;
 
     function focusElement(name) {
@@ -92,5 +93,3 @@ function AccountFormComp(props) {
         </div>
     )
 }
-
-export default AccountFormComp;

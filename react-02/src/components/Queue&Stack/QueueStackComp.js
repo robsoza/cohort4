@@ -1,76 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import func from '../../business/QueueStackFunc';
+import React, { useContext, useEffect, useRef } from 'react';
 import FifoLifoComp from './FifoLifoComp';
+import { AppContext } from '../AppContext';
 
-function QueueStackComp() {
-
-    const [queueCtrl] = useState(new func.FifoQueue());
-    const [stackCtrl] = useState(new func.LifoStack());
-    const [fifo, setFifo] = useState();
-    const [lifo, setLifo] = useState();
-    const [fifoNode, setFifoNode] = useState(1);
-    const [lifoNode, setLifoNode] = useState(1);
-    const [message, setMessage] = useState({ text: "", class: "" });
+export default function QueueStackComp() {
+    const context = useContext(AppContext);
+    const isCurrent = useRef(true);
 
     useEffect(() => {
-        setTimeout(() => { userMsg() }, 9000);
+        if (isCurrent.current) getData()
+        const timer = setTimeout(() => { userMsg() }, 5000);
+        return () => clearTimeout(timer);
     });
 
-    useEffect(() => {
-        function fetchData() {
-            try {
-                userMsg("Welcome", "status");
-            } catch (e) {
-                userMsg("***** Error*****", "error");
-            }
+    function getData() {
+        try {
+            userMsg("Welcome", "status");
+            isCurrent.current = false;
+        } catch (e) {
+            userMsg("***** Error*****", "error");
         }
-        fetchData();
-    }, []);
+    }
 
     function userMsg(msg, type) {
         const cls = (type) ? 'cl' + type : 'clstatus';
-        setMessage({ text: msg, class: cls });
+        context.handleStateChange([{
+            state: 'fifoLifoMessage',
+            newState: { text: msg, class: cls }
+        }])
     }
+    console.log(context.state.fifoNode + 1, context.state.fifoNode)
 
     function onSave() {
-        setFifoNode(fifoNode + 1);
-        queueCtrl.enqueue(fifoNode);
-        setFifo(queueCtrl.show());
+        context.handleStateChange([{
+            state: 'fifoNode',
+            newState: context.state.fifoNode + 1
+        }]);
+        context.queueCtrl.enqueue(context.state.fifoNode);
+        context.handleStateChange([{
+            state: 'fifoQueue',
+            newState: context.queueCtrl.show()
+        }]);
 
-        setLifoNode(lifoNode + 1);
-        stackCtrl.putIn(lifoNode)
-        setLifo(stackCtrl.show());
-        userMsg("Added: " + fifoNode, "status");
+        context.handleStateChange([{
+            state: 'lifoNode',
+            newState: context.state.lifoNode + 1
+        }]);
+        context.stackCtrl.putIn(context.state.lifoNode);
+        context.handleStateChange([{
+            state: 'lifoStack',
+            newState: context.stackCtrl.show()
+        }]);
+
+        userMsg("Added: " + context.state.fifoNode, "status");
     }
 
     function onDelete() {
-        let qArr = queueCtrl.show();
-        let sArr = stackCtrl.show();
+        let qArr = context.queueCtrl.show();
+        let sArr = context.stackCtrl.show();
         let first = qArr[0];
         let last = sArr[0];
 
-        if (queueCtrl.show() !== 'Empty Queue') {
+        if (context.queueCtrl.show() !== 'Empty Queue') {
             userMsg("Deleted  Fifo:  " + first + ", Lifo:  " + last);
         } else { userMsg() }
 
-        queueCtrl.dequeue();
-        setFifo(queueCtrl.show());
+        context.queueCtrl.dequeue();
+        context.handleStateChange([{
+            state: 'fifoQueue',
+            newState: context.queueCtrl.show()
+        }]);
 
-        stackCtrl.takeOut();
-        setLifo(stackCtrl.show());
+        context.stackCtrl.takeOut();
+        context.handleStateChange([{
+            state: 'lifoStack',
+            newState: context.stackCtrl.show()
+        }]);
     }
-
+    console.log(context.stackCtrl.show())
     return (
         <div>
             <FifoLifoComp
-                queue={fifo}
-                stack={lifo}
+                queue={context.state.fifoQueue}
+                stack={context.state.lifoStack}
                 onSave={onSave}
                 onDelete={onDelete}
                 userMsg={userMsg} />
-            <label className={message.class}>{message.text}</label>
+            <label className={context.state.fifoLifoMessage.class}>{context.state.fifoLifoMessage.text}</label>
         </div>
     )
 }
-
-export default QueueStackComp; 

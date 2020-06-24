@@ -1,7 +1,7 @@
 import React from 'react';
 import cityData from '../../json/cityData.json'
 
-function CitySearchComp(props) {
+export default function CitySearchComp(props) {
 
     function focusElement(name) {
         const el = document.querySelector(`[name=${name}]`);
@@ -44,7 +44,7 @@ function CitySearchComp(props) {
 
             props.save(myCity);
             props.userMsg("Saved", "status");
-            input = "";
+            input = '';
         } catch (e) {
             props.userMsg(e.message, "error");
         }
@@ -84,5 +84,3 @@ function CitySearchComp(props) {
         </div>
     )
 }
-
-export default CitySearchComp;

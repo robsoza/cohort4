@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AccountListComp(props) {
+export default function AccountListComp(props) {
 
     let myAccsList;
 
@@ -33,5 +33,3 @@ function AccountListComp(props) {
         </div>
     )
 }
-
-export default AccountListComp;

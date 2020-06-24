@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FifoLifoComp(props) {
+export default function FifoLifoComp(props) {
 
   return (
     <div>
@@ -17,17 +17,15 @@ function FifoLifoComp(props) {
 
         <fieldset className='fifo'>
           <legend>FIFO Queue:</legend>
-          <textarea value={props.queue} placeholder='queue...' ></textarea><br />
+          <textarea readOnly value={props.queue} placeholder='queue...' ></textarea><br />
         </fieldset>
 
         <fieldset className='stack'>
           <legend>LIFO Stack:</legend>
-          <textarea value={props.stack} placeholder='stack...' ></textarea>
+          <textarea readOnly value={props.stack} placeholder='stack...' ></textarea>
         </fieldset>
 
       </div>
     </div>
   )
 }
-
-export default FifoLifoComp;

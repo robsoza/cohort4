@@ -17,7 +17,7 @@ async function postData(url = '', data = {}) {
         },
         redirect: 'follow',         // manual, *follow, error
         referrer: 'no-referrer',    // no-referrer, *client
-        body: JSON.stringify(data)  // body data type must match "Content-Type" header
+        body: JSON.stringify(data)  // body data type must match 'Content-Type' header
     });
 
     const json = await response.json();    // parses JSON response into native JavaScript objects
@@ -26,4 +26,5 @@ async function postData(url = '', data = {}) {
 
     return json;
 }
+
 export default postData;

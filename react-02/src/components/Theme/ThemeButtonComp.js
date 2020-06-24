@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeContext } from './ThemeContextComp';
 
-function ThemeButtonComp() {
+export default function ThemeButtonComp() {
     return (
         <ThemeContext.Consumer>
             {({ toggleTheme }) => (
@@ -20,5 +20,3 @@ function ThemeButtonComp() {
         </ThemeContext.Consumer>
     );
 }
-
-export default ThemeButtonComp;

@@ -4,15 +4,15 @@ import NodeFormComp from './NodeFormComp';
 import NodeListComp from './NodeListComp';
 import { AppContext } from '../AppContext';
 
-function LinkedListComp() {
+export default function LinkedListComp() {
     const context = useContext(AppContext);
     const isCurrent = useRef(true);
 
     // const [node, setNode] = useState();
-    useEffect(() => { if (isCurrent.current) getData() });
     useEffect(() => {
-        isCurrent.current = false;
-        setTimeout(() => { userMsg() }, 9000);
+        if (isCurrent.current) getData()
+        const timer = setTimeout(() => { userMsg() }, 5000);
+        return () => clearTimeout(timer);
     });
 
     // Load the list only the first time
@@ -20,6 +20,7 @@ function LinkedListComp() {
         try {
             startLoadingAnimation();
             userMsg("LinkedList", "status");
+            isCurrent.current = false;
         } catch (e) {
             userMsg("***** Turn the server on please! *****", "error");
         } finally {
@@ -158,5 +159,3 @@ function LinkedListComp() {
         </div>
     );
 }
-
-export default LinkedListComp;

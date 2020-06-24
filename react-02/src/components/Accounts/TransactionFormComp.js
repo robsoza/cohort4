@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TransactionFormComp(props) {
+export default function TransactionFormComp(props) {
     const account = props.account;
 
     function focusElement(name) {
@@ -100,5 +100,3 @@ function TransactionFormComp(props) {
         </div>
     )
 }
-
-export default TransactionFormComp;

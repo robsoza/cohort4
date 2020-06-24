@@ -1,21 +1,19 @@
 import React, { useEffect, useContext, useRef } from 'react';
-// import accountFunc from '../../business/AccountFunc';
 import AccountFormComp from './AccountFormComp';
 import AccountListComp from './AccountListComp';
 import TransactionFormComp from './TransactionFormComp';
 import AccountSummaryComp from './AccountSummaryComp';
 import { AppContext } from '../AppContext';
 
-function AccountComp() {
-    const context = useContext(AppContext);
+export default function AccountComp() {
     const isCurrent = useRef(true);
-    // const [accsCtrl, setAccsCtrl] = useState();
-    // const [account, setAccount] = useState();
-    // const [accMessage, setAccMessage] = useState({ text: "", class: "" });
-    // const [onDom, setOnDom] = useState();
+    const context = useContext(AppContext);
 
-    useEffect(() => { if (isCurrent.current) { getData() } });
-    useEffect(() => { isCurrent.current = false; setTimeout(() => { userMsg() }, 9000); });
+    useEffect(() => {
+        if (isCurrent.current) { getData() };
+        const timer = setTimeout(() => { userMsg() }, 5000);
+        return () => clearTimeout(timer);
+    });
 
     function getData() {
         try {
@@ -26,6 +24,7 @@ function AccountComp() {
                     newState: 'account-list'
                 }]);
                 userMsg("My Accounts", "status");
+                return isCurrent.current = false;
             }
         } catch (e) {
             userMsg("***** accounts not loaded! *****", "error");
@@ -148,5 +147,3 @@ function AccountComp() {
         </div>
     );
 }
-
-export default AccountComp;
