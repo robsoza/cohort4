@@ -1,7 +1,11 @@
 import functions from './fetch.js'
 global.fetch = require('node-fetch');
 
-const data = [
+beforeEach(async () => {
+    await functions.postData(url + 'clear');
+})
+
+const myData = [
     {
         "name": "Maricica", "surname": "Ghinea", "gender": "female",
         "region": "Romania"
@@ -45,18 +49,14 @@ const data = [
 ]
 
 test('does the getFirstName function work?', () => {
-    expect(functions.getFirstName(data)).toBe('Maricica');
+    expect(functions.getFirstName(myData)).toBe('Maricica');
 });
 
 test('does the getAllFirstNames function work?', () => {
-    expect(functions.getAllFirstNames(data)).toStrictEqual(["Maricica", "Nishant", "Nicuță", "Barbara", "Stanca", "Bella", "Fabian", "Славчо", "Upendra", "Dumitra"]);
+    expect(functions.getAllFirstNames(myData)).toStrictEqual(["Maricica", "Nishant", "Nicuță", "Barbara", "Stanca", "Bella", "Fabian", "Славчо", "Upendra", "Dumitra"]);
 });
 
 const url = 'http://localhost:5000/';
-
-afterEach(async () => {
-    await functions.postData(url + 'clear');
-})
 
 test('test that the fetch works?', async () => {
 
@@ -69,27 +69,29 @@ test('test that the fetch works?', async () => {
     let data = await functions.postData(url + 'clear');
 
     data = await functions.postData(url + 'all');
-    expect(data.status).toEqual(200);
+    expect(data.status).toBe(200);
     expect(data.length).toBe(0);
-
+    
     data = await functions.postData(url + 'add', cities[0]);
     expect(data.status).toEqual(200);
 
     data = await functions.postData(url + 'all');
     expect(data.status).toEqual(200);
+
     expect(data.length).toBe(1);
     expect(data[0].name).toBe("Saskatoon");
 
+
     // add a second with the same key which should be an error
     data = await functions.postData(url + 'add', cities[0]);
-    expect(data.status).toEqual(400);
+    expect(data.status).toBe(400);
 
     // add a second which should be ok
     data = await functions.postData(url + 'add', cities[1]);
-    expect(data.status).toEqual(200);
 
     data = await functions.postData(url + 'all');
     expect(data.status).toEqual(200);
+    
     expect(data.length).toBe(2);
     expect(data[1].name).toBe("Amsterdam");
 
@@ -111,4 +113,5 @@ test('test that the fetch works?', async () => {
 
     data = await functions.postData(url + 'read', { key: 1 });
     expect(data.status).toEqual(400);
+    data = await functions.postData(url + 'clear');
 });

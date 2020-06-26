@@ -58,25 +58,24 @@ class Community {
         let myCity = new City(city, lat, long, population, k + 1);
         data = await functions.postData(this.url + 'add', myCity);
         return data;
-
     }
 
     async getCommunity() {
         let data = await functions.postData(this.url + 'all');
-            this.comms = [];
-            this.comms = await JSON.parse(JSON.stringify(data));
-            return this.comms;
+        this.comms = [];
+        this.comms = await JSON.parse(JSON.stringify(data));
+        return this.comms;
     }
 
     getLocalData() {
-            return this.comms;
+        return this.comms;
     }
 
     async updatePopulation(c) {
         let data = await functions.postData(this.url + 'all');
-            data = await functions.postData(this.url + 'update', { key: c.key, name: c.name, latitude: c.latitude, longitude: c.longitude, population: c.population });
-            return data;
-        
+        data = await functions.postData(this.url + 'update', { key: c.key, name: c.name, latitude: c.latitude, longitude: c.longitude, population: c.population });
+        return data;
+
     }
 
     whichSphere(city) {
@@ -85,35 +84,35 @@ class Community {
             return "Northern Hemisphere";
         } if (myCity.latitude < 0) {
             return 'Southern Hemisphere';
-        } 
-            return 'The Equator';
+        }
+        return 'The Equator';
     }
 
     async getMostNorthern() {
         let data = await functions.postData(this.url + 'all');
-            data = data.sort((a, b) => { return b.latitude - a.latitude });
-            return data[0].name;
+        data = data.sort((a, b) => { return b.latitude - a.latitude });
+        return data[0].name;
     }
 
     async getMostSouther() {
         let data = await functions.postData(this.url + 'all');
-            data = data.sort((a, b) => { return a.latitude - b.latitude });
-            return data[0].name;
+        data = data.sort((a, b) => { return a.latitude - b.latitude });
+        return data[0].name;
     }
 
     async getPopulation() {
         let data = await functions.postData(this.url + 'all');
-            let pop = data.map(c => c.population);
-            pop = pop.reduce((a, b) => (Number(a) + Number(b)));
-            return Number(pop).toLocaleString();
+        let pop = data.map(c => c.population);
+        pop = pop.reduce((a, b) => (Number(a) + Number(b)));
+        return Number(pop).toLocaleString();
     }
 
     async deleteCity(city) {
         let data = await functions.postData(this.url + 'all');
-            let myCity = data.find(c => c.name === city);
-            let k = { key: myCity.key };
-            data = await functions.postData(this.url + 'delete', k);
-            return data;
+        let myCity = data.find(c => c.name === city);
+        let k = { key: myCity.key };
+        data = await functions.postData(this.url + 'delete', k);
+        return data;
     }
 
     isNewCity(city) {

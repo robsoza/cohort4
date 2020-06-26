@@ -6,7 +6,7 @@ afterEach(async () => {
     await postData(funcs.url + 'clear');
 })
 
-test('test getNewCity', () => {
+test('test getNewCity', async () => {
     const Ctrl = new funcs.Community();
     let city1 = Ctrl.getNewCity();
 
@@ -21,7 +21,7 @@ test('test getNewCity', () => {
 
     city1.movedOut(50);
     expect(city1.population).toBe(50);
-
+    await postData(funcs.url + 'clear');
 });
 
 test('test load Community from api', async () => {
@@ -91,7 +91,7 @@ test('test load Community from api', async () => {
         const ctrl2 = new funcs.Community();
         await ctrl2.getCommunity();
         expect(ctrl2.lastKey).toBe(2);
-
+        await postData(funcs.url + 'clear');
     } catch (e) {
         console.log('*** Start the server please ***');
         // expect('').toBe(e.message);
@@ -149,7 +149,7 @@ test('does that updatePopulation function work', async () => {
     expect(data.status).toBe(200);
     city1 = await ctrl.get(1);
     expect(city1.population).toBe(13);
-
+    await postData(funcs.url + 'clear');
 });
 
 test('does that delete function work', async () => {
@@ -174,7 +174,7 @@ test('does that delete function work', async () => {
     await ctrl.getCommunity();
     expect(ctrl.length()).toBe(1);
     expect(ctrl.total()).toBe(30);
-
+    await postData(funcs.url + 'clear');
 });
 
 //test deep cloning copies methods too
@@ -196,6 +196,7 @@ test('test load city instance from city copy', async () => {
     // deep clone the new city
     const newCity = { ...city1 };
     await ctrl.addOrUpdate(newCity);
+    await postData(funcs.url + 'clear');
 });
 
 //Make sure addOrUpdate updates the internal storage
@@ -223,4 +224,5 @@ test('test addOrUpdate updates internal storage', async () => {
     await ctrl.addOrUpdate(city2);
     city2 = ctrl.get('1');
     expect(city2.city).toBe('City2');
+    await postData(funcs.url + 'clear');
 });
