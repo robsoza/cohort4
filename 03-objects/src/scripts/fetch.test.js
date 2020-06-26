@@ -54,6 +54,10 @@ test('does the getAllFirstNames function work?', () => {
 
 const url = 'http://localhost:5000/';
 
+afterEach(async () => {
+    await functions.postData(url + 'clear');
+})
+
 test('test that the fetch works?', async () => {
 
     const cities = [

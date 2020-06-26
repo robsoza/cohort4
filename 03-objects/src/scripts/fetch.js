@@ -6,19 +6,11 @@
 const functions = {
 
     getFirstName(data) {
-        try {
-            return data[0].name;
-        } catch (error) {
-            throw error;
-        }
+        return data[0].name;
     },
 
     getAllFirstNames(data) {
-        try {
-            return data.map(d => d.name);
-        } catch (error) {
-            throw error;
-        }
+        return data.map(d => d.name);
     },
 
     async postData(url = '', data = {}) {
