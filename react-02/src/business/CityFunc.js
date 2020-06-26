@@ -52,10 +52,10 @@ class Community {
 
         if (cityUpdate.type === 'movedIn') {
             city.movedIn(Number(cityUpdate.numOfPeople));
-        } else if (cityUpdate.type === 'movedOut') {
+        }
+        if (cityUpdate.type === 'movedOut') {
             city.movedOut(Number(cityUpdate.numOfPeople));
         }
-
         await postData(theUrl, city);
         this.community[city.key] = city;
     }
@@ -64,16 +64,14 @@ class Community {
         const a = this.community;
         let total = 0;
         Object.keys(a).forEach(function (key) {
-            total += a[key].balance;
+            total += a[key].population;
         })
         return total;
     }
 
     async delete(city) {
-        let theUrl;
-        if (city.key) {
-            theUrl = url + 'delete';
-        }
+        let theUrl = url + 'delete';
+        
         await postData(theUrl, city);
         this.community[city.key] = city;
     }
@@ -90,11 +88,6 @@ class City {
         this.population = Number(data.population);
         this.country = Number(data.country);
         this.key = data.key;
-    }
-
-    newKey() {
-        City.lastKey++;
-        this.key = City.lastKey;
     }
 
     movedIn(num) {

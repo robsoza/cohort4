@@ -28,7 +28,6 @@ export default function QueueStackComp() {
             newState: { text: msg, class: cls }
         }])
     }
-    console.log(context.state.fifoNode + 1, context.state.fifoNode)
 
     function onSave() {
         context.handleStateChange([{
@@ -76,7 +75,7 @@ export default function QueueStackComp() {
             newState: context.stackCtrl.show()
         }]);
     }
-    console.log(context.stackCtrl.show())
+
     return (
         <div>
             <FifoLifoComp

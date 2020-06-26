@@ -39,10 +39,9 @@ class Accs {
 
         if (transaction.type === "deposit") {
             account.deposit(Number(transaction.amount));
-        } else if (transaction.type === "withdraw") {
+        } if (transaction.type === "withdraw") {
             account.withdraw(Number(transaction.amount));
         }
-
         let defaults = {
             name: transaction.name,
             balance: account.balance,
@@ -52,9 +51,7 @@ class Accs {
     }
 
     delete(account) {
-        if (account.key) {
-            delete this.accs[account.key]
-        }
+        delete this.accs[account.key]
     }
 }
 
@@ -66,11 +63,6 @@ class Account {
         this.balance = Number(data.balance);
         this.name = data.name;
         this.key = data.key;
-    }
-
-    newKey() {
-        Account.lastKey++;
-        this.key = Account.lastKey;
     }
 
     deposit(num) {

@@ -76,7 +76,7 @@ test('test load Community from api', async () => {
         city1.population = 40
 
         await ctrl.addOrUpdate(city1);
-        
+
         // check updated community info
         await ctrl.getCommunity();
         city1 = ctrl.get('1');
@@ -142,6 +142,14 @@ test('does that updatePopulation function work', async () => {
     expect(data.status).toBe(200);
     city1 = await ctrl.get(1);
     expect(city1.population).toBe(23);
+
+    // movedout
+    updateCity = { key: 1, numOfPeople: '10', city: 'city1', type: 'movedOut' };
+    await ctrl.populationUpdate(updateCity);
+    expect(data.status).toBe(200);
+    city1 = await ctrl.get(1);
+    expect(city1.population).toBe(13);
+
 });
 
 test('does that delete function work', async () => {
@@ -165,6 +173,8 @@ test('does that delete function work', async () => {
     await ctrl.delete(city1);
     await ctrl.getCommunity();
     expect(ctrl.length()).toBe(1);
+    expect(ctrl.total()).toBe(30);
+
 });
 
 //test deep cloning copies methods too

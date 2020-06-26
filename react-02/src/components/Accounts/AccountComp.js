@@ -105,7 +105,7 @@ export default function AccountComp() {
     }
 
     let output;
-    if (context.state.onDom === "account-list") {
+    if (context?.state.onDom === "account-list") {
         output =
             <div>
                 <AccountSummaryComp
@@ -118,7 +118,7 @@ export default function AccountComp() {
                     userMsg={userMsg}
                 />
             </div>
-    } if (context.state.onDom === "account-form") {
+    } if (context?.state.onDom === "account-form") {
         output =
             <AccountFormComp
                 account={context.state.account}
@@ -127,7 +127,7 @@ export default function AccountComp() {
                 cancel={onCancel}
                 userMsg={userMsg}
             />
-    } else if (context.state.onDom === "transaction-form") {
+    } else if (context?.state.onDom === "transaction-form") {
         output =
             <TransactionFormComp
                 account={context.state.account}
@@ -143,7 +143,7 @@ export default function AccountComp() {
             <main className="App-main">
                 {output}
             </main>
-            <label className={context.state.accMessage.class}>{context.state.accMessage.text}</label>
+            <label className={context?.state.accMessage.class}>{context?.state.accMessage.text}</label>
         </div>
     );
 }

@@ -2,10 +2,9 @@ import React from 'react';
 import './App.css';
 import { ThemeContext, themes } from './components/Theme/ThemeContextComp';
 import { LogosData, NavbarComp } from './components/Navbar/NavbarComp';
-// import func from '../business/FifoLifoFunc';
 import FooterComp from './components/Footer/FooterComp';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props)
 
@@ -67,5 +66,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;

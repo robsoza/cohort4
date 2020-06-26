@@ -108,11 +108,16 @@ test('does that addTransaction function work', () => {
     expect(account.balance).toBe(40);
 
     // withdraw transaction info
-    let transaction2 = { key: 1, amount: 30, name: 'Checking', type: 'withdraw' };
+    let transaction2 = { key: 1, amount: 15, name: 'Checking', type: 'withdraw' };
     accsCtrl.addTransaction(transaction2);
+
+    let transaction3 = { key: 1, amount: 15, name: 'Checking', type: 'withdraw' };
+    accsCtrl.addTransaction(transaction3);
 
     account = accsCtrl.get(1);
     expect(account.balance).toBe(10);
+            // Test new key works
+
 });
 
 test('does that delete function work', () => {
@@ -133,6 +138,10 @@ test('does that delete function work', () => {
     accsCtrl.delete(acc1);
     accsCtrl.getAccs();
     expect(accsCtrl.length()).toBe(1);
+    accsCtrl.delete(acc2);
+    accsCtrl.getAccs();
+    expect(accsCtrl.length()).toBe(0);
+
 });
 
 //test deep cloning copies methods too
