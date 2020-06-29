@@ -1,10 +1,6 @@
 import functions from './fetch.js'
 global.fetch = require('node-fetch');
 
-beforeEach(async () => {
-    await functions.postData(url + 'clear');
-})
-
 const myData = [
     {
         "name": "Maricica", "surname": "Ghinea", "gender": "female",
@@ -91,7 +87,7 @@ test('test that the fetch works?', async () => {
 
     data = await functions.postData(url + 'all');
     expect(data.status).toEqual(200);
-    
+
     expect(data.length).toBe(2);
     expect(data[1].name).toBe("Amsterdam");
 
