@@ -21,6 +21,7 @@ const functions = {
     },
 
     buildCard: (text) => {
+        i++;
         const myCard = document.createElement("div");
         myCard.setAttribute("class", "cards");
         const cardTitle = document.createElement("cardTitle");
@@ -45,12 +46,10 @@ const functions = {
     },
 
     addCardBefore: (node, text) => {
-        i++;
         const myCard = functions.buildCard(text);
         node.parentElement.insertBefore(myCard, node);
     },
     addCardAfter: (node, text) => {
-        i++;
         const myCard = functions.buildCard(text);
         node.parentNode.insertBefore(myCard, node.nextSibling);
     },

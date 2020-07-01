@@ -25,6 +25,11 @@ export default function TransactionFormComp(props) {
                 throw new Error('Amount can not be blank');
             }
 
+            if(isNaN(transaction.amount)){
+                focusElement('amount');
+                throw new Error('Amount must be a number')
+            }
+
             if (!transaction.name) {
                 focusElement('name');
                 throw new Error('Name can not be blank');

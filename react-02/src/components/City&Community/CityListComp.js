@@ -11,7 +11,7 @@ export default function CityListComp(props) {
                 <li key={c.key} mykey={c.key}> {c.city} <br></br>
                     <span mykey={c.key}> Lat: {c.latitude}</span>,
                     <span mykey={c.key}> long: {c.longitude}</span>,
-                    <span mykey={c.key}> pupulation: {c.population}</span><br></br>
+                    <span mykey={c.key}> population: {c.population}</span><br></br>
                     <span mykey={c.key}> Is a {howBig(c)}</span>,
                     <span mykey={c.key}> in the {whichSphere(c)}</span>
                 </li>

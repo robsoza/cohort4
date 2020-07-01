@@ -16,7 +16,8 @@ class FifoQueue {
         let node = new FifoNode(value);
 
         if (!this.front) {
-            this.front = this.back = node;
+            this.front = node;
+            this.back = node;
         }
         else {
             this.back.next = node;

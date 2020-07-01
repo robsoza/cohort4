@@ -2,10 +2,6 @@ import postData from './Fetch.js'
 global.fetch = require('node-fetch');
 const url = 'http://localhost:5000/';
 
-afterEach(async () => {
-    await postData(url + 'clear');
-})
-
 test('test postdata gives a good error if api server not started', async () => {
     try {
         // dummy url:port that does not exist
@@ -16,8 +12,6 @@ test('test postdata gives a good error if api server not started', async () => {
     }
     catch (e) {
         expect(e.code).toBe('ECONNREFUSED');
-    }
-    finally {
     }
 });
 
