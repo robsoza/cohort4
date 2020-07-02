@@ -18,15 +18,15 @@ class LinkedList {
         const node = new Node(id, subject, amount);
         if (this.current) {
 
-            //connect the new to the current.nextNode
+            if (this.head === this.tail) { this.tail = node };
+            //new note.nextnode is current next 
             node.nextNode = this.current.nextNode;
             node.nextNode.prevNode = node;
 
             this.current.nextNode = node;
             node.prevNode = this.current;
-
             this.current = node;
-            this.tail = node;
+            this.tail = this.head.prevNode
         } else {
             this.head = node;
             this.tail = node;
@@ -75,7 +75,7 @@ class LinkedList {
         }
         return 'Empty List';
     }
-    
+
     total() {
         let total = 0; let i = 0;
         let current = this.head;
@@ -96,7 +96,8 @@ class LinkedList {
         //delete the head or first node
         if (this.current === this.head) {
             let current = this.head;
-            this.head = this.current = current.nextNode;
+            this.head = current.nextNode;
+            this.current = current.nextNode;
             this.count--;
             if (current === this.tail) {
                 this.head = this.current = this.tail = null;
@@ -118,7 +119,8 @@ class LinkedList {
         this.count--;
         //delete the tail or last node
         if (current === this.tail) {
-            this.current.prevNode = this.tail = previous;
+            this.current.prevNode = previous;
+            this.tail = previous;
             this.tail.prevNode = previous.prevNode;
         } else {
             //else delete the middle
