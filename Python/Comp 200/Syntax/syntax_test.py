@@ -49,3 +49,6 @@ def test_while_loop():
 
 def test_look_up_key():
     assert syntax.look_up_key("red") == "color: red" 
+
+def test_defaultdict():
+    assert syntax.defaultdict() == {'m': 1, 'y': 2, 'P': 1, 't': 1, 'h': 1, 'o': 1, 'n': 1} 
