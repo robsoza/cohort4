@@ -1,0 +1,21 @@
+*** Census_by_Community_2018 ***
+Total Rows = 303
+====================
+*** CLASS DATA ***
+By Class Total : 1264656
+    "Industrial": 922,
+    "Major Park": 0,
+    "Residential": 1263734,
+    "Residual Sub Area": 0
+
+====================
+*** SECTOR DATA ***
+By Sector Total : 1264656
+    "CENTRE": 199977,
+    "EAST": 57666,
+    "NORTH": 160502,
+    "NORTHEAST": 185534,
+    "NORTHWEST": 174126,
+    "SOUTH": 227345,
+    "SOUTHEAST": 135009,
+    "WEST": 124497
