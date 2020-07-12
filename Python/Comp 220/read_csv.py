@@ -1,5 +1,4 @@
 import csv
-import pprint
 import json
 r_file = 'D:/Code/cohort4/Python/Comp 220/Census_by_Community_2018.csv'
 w_file = 'D:/Code/cohort4/Python/Comp 220/report.txt'
@@ -37,7 +36,6 @@ def write_report(d):
         report.write("*** SECTOR DATA ***\n")
         report.write(f'By Sector Total : {sum(d["sector"].values())}')
         report.write(json.dumps(d["sector"], indent=4, sort_keys=True)[1:-1])
-
     return report
 
 
