@@ -9,12 +9,13 @@ def read_datasheet():
         d[ws] = {}  # add worksheets
         i = 1
         for row in wb[ws].iter_rows(min_row=3, min_col=1):
-            if row[0].value is not None:
+            if row[0].value:
                 d[ws][i] = {}  # add rows
                 col = 0
                 for cell in row:
-                    d[ws][i][wb[ws][2][col].value] = cell.value
-                    col += 1
+                    if cell.value:
+                        d[ws][i][wb[ws][2][col].value] = cell.value
+                        col += 1
             i += 1
     return(d)
 
