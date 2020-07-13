@@ -16,7 +16,7 @@ def read_datasheet():
                     d[ws][i][wb[ws][2][col].value] = cell.value
                     col += 1
             i += 1
-    print(d)
+    return(d)
 
 
 read_datasheet()
