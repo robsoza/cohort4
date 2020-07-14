@@ -2,7 +2,7 @@ import pytest
 import invoice_tracker
 
 
-def test_read_invoice():
+def test_read_datasheet():
     d = invoice_tracker.read_datasheet()
 
     assert d['Customers'][1] == {'customer_id': 1, 'f_name': 'Wilbert', 'l_name': 'Toor', 'phone': '457-218-5978','email': 'wtoor0@rambler.ru', 'street': '9844 Eastlawn Point', 'city': 'Waihibar', 'zipcode': 32179}
