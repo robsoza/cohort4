@@ -8,4 +8,4 @@ def test_hello():
 
 def test_files():
     assert read_directory.files(
-    ) == 'There are 6 files in D:\Code\cohort4\Python with total size of 4096 bites'
+    ) == 'There are 7 files in D:\Code\cohort4\Python with total size of 4096 bites'
