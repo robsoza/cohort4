@@ -11,8 +11,8 @@ export default function LinkedListComp() {
     // const [node, setNode] = useState();
     useEffect(() => {
         if (isCurrent.current) getData()
-        const timer = setTimeout(() => { userMsg() }, 5000);
-        return () => clearTimeout(timer);
+        // const timer = setTimeout(() => { userMsg() }, 5000);
+        // return () => clearTimeout(timer);
     });
 
     // Load the list only the first time

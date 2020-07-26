@@ -14,8 +14,8 @@ export default function CityComp() {
     const [onDom, setOnDom] = useState();
 
     useEffect(() => {
-        const timer = setTimeout(() => { userMsg() }, 5000);
-        return () => clearTimeout(timer);
+        // const timer = setTimeout(() => { userMsg() }, 5000);
+        // return () => clearTimeout(timer);
     });
 
     useEffect(() => {
