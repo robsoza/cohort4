@@ -1,5 +1,5 @@
 from openpyxl import load_workbook
-file = 'D:/Code/cohort4/Python/Comp 230/datasheet.xlsx'
+file = 'D:/Code/cohort4/Python/Comp_230/datasheet.xlsx'
 
 
 def read_datasheet():

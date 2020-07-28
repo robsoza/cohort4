@@ -1,7 +1,7 @@
 import csv
 import json
-r_file = 'D:/Code/cohort4/Python/Comp 220/Census_by_Community_2018.csv'
-w_file = 'D:/Code/cohort4/Python/Comp 220/report.txt'
+r_file = 'D:/Code/cohort4/Python/Comp_220/Census_by_Community_2018.csv'
+w_file = 'D:/Code/cohort4/Python/Comp_220/report.txt'
 
 
 def read_census():

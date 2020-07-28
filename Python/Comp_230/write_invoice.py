@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 import invoice_tracker
 import json
 
-file = 'D:/Code/cohort4/Python/Comp 230/invoice.xlsx'
+file = 'D:/Code/cohort4/Python/Comp_230/invoice.xlsx'
 d = invoice_tracker.read_datasheet()
 
 
